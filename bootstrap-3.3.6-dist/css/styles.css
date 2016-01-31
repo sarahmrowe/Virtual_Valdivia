@@ -1,0 +1,25 @@
+/*!
+ * added padding to row item to create space between top and bottom static navbars
+ * added padding to jumbotron item to create space between top static navbar
+ */
+ 
+.row {
+	margin-top: 70px;
+	margin-bottom: 70px;
+}
+
+.jumbotron {
+	margin-top: 70px;
+}
+
+.page-header {
+	margin-top:0;
+}
+
+.panel-body {
+	padding-top:0;
+}
+
+.featuredImg {
+	margin-bottom: 15px;
+}
