@@ -3,23 +3,69 @@
  * added padding to jumbotron item to create space between top static navbar
  */
  
-.row {
-	margin-top: 70px;
-	margin-bottom: 70px;
+.html, body {
+	background-color: #FCF4E8;
 }
 
-.jumbotron {
-	margin-top: 70px;
-}
+.navbar {
+  background-color: #f6faeb;
+  background-image: none;
+  background-repeat: no-repeat;
+ }
 
 .page-header {
 	margin-top:0;
 }
 
+.page-header h3 {
+	color: #61381e;
+}
+
 .panel-body {
 	padding-top:0;
+	background-color: #f6faeb;
+}
+
+.panel-body h4{
+	color: #61381e;
+}
+	
+.panel-body p {
+	color: #595959;
+}
+
+.row {
+	margin-top: 70px;
+	margin-bottom: 70px;
+}
+
+.row h3 {
+	color: #61381e;
+}
+
+
+.jumbotron {
+	margin-top: 70px;
+	background-color: #d2e699;
+}
+
+.jumbotron h1 {
+    color: #61381e;
+}
+
+.jumbotron h2 {
+    color: #61381e;
+}
+
+.jumbotron p {
+    color: #61381e;
 }
 
 .featuredImg {
 	margin-bottom: 15px;
+}
+
+.btn-accent {
+	background-color: #ecbcac;
+	color: #61381e;
 }
