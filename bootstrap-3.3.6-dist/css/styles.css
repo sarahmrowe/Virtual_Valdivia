@@ -35,8 +35,8 @@
 }
 
 .row {
-	margin-top: 70px;
-	margin-bottom: 70px;
+	margin-top: 50px;
+	margin-bottom: 60px;
 }
 
 .row h3 {
@@ -45,7 +45,6 @@
 
 
 .jumbotron {
-	margin-top: 70px;
 	background-color: #d2e699;
 }
 
@@ -68,4 +67,8 @@
 .btn-accent {
 	background-color: #ecbcac;
 	color: #61381e;
+}
+
+.jumbotron img {
+	padding-top: 20px;
 }
