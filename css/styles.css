@@ -23,7 +23,7 @@
 
 .panel-body {
 	padding-top:0;
-	background-color: #f6faeb;
+	background-color: #FCF4E8;
 }
 
 .panel-body h4{
@@ -52,6 +52,7 @@
     color: #61381e;
 }
 
+
 .jumbotron h2 {
     color: #61381e;
 }
@@ -71,4 +72,8 @@
 
 .jumbotron img {
 	padding-top: 20px;
+}
+
+.list-group-item {
+	background-color: #f6faeb;
 }
