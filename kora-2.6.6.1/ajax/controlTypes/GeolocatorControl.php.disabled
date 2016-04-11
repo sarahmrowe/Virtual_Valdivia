@@ -1,0 +1,35 @@
+<?php
+//Ajax calls for GeolocatorControl
+if(Manager::CheckRequestsAreSet(['cid', 'geocode', 'lat', 'lng', 'address', 'exists','rid','sid']))
+{
+		global $db;
+		$xml = "<location></location>";
+		$xml = simplexml_load_string($xml);
+		$xml->addChild('lat', xmlEscape($_REQUEST['lat']));
+		$xml->addChild('lng', xmlEscape($_REQUEST['lng']));
+		$xml->addChild('address', xmlEscape($_REQUEST['address']));
+
+
+		if($_REQUEST['exists'])
+			$query = "UPDATE p".$this->pid."Data SET value=".escape($xml->asXML())." WHERE id=".escape($_REQUEST['rid'])." AND cid=".escape($_REQUEST['cid']);
+		else{
+			$query = "INSERT INTO p".$this->pid."Data (id, cid, schemeid, value) VALUES (".escape($_REQUEST['rid']).", ".escape($_REQUEST['cid']).", ".escape($_REQUEST['sid']).", ".escape($xml->asXML()).")";
+			$query = $db->query($query);
+		}		
+}
+
+if(Manager::CheckRequestsAreSet(['action', 'source','pid','cid']) && $_REQUEST['source'] == 'GeolocatorControl')
+{
+	if(Manager::GetUser()->HasProjectPermissions(EDIT_LAYOUT)){
+		$action = $_REQUEST['action'];
+		$ctrlopts = Manager::GetControl($_REQUEST['pid'], $_REQUEST['cid']);
+		if ($action == 'updateControls' && Manager::CheckRequestsAreSet(['options'])) {
+			$ctrlopts->updateControls($_REQUEST['options']);
+		} else if($action == 'updateGeocodes'){
+			$ctrlopts->updateGeocodes();
+		} else if ($action == 'showDialog') {
+			Manager::GetControl($_REQUEST['pid'], $_REQUEST['cid'])->PrintControlOptions();
+		} 
+	}
+}
+?>

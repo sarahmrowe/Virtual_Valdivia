@@ -1,0 +1,22 @@
+Kora ORM API Examples
+
+These examples aim to demonstrate how to use the Kora ORM API. The instructions
+on how to try out the provided examples are below.
+
+1. Install Kora.
+
+2. Create a new project.
+
+3. Import the example scheme from API_Demo-Demo_Scheme-scheme.xml.
+
+4. Import the example records to "Demo Scheme" from
+     API_Demo-Demo_Scheme-records.xml and API_Demo-Demo_Scheme-files_1.zip.
+     
+5. Create a search token for the new project.
+
+6. Edit config.php and replace the X's with the new search token, the new
+     project's id, "Demo Scheme"'s scheme id, and the KID of any of the records
+     in that scheme of your choosing.
+     
+Now you may try out any of the provided examples by navigating to them in your
+browser.

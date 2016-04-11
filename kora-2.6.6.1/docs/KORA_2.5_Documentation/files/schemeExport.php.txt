@@ -1,0 +1,164 @@
+<?php
+/**
+ Copyright (2008) Matrix: Michigan State University
+
+ This file is part of KORA.
+
+ KORA is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ KORA is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+//Initial version Ben Pedersen, 2010
+// Refactor: Joe Deming, Anthony D'Onofrio 2013
+
+require_once('includes/includes.php');
+
+Manager::Init();
+
+Manager::RequireLogin();
+Manager::RequireProjectAdmin();
+Manager::RequireProject();
+Manager::RequireScheme();
+
+//Function to format XML.
+//For debugging purposes only
+function PrettyXML($string)
+    {
+        /**
+         * put each element on it's own line
+         */
+        $string =preg_replace("/>\s*</",">\n<",$string);
+
+        /**
+         * each element to own array
+         */
+        $xmlArray = explode("\n",$string);
+
+        /**
+         * holds indentation
+         */
+        $currIndent = 0;
+
+        /**
+         * set xml element first by shifting of initial element
+         */
+        $string = array_shift($xmlArray) . "\n";
+
+        foreach($xmlArray as $element) {
+            /** find open only tags... add name to stack, and print to string
+             * increment currIndent
+             */
+
+            if (preg_match('/^<([\w])+[^>\/]*>$/U',$element)) {
+                $string .=  str_repeat(' ', $currIndent) . $element . "\n";
+                $currIndent += 4;
+            }
+
+            /**
+             * find standalone closures, decrement currindent, print to string
+             */
+            elseif ( preg_match('/^<\/.+>$/',$element)) {
+                $currIndent -= 4;
+                $string .=  str_repeat(' ', $currIndent) . $element . "\n";
+            }
+            /**
+             * find open/closed tags on the same line print to string
+             */
+            else {
+                $string .=  str_repeat(' ', $currIndent) . $element . "\n";
+            }
+        }
+
+        return $string;
+
+    }
+
+$pid = Manager::GetProject()->GetPID();
+$results = array();
+if(!empty($_REQUEST['scheme'])){
+	$newSID = $_REQUEST['scheme'];
+	$results = array($newSID=>'');
+}
+else{
+	if(!empty($_SESSION['results'])) $results = $_SESSION['results'];
+	else
+	{
+		$newSID = Manager::GetScheme()->GetSID();
+		$results = array($newSID=>'');
+	}
+}
+$dataTable = "p".$pid."Data";
+$controlTable = "p".$pid."Control";
+$xmlPacked = array();
+//need to include control files for xml-packed types
+$controlQuery = "SELECT class,file FROM control WHERE xmlPacked = 1";
+$controls = $db->query($controlQuery);
+if(is_object($controls) && $controls->num_rows > 0){
+	while($con = $controls->fetch_assoc()){
+		include_once("controls/".$con['file']);
+		$xmlPacked[] = $con['class'];
+	}
+}
+
+foreach($results as $sid=>$result)
+{
+	
+	// do not add scheme information when only record data is requested
+	if(!@($_REQUEST['type']=='data')){
+		$schemeNode = simplexml_load_string('<?xml version="1.0" encoding="ISO-8859-1"?><Scheme />');
+		$schemeNode = Manager::GetScheme()->ExportSchemeToXML($schemeNode);
+
+		//If everything succeeded to here, send headers and the file directly
+		$name = Manager::GetProject()->GetName().'-'.Manager::GetScheme()->GetName().'-scheme.xml';
+		$name = str_replace(" ", "_", $name);
+		$name = htmlentities($name);
+		
+		header("Content-Type: text/xml; charset=ISO-8859-4");
+		header("Content-Disposition: attachment;filename=$name");
+		header("Content-Transfer-Encoding: binary");
+		echo $schemeNode->asXML();
+	}
+	
+	// do not add record data when only the scheme is requested
+	if(!@($_REQUEST['type']=='scheme')){
+		//*******************************Export Records******************
+		//Get all data for the scheme
+		$results = KoraSearch::SortedInternalSearchResults(Manager::GetProject()->GetPID(), Manager::GetScheme()->GetSID());
+		
+		$dataNode = simplexml_load_string('<?xml version="1.0" encoding="ISO-8859-1"?><Data />');
+		$dataNode->addChild('ConsistentData');
+		
+		foreach ($results as $r)
+		{
+			$r = new Record(Manager::GetProject()->GetPID(), Manager::GetScheme()->GetSID(), $r);
+			$rxml = $dataNode->addChild('Record');
+			foreach ($r->GetControls() as $c)
+			{ if ($c->HasData()) { $c->ExportToSimpleXML($rxml); } }
+		}
+		
+		//If everything succeeded to here, send headers and the file directly
+		$name = Manager::GetProject()->GetName().'-'.Manager::GetScheme()->GetName().'-data.xml';
+		$name = str_replace(" ", "_", $name);
+		$name = htmlentities($name);
+		
+		header("Content-Type: text/xml; charset=ISO-8859-4");
+		header("Content-Disposition: attachment;filename=$name");
+		header("Content-Transfer-Encoding: binary");
+		echo $dataNode->asXML();
+		
+	}
+}
+
+	exit;
+
+?>

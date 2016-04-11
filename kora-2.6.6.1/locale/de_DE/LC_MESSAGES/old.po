@@ -1,0 +1,3065 @@
+# de_DE german translations.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the KORA package.
+# Cassia Miller <cassi.miller@matrix.msu.edu>, 2009.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-15 15:44-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../controls/associatorControl.php:186
+#: ../../../includes/presetFunctions.php:170
+#: ../../../includes/utilities.php:913
+msgid "Invalid"
+msgstr "Ungültige"
+
+#: ../../../controls/associatorControl.php:278
+#: ../../../controls/associatorControl.php:755
+#: ../../../controls/fileControl.php:781
+#: ../../../controls/geolocatorControl.php:654
+#: ../../../controls/listControl.php:666
+#: ../../../controls/multiDateControl.php:425
+#: ../../../controls/multiDateControl.php:930
+#: ../../../controls/multiListControl.php:442
+#: ../../../controls/multiTextControl.php:221
+#: ../../../controls/multiTextControl.php:503
+msgid "Remove"
+msgstr "Entfernen"
+
+#: ../../../controls/associatorControl.php:279
+#: ../../../controls/associatorControl.php:756
+#: ../../../includes/ingestionClass.php:441
+msgid "View Record"
+msgstr "Anzeigen Record"
+
+#: ../../../controls/associatorControl.php:280
+#: ../../../controls/associatorControl.php:759
+#: ../../../controls/fileControl.php:779
+#: ../../../controls/geolocatorControl.php:652
+#: ../../../controls/listControl.php:664
+#: ../../../controls/multiDateControl.php:331
+#: ../../../controls/multiDateControl.php:813
+#: ../../../controls/multiListControl.php:440
+#: ../../../controls/multiTextControl.php:213
+#: ../../../controls/multiTextControl.php:495
+msgid "Up"
+msgstr "Nach Oben"
+
+#: ../../../controls/associatorControl.php:281
+#: ../../../controls/associatorControl.php:760
+#: ../../../controls/fileControl.php:780
+#: ../../../controls/geolocatorControl.php:653
+#: ../../../controls/listControl.php:665
+#: ../../../controls/multiDateControl.php:332
+#: ../../../controls/multiDateControl.php:814
+#: ../../../controls/multiListControl.php:441
+#: ../../../controls/multiTextControl.php:214
+#: ../../../controls/multiTextControl.php:496
+msgid "Down"
+msgstr "Unten"
+
+#: ../../../controls/associatorControl.php:283
+#: ../../../controls/associatorControl.php:764
+msgid "Find a Record"
+msgstr "Suchen Sie eine Record"
+
+#: ../../../controls/associatorControl.php:285
+#: ../../../includes/utilities.php:1191 ../../../includes/utilities.php:1228
+msgid "Associate this Record"
+msgstr "Associate diesem Datensatz"
+
+#: ../../../controls/associatorControl.php:366
+#: ../../../controls/dateControl.php:561 ../../../controls/fileControl.php:260
+#: ../../../controls/geolocatorControl.php:243
+#: ../../../controls/listControl.php:288
+#: ../../../controls/multiDateControl.php:588
+#: ../../../controls/multiListControl.php:266
+#: ../../../controls/multiTextControl.php:348
+#: ../../../controls/textControl.php:224
+msgid "No Record ID Specified"
+msgstr "Keine Record ID spezifiziert"
+
+#: ../../../controls/associatorControl.php:534
+#: ../../../controls/associatorControl.php:547
+msgid "Currently Associated Objects"
+msgstr "Derzeit Verbundenen Objekte "
+
+#: ../../../controls/associatorControl.php:578
+#: ../../../controls/dateControl.php:647 ../../../controls/fileControl.php:467
+#: ../../../controls/listControl.php:363
+#: ../../../controls/multiDateControl.php:688
+#: ../../../controls/multiListControl.php:397
+#: ../../../controls/multiTextControl.php:419
+#: ../../../controls/textControl.php:278
+msgid "No value supplied for required field"
+msgstr "Keine Wert für Pflichtfeld "
+
+#: ../../../controls/associatorControl.php:661
+msgid "Association Permissions"
+msgstr "Verband Berechtigungen"
+
+#: ../../../controls/associatorControl.php:661
+msgid ""
+"Use the checkboxes to allow/disallow associating to records from the "
+"following schemes from this control"
+msgstr ""
+"Verwenden Sie die Kontrollkästchen, so dass/Disallow Beteiligung an den "
+"Recorden aus den folgenden Schema dieser Kontrolle"
+
+#: ../../../controls/associatorControl.php:706
+msgid "No schemes have granted access to this scheme yet"
+msgstr "Keine Schema haben Zugang zu diesem Schema noch"
+
+#: ../../../controls/associatorControl.php:711 ../../../includes/menu.php:131
+#: ../../../includes/projectFunctions.php:71 ../../../searchProject.php:37
+msgid "Scheme"
+msgstr "Schema"
+
+#: ../../../controls/associatorControl.php:711 ../../../includes/menu.php:104
+#: ../../../crossProjectSearch.php:78 ../../../searchProject.php:31
+#: ../../../searchProject.php:62
+msgid "Search"
+msgstr "Suche"
+
+#: ../../../controls/associatorControl.php:733
+#: ../../../controls/dateControl.php:879 ../../../controls/listControl.php:672
+#: ../../../controls/multiDateControl.php:792
+#: ../../../controls/multiListControl.php:449
+#: ../../../controls/multiListControl.php:476
+#: ../../../controls/multiTextControl.php:472
+#: ../../../controls/textControl.php:427
+msgid "Default Value"
+msgstr "Standardwert"
+
+#: ../../../controls/associatorControl.php:734
+msgid ""
+"Use this field to set an optional set of objects to which new objects in "
+"this scheme will be associated by default"
+msgstr ""
+"Verwenden Sie dieses Feld, um eine optionale Menge von Objekten, auf die "
+"neuen Objekte in diesem Schema in Verbindung gebracht werden standardmäßig "
+
+#: ../../../controls/associatorControl.php:768
+#: ../../../controls/geolocatorControl.php:639
+#: ../../../controls/multiDateControl.php:424
+#: ../../../controls/multiDateControl.php:929
+#: ../../../controls/multiTextControl.php:220
+#: ../../../controls/multiTextControl.php:502
+#: ../../../includes/userFunctions.php:267
+#: ../../../includes/userFunctions.php:355 ../../../manageAssocPerms.php:46
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: ../../../controls/associatorControl.php:803
+#: ../../../controls/associatorControl.php:894
+#: ../../../controls/associatorControl.php:940
+#: ../../../controls/dateControl.php:762 ../../../controls/dateControl.php:791
+#: ../../../controls/dateControl.php:819 ../../../controls/dateControl.php:845
+#: ../../../controls/dateControl.php:1014
+#: ../../../controls/fileControl.php:508 ../../../controls/fileControl.php:546
+#: ../../../controls/fileControl.php:595 ../../../controls/fileControl.php:834
+#: ../../../controls/geolocatorControl.php:392
+#: ../../../controls/geolocatorControl.php:434
+#: ../../../controls/geolocatorControl.php:499
+#: ../../../controls/geolocatorControl.php:606
+#: ../../../controls/listControl.php:392 ../../../controls/listControl.php:431
+#: ../../../controls/listControl.php:465 ../../../controls/listControl.php:506
+#: ../../../controls/listControl.php:536 ../../../controls/listControl.php:644
+#: ../../../controls/listControl.php:817 ../../../controls/listControl.php:839
+#: ../../../controls/listControl.php:856
+#: ../../../controls/multiDateControl.php:758
+#: ../../../controls/multiDateControl.php:968
+#: ../../../controls/multiDateControl.php:1087
+#: ../../../controls/multiDateControl.php:1136
+#: ../../../controls/multiListControl.php:420
+#: ../../../controls/multiListControl.php:521
+#: ../../../controls/multiTextControl.php:455
+#: ../../../controls/multiTextControl.php:553
+#: ../../../controls/multiTextControl.php:643
+#: ../../../controls/multiTextControl.php:688
+#: ../../../controls/textControl.php:313 ../../../controls/textControl.php:336
+#: ../../../controls/textControl.php:359 ../../../controls/textControl.php:392
+#: ../../../controls/textControl.php:479
+msgid "Improper Control ID or Project ID Specified"
+msgstr "Falsche Control ID oder Projekt-ID spezifiziert"
+
+#: ../../../controls/dateControl.php:268 ../../../controls/dateControl.php:358
+#: ../../../controls/dateControl.php:991
+#: ../../../controls/multiDateControl.php:418
+#: ../../../controls/multiDateControl.php:924
+msgid ""
+"This control's display format is an unrecognized value; please check its "
+"options."
+msgstr ""
+"Diese Steuerung der Display-Format ist ein Wert nicht erkannt, überprüfen "
+"Sie bitte die Optionen."
+
+#: ../../../controls/dateControl.php:363
+msgid "<div style=\"text-align: center;\"> to </div>"
+msgstr ""
+
+#: ../../../controls/dateControl.php:491
+msgid "This control has no format option set; please check its options."
+msgstr ""
+"Diese Kontrolle hat keine Option gesetzt, überprüfen Sie bitte die Optionen."
+
+#: ../../../controls/dateControl.php:616
+#: ../../../controls/imageControl.php:158
+#: ../../../controls/multiDateControl.php:642
+msgid "Invalid PID"
+msgstr "Ungültige PID"
+
+#: ../../../controls/dateControl.php:618
+#: ../../../controls/imageControl.php:160
+#: ../../../controls/imageControl.php:302
+#: ../../../controls/multiDateControl.php:644
+msgid "Invalid Control ID"
+msgstr "Ungültige Control ID"
+
+#: ../../../controls/dateControl.php:622
+#: ../../../controls/imageControl.php:186
+#: ../../../controls/multiDateControl.php:648
+msgid "Invalid PID/CID"
+msgstr "Ungültige PID/CID"
+
+#: ../../../controls/dateControl.php:669
+msgid "Invalid Month specified for field"
+msgstr "Ungültiger Monat für Bereich"
+
+#: ../../../controls/dateControl.php:671
+msgid "Invalid Year specified for field"
+msgstr "Ungültiger Jahr für Bereich"
+
+#: ../../../controls/dateControl.php:673
+msgid "\" is not a valid option for an era."
+msgstr "nicht ist eine gültige Wahl für eine Ära."
+
+#: ../../../controls/dateControl.php:692 ../../../controls/dateControl.php:705
+#: ../../../controls/multiDateControl.php:717
+#: ../../../controls/multiDateControl.php:721
+#: ../../../controls/multiDateControl.php:725
+msgid "Field"
+msgstr "Feld"
+
+#: ../../../controls/dateControl.php:692 ../../../controls/dateControl.php:696
+msgid "is not a leap year"
+msgstr "ist kein Schaltjahr"
+
+#: ../../../controls/dateControl.php:705 ../../../controls/dateControl.php:709
+msgid "There are only "
+msgstr "Es gibt nur "
+
+#: ../../../controls/dateControl.php:705 ../../../controls/dateControl.php:709
+msgid " days in "
+msgstr " Tage in "
+
+#: ../../../controls/dateControl.php:746
+msgid "Start Date must be in the range [1,9999]"
+msgstr "Start Datum muss im Bereich [1,9999]"
+
+#: ../../../controls/dateControl.php:750
+msgid "End Date must be in the range [1,9999]"
+msgstr "Ende Datum muss im Bereich [1,9999]"
+
+#: ../../../controls/dateControl.php:754
+msgid "End Date must be greater than or equal to Start Date"
+msgstr "Ende Datum muss größer als oder gleich zu Beginn"
+
+#: ../../../controls/dateControl.php:777
+msgid "Date Range Settings Updated"
+msgstr "Zeitraum Einstellungen Aktualisiert"
+
+#: ../../../controls/dateControl.php:805
+msgid "Era Settings Updated"
+msgstr "Era Einstellungen Aktualisiert"
+
+#: ../../../controls/dateControl.php:833
+msgid "Date Format Settings Updated"
+msgstr "Datum Format Einstellungen Aktualisiert"
+
+#: ../../../controls/dateControl.php:855
+#: ../../../controls/multiDateControl.php:768
+msgid "Date Range"
+msgstr "Datumsbereich"
+
+#: ../../../controls/dateControl.php:855
+#: ../../../controls/multiDateControl.php:768
+msgid "Please provide a start and end year in the range 1-9999 for the control"
+msgstr ""
+"Bitte geben Sie eine Start-und End-Jahr im Bereich 1-9999 für die Kontrolle"
+
+#: ../../../controls/dateControl.php:858
+#: ../../../controls/multiDateControl.php:771
+msgid "Start Date"
+msgstr "Start-Datum"
+
+#: ../../../controls/dateControl.php:862
+#: ../../../controls/multiDateControl.php:775
+msgid "End Date"
+msgstr "Ende-Datum"
+
+#: ../../../controls/dateControl.php:867 ../../../controls/dateControl.php:876
+#: ../../../controls/dateControl.php:977 ../../../controls/dateControl.php:982
+#: ../../../controls/dateControl.php:987
+#: ../../../controls/dateControl.php:1000
+#: ../../../controls/fileControl.php:766
+#: ../../../controls/geolocatorControl.php:662
+#: ../../../controls/imageControl.php:260
+#: ../../../controls/imageControl.php:267
+#: ../../../controls/listControl.php:687
+#: ../../../controls/multiDateControl.php:780
+#: ../../../controls/multiDateControl.php:938
+#: ../../../controls/multiTextControl.php:468
+#: ../../../controls/textControl.php:414 ../../../controls/textControl.php:423
+#: ../../../controls/textControl.php:442
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: ../../../controls/dateControl.php:872
+#: ../../../controls/multiDateControl.php:785
+msgid "Date Format"
+msgstr "Datumsformat"
+
+#: ../../../controls/dateControl.php:872
+#: ../../../controls/multiDateControl.php:785
+msgid ""
+"Please select the format you would prefer to enter your dates in.  This "
+"format will also be used for displaying the dates inside of KORA (this "
+"setting has no effect on front-end sites)."
+msgstr ""
+"Bitte wählen Sie das Format, das Sie würden es vorziehen, geben Sie Ihre "
+"Daten in. Dieses Format wird auch verwendet werden, für die Anzeige der "
+"Daten innerhalb des KORA (Diese Einstellung hat keine Auswirkungen auf die "
+"Front-End-Sites). "
+
+#: ../../../controls/dateControl.php:873
+#: ../../../controls/multiDateControl.php:786
+msgid "MM DD, YYYY"
+msgstr "MM DD, JJJJ"
+
+#: ../../../controls/dateControl.php:874
+#: ../../../controls/multiDateControl.php:787
+msgid "DD MM YYYY"
+msgstr "DD MM JJJJ"
+
+#: ../../../controls/dateControl.php:875
+#: ../../../controls/multiDateControl.php:788
+msgid "YYYY MM DD"
+msgstr "JJJJ MM DD"
+
+#: ../../../controls/dateControl.php:879
+#: ../../../controls/multiDateControl.php:792
+msgid ""
+"Please select an optional value which will be initially filled in during "
+"ingestion"
+msgstr ""
+"Bitte wählen Sie einen optionalen Wert, wird zunächst ausgefüllt während der "
+"Einnahme"
+
+#: ../../../controls/dateControl.php:997
+#: ../../../controls/multiDateControl.php:935
+msgid "Show Era Field?"
+msgstr "Zeigen Era Feld?"
+
+#: ../../../controls/dateControl.php:997
+#: ../../../controls/multiDateControl.php:935
+msgid ""
+"Choose whether or not to show the CE/BCE selector; if you choose not to show "
+"it, the control will default to assuming CE."
+msgstr ""
+"Legen Sie fest, ob oder nicht, um die CE/BCE Selektor, wenn Sie nicht zu "
+"zeigen, die Kontrolle wird standardmäßig auf der Annahme, CE. "
+
+#: ../../../controls/dateControl.php:998 ../../../controls/fileControl.php:787
+#: ../../../controls/fileControl.php:793
+#: ../../../controls/imageControl.php:282
+#: ../../../controls/multiDateControl.php:936
+#: ../../../includes/schemeFunctions.php:303
+#: ../../../includes/schemeFunctions.php:305
+#: ../../../includes/schemeFunctions.php:306
+#: ../../../includes/schemeFunctions.php:311 ../../../deleteObject.php:59
+#: ../../../manageProjects.php:128 ../../../manageProjects.php:173
+msgid "No"
+msgstr "Nein"
+
+#: ../../../controls/dateControl.php:999 ../../../controls/fileControl.php:788
+#: ../../../controls/fileControl.php:794
+#: ../../../controls/imageControl.php:283
+#: ../../../controls/multiDateControl.php:937
+#: ../../../includes/schemeFunctions.php:303
+#: ../../../includes/schemeFunctions.php:305
+#: ../../../includes/schemeFunctions.php:306
+#: ../../../includes/schemeFunctions.php:308
+#: ../../../includes/schemeFunctions.php:309 ../../../deleteObject.php:58
+#: ../../../manageProjects.php:127 ../../../manageProjects.php:172
+msgid "Yes"
+msgstr "Ja"
+
+#: ../../../controls/dateControl.php:1085
+msgid "Default Value Settings Updated"
+msgstr "Standardwert Einstellungen Aktualisiert"
+
+#: ../../../controls/fileControl.php:137
+msgid ""
+"Are you sure you want to delete this file?  This takes effect immediately "
+"and cannot be undone."
+msgstr ""
+"Sind Sie sicher, dass Sie diese Datei löschen möchten? Diese sofort wirksam "
+"und wird nicht rückgängig gemacht."
+
+#: ../../../controls/fileControl.php:151
+msgid "Existing File"
+msgstr "Bestehende Datei"
+
+#: ../../../controls/fileControl.php:160 ../../../controls/fileControl.php:423
+#: ../../../controls/fileControl.php:440
+#: ../../../controls/imageControl.php:142
+#: ../../../controls/imageControl.php:169
+#: ../../../controls/textControl.php:402
+msgid "Size"
+msgstr "Größe"
+
+#: ../../../controls/fileControl.php:161
+msgid "Delete this File"
+msgstr "Löschen Sie diese Datei"
+
+#: ../../../controls/fileControl.php:185 ../../../controls/listControl.php:171
+#: ../../../controls/multiListControl.php:149
+msgid ""
+"Really delete option?  This will delete all data about this option from any "
+"records which currently have selected it."
+msgstr "Wirklich Löschungwahl? Dieses löscht alle Daten über diese Wahl aus allen möglichen Aufzeichnungen, die z.Z. sie vorgewählt haben."
+
+#: ../../../controls/fileControl.php:209
+#: ../../../controls/multiListControl.php:165
+msgid ""
+"Really select preset?  This will delete all existing options and cannot be "
+"undone!"
+msgstr ""
+"Wählen Sie Preset wirklich? Dies wird alle bestehenden Möglichkeiten und "
+"kann nicht rückgängig gemacht werden!"
+
+#: ../../../controls/fileControl.php:417 ../../../controls/fileControl.php:420
+#: ../../../controls/fileControl.php:436
+#: ../../../controls/imageControl.php:135
+#: ../../../controls/imageControl.php:140
+#: ../../../controls/imageControl.php:165
+#: ../../../includes/presetFunctions.php:223
+#: ../../../includes/schemeFunctions.php:56
+#: ../../../includes/schemeFunctions.php:276
+#: ../../../includes/userFunctions.php:202
+#: ../../../includes/utilities.php:1467 ../../../addCollection.php:37
+#: ../../../addScheme.php:36 ../../../editCollection.php:58
+#: ../../../editControl.php:109 ../../../editScheme.php:95
+#: ../../../manageProjects.php:106 ../../../manageProjects.php:167
+#: ../../../viewObject.php:129
+msgid "Name"
+msgstr "Name"
+
+#: ../../../controls/fileControl.php:424 ../../../controls/fileControl.php:444
+#: ../../../controls/imageControl.php:143
+#: ../../../controls/imageControl.php:173
+#: ../../../includes/presetFunctions.php:141
+#: ../../../includes/schemeFunctions.php:277 ../../../editControl.php:108
+msgid "Type"
+msgstr "Sorte"
+
+#: ../../../controls/fileControl.php:440
+#: ../../../controls/imageControl.php:142
+#: ../../../controls/imageControl.php:169
+msgid "bytes"
+msgstr "Byte"
+
+#: ../../../controls/fileControl.php:473
+msgid "File too large"
+msgstr "Datei zu groß"
+
+#: ../../../controls/fileControl.php:490
+msgid "Filetype is not in approved list"
+msgstr "Dateityp nicht genehmigte Liste"
+
+#: ../../../controls/fileControl.php:532 ../../../controls/listControl.php:416
+msgid "You cannot have a duplicate list item"
+msgstr "Sie können nicht ein Duplikat Liste"
+
+#: ../../../controls/fileControl.php:588
+#: ../../../controls/geolocatorControl.php:427
+msgid "Improper Direction Specified"
+msgstr "Falsche Richtung spezifiziert"
+
+#: ../../../controls/fileControl.php:667
+msgid "Invalid maximum size specified"
+msgstr "Ungültige maximale Größe"
+
+#: ../../../controls/fileControl.php:680
+msgid "Maximum File Size Updated"
+msgstr "Maximale Dateigröße Aktualisiert"
+
+#: ../../../controls/fileControl.php:684 ../../../controls/fileControl.php:713
+#: ../../../controls/fileControl.php:742 ../../../controls/fileControl.php:756
+#: ../../../controls/imageControl.php:243
+#: ../../../controls/imageControl.php:366
+msgid "Invalid cid specified"
+msgstr "Ungültige CID angegeben"
+
+#: ../../../controls/fileControl.php:696
+msgid "Restrictions must be 'Yes' or 'No'"
+msgstr "Einschränkungen muss 'Ja' oder 'Nein'"
+
+#: ../../../controls/fileControl.php:709
+msgid "File Restrictions Updated"
+msgstr "Datei-Beschränkungen Aktualisiert"
+
+#: ../../../controls/fileControl.php:725
+msgid "Archival must be 'Yes' or 'No'"
+msgstr "Archivierung muss 'Ja' oder 'Nein'"
+
+#: ../../../controls/fileControl.php:738
+msgid "Archival Settings Updated"
+msgstr "Archivierung Einstellungen Aktualisiert"
+
+#: ../../../controls/fileControl.php:764
+#: ../../../controls/imageControl.php:265
+msgid "Maximum File Size"
+msgstr "Maximale Dateigröße"
+
+#: ../../../controls/fileControl.php:764
+#: ../../../controls/imageControl.php:265
+msgid ""
+"The maximum size (in kB, 1024kB = 1MB) allowed to be uploaded by this "
+"control.  Set to 0 to have no limit."
+msgstr ""
+"Die maximale Größe (in kB, 1024KB = 1 MB) erlaubt, die hochgeladen werden "
+"soll durch diese Kontrolle. Auf 0 gesetzt zu haben kein Limit."
+
+#: ../../../controls/fileControl.php:769
+#: ../../../controls/imageControl.php:270
+msgid "Allowed File Types"
+msgstr "Erlaubte Dateitypen"
+
+#: ../../../controls/fileControl.php:783 ../../../controls/listControl.php:668
+#: ../../../controls/multiListControl.php:444
+msgid "Add Option"
+msgstr "Fügen Option"
+
+#: ../../../controls/fileControl.php:786
+msgid "Restrict File Types?"
+msgstr "Dateitypen beschränken?"
+
+#: ../../../controls/fileControl.php:786
+msgid ""
+"If this is set to yes, only the filetypes set in the above list will be "
+"allowed"
+msgstr ""
+"Wenn diese aktiviert ist, werden nur die Dateitypen in der obigen Liste wird "
+"erlaubt"
+
+#: ../../../controls/fileControl.php:792
+#: ../../../controls/imageControl.php:281
+msgid "Archival Enabled?"
+msgstr "Archivierung aktiv?"
+
+#: ../../../controls/fileControl.php:792
+#: ../../../controls/imageControl.php:281
+msgid ""
+"This will enable fixity integrity checking on files ingested after this is "
+"enabled"
+msgstr ""
+"Dies ermöglicht die Kontrolle über die Integrität fixe Dateien nach Einnahme "
+"dieser aktiviert ist"
+
+#: ../../../controls/fileControl.php:798 ../../../controls/listControl.php:691
+#: ../../../controls/multiListControl.php:486
+#: ../../../controls/multiTextControl.php:509
+#: ../../../controls/textControl.php:445
+msgid "Presets"
+msgstr "Preseten"
+
+#: ../../../controls/fileControl.php:798
+msgid "Sets of pre-defined file-types which are commonly used"
+msgstr "Sets von vordefinierten Datei-Typen, die häufig verwendete"
+
+#: ../../../controls/fileControl.php:808 ../../../controls/listControl.php:701
+#: ../../../controls/multiListControl.php:496
+#: ../../../controls/multiTextControl.php:519
+#: ../../../controls/textControl.php:455
+msgid "Use Preset"
+msgstr "Verwendung Preset"
+
+#: ../../../controls/fileControl.php:811 ../../../controls/listControl.php:704
+#: ../../../controls/multiListControl.php:499
+#: ../../../controls/multiTextControl.php:522
+#: ../../../controls/textControl.php:458
+msgid "Create New Preset"
+msgstr "Neues Preset"
+
+#: ../../../controls/fileControl.php:811 ../../../controls/listControl.php:704
+#: ../../../controls/multiListControl.php:499
+msgid ""
+"If you would like to save this set of allowed file types as a preset, enter "
+"a name and click 'Save as Preset'"
+msgstr ""
+"Wenn Sie möchten, speichern Sie diese Reihe von Dateitypen können als "
+"Preset, geben Sie einen Namen ein und klicken Sie auf 'Speichern als Preset'"
+
+#: ../../../controls/fileControl.php:812 ../../../controls/listControl.php:705
+#: ../../../controls/multiListControl.php:500
+#: ../../../controls/multiTextControl.php:523
+#: ../../../controls/textControl.php:459
+msgid "Save as Preset"
+msgstr "Speichern als Preset"
+
+#: ../../../controls/fileControl.php:861 ../../../controls/textControl.php:491
+msgid "Preset Selected"
+msgstr "Preset ausgewählt"
+
+#: ../../../controls/fileControl.php:880
+msgid "There is already a File Control preset with the name"
+msgstr "Es gibt bereits eine Datei Control Preset mit dem Namen"
+
+#: ../../../controls/fileControl.php:884 ../../../controls/fileControl.php:891
+#: ../../../controls/listControl.php:607 ../../../controls/listControl.php:614
+msgid "Invalid Project or Control ID"
+msgstr "Ungültige Project oder Control ID"
+
+#: ../../../controls/fileControl.php:921
+msgid "Invalid KID"
+msgstr "Ungültige KID"
+
+#: ../../../controls/fileControl.php:934
+msgid "File Deleted"
+msgstr "Datei Löschen"
+
+#: ../../../controls/geolocatorControl.php:89
+msgid "Geolocator uninitialized; Please edit control options."
+msgstr "Geolocator uninitialized Bitte Edit-Control-Optionen."
+
+#: ../../../controls/geolocatorControl.php:106
+msgid ""
+"No location controls set.  Edit control properties to add location controls."
+msgstr ""
+"Keine Ort Kontrollen. Bearbeiten Eigenschaften hinzufügen Standort "
+"Kontrollen."
+
+#: ../../../controls/geolocatorControl.php:143
+msgid ""
+"Are you sure you want to update geocodes?  This may take some time, and all "
+"existing geocodes will be replaced"
+msgstr ""
+"Sind Sie sicher, dass Sie aktualisieren möchten geocodes? Dies kann einige "
+"Zeit in Anspruch nehmen, und alle bestehenden geocodes wird ersetzt"
+
+#: ../../../controls/geolocatorControl.php:176
+#: ../../../controls/geolocatorControl.php:204
+msgid "Latitude"
+msgstr "Breite"
+
+#: ../../../controls/geolocatorControl.php:179
+#: ../../../controls/geolocatorControl.php:205
+msgid "Longitude"
+msgstr "Länge"
+
+#: ../../../controls/geolocatorControl.php:182
+msgid "Translated Address"
+msgstr "Übersetzt Adresse"
+
+#: ../../../controls/geolocatorControl.php:206
+msgid "Geocoded Address"
+msgstr "Geocodiert Adresse"
+
+#: ../../../controls/geolocatorControl.php:251
+msgid "Invalid Project/Scheme ID"
+msgstr "Ungültige Projekt/Schema-ID"
+
+#: ../../../controls/geolocatorControl.php:293
+msgid "Geolocator control uninitialized"
+msgstr "Geolocator Kontrolle uninitialized"
+
+#: ../../../controls/geolocatorControl.php:315
+msgid "Control"
+msgstr "Kontrolle"
+
+#: ../../../controls/geolocatorControl.php:315
+msgid "has been deleted - please edit options for"
+msgstr "wurde gelöscht - bitte bearbeiten Optionen für"
+
+#: ../../../controls/geolocatorControl.php:327
+msgid "No location data entered for required Geolocator control"
+msgstr ""
+"Keine Lage eingegebenen Daten für die Kontrolle erforderlich Geolocator"
+
+#: ../../../controls/geolocatorControl.php:416
+msgid "You cannot include the same control more than once"
+msgstr "Sie können nicht die gleiche Kontrolle mehr als einmal"
+
+#: ../../../controls/geolocatorControl.php:620
+msgid ""
+"Invalid project or scheme id, or this scheme does not have any non-"
+"geolocator controls."
+msgstr ""
+"Ungültige Projekt oder Programm-ID, oder diese Regelung nicht haben, die "
+"nicht-geolocator Kontrollen."
+
+#: ../../../controls/geolocatorControl.php:628
+msgid "Controls List"
+msgstr "Liste der Kontrollen"
+
+#: ../../../controls/geolocatorControl.php:628
+msgid ""
+"These are the available controls.  Select and add the ones the geolocator "
+"will pull address data from."
+msgstr ""
+"Dies sind die Kontrollen zur Verfügung. Wählen Sie und fügen Sie die, die "
+"geolocator wird pull-Adresse Daten aus."
+
+#: ../../../controls/geolocatorControl.php:643
+msgid "Selected Controls"
+msgstr "Ausgewählte Kontrolle"
+
+#: ../../../controls/geolocatorControl.php:643
+msgid ""
+"The controls in this list will be used for geolocation on record ingestion"
+msgstr ""
+"Die Steuerelemente in dieser Liste werden für die Geolocation zu Protokoll "
+"Einnahme"
+
+#: ../../../controls/geolocatorControl.php:644
+msgid ""
+"The locator string will be built by adding the contents of the controls from "
+"top to bottom"
+msgstr ""
+"Die Locator-String wird durch die Addition der Inhalte der Kontrollen von "
+"oben nach unten"
+
+#: ../../../controls/geolocatorControl.php:659
+msgid "Update Geocodes"
+msgstr "Aktualisieren Geocodes"
+
+#: ../../../controls/geolocatorControl.php:659
+msgid "Look up latitude/longitude for all records in this scheme"
+msgstr "Look-Up-Länge/Breite für alle Einträge in dieser Regelung"
+
+#: ../../../controls/imageControl.php:256
+msgid "Width"
+msgstr "Breite"
+
+#: ../../../controls/imageControl.php:257
+msgid "Height"
+msgstr "Höhe"
+
+#: ../../../controls/imageControl.php:270
+msgid ""
+"Note: This list is based on the image types which PHP can process and cannot "
+"be changed; it is provided here solely for reference."
+msgstr ""
+"Hinweis: Diese Liste basiert auf dem Bild-Typen, die PHP verarbeiten kann "
+"und kann nicht geändert werden, es ist hier nur zu Referenzzwecken."
+
+#: ../../../controls/imageControl.php:306
+msgid "Width and Height must be Positive Integers"
+msgstr "Breite und Höhe muss Positive Ganzzahlen"
+
+#: ../../../controls/imageControl.php:310
+msgid "Maximum Width"
+msgstr "Maximale Breite"
+
+#: ../../../controls/imageControl.php:310
+#: ../../../controls/imageControl.php:314
+msgid "pixels"
+msgstr "Pixel"
+
+#: ../../../controls/imageControl.php:314
+msgid "Maximum Height"
+msgstr "Maximale Höhe"
+
+#: ../../../controls/imageControl.php:359
+msgid "Unable to open thumbnail directory"
+msgstr "Konnte nicht geöffnet werden Thumbnail-Verzeichnis"
+
+#: ../../../controls/imageControl.php:362
+msgid "Thumbnail Size Updated"
+msgstr "Größe der Vorschaubilder Aktualisiert"
+
+#: ../../../controls/listControl.php:365
+#: ../../../controls/multiListControl.php:401
+msgid "\" is not an valid value for "
+msgstr " nicht ist ein gültiger Wert für "
+
+#: ../../../controls/listControl.php:603
+msgid "There is already a List Control preset with the name"
+msgstr "Es gibt bereits eine Liste der Preset mit dem Namen"
+
+#: ../../../controls/listControl.php:655
+#: ../../../controls/multiListControl.php:431
+msgid "List Options"
+msgstr "Liste Optionen"
+
+#: ../../../controls/listControl.php:655
+#: ../../../controls/multiListControl.php:431
+msgid "These are the choices users will be presented with when ingesting"
+msgstr "Dies sind die Entscheidungen Benutzer wird bei der Aufnahme"
+
+#: ../../../controls/listControl.php:672
+msgid ""
+"Optionally, select a value which will be initially selected upon first "
+"ingestion"
+msgstr ""
+"Wählen Sie ein Wert, wird zunächst auf den ersten ausgewählten Aufnahme"
+
+#: ../../../controls/listControl.php:691
+#: ../../../controls/multiListControl.php:486
+msgid "Sets of pre-defined list values which are commonly used"
+msgstr "Legt der vordefinierten Liste Werte, die häufig verwendete"
+
+#: ../../../controls/listControl.php:708
+msgid "Set AutoFill"
+msgstr "Stellen Sie AutoFill ein"
+
+#: ../../../controls/listControl.php:708
+msgid ""
+"Choose a control to auto select a value for this control when specific value "
+"is selected."
+msgstr "Wählen Sie eine Steuerung zum Automobil vorwählen einen Wert für diese Steuerung, wenn spezifischer Wert vorgewählt wird."
+
+#: ../../../controls/listControl.php:721
+msgid "Select Control"
+msgstr "Wählen Sie Steuerung vor"
+
+#: ../../../controls/listControl.php:829 ../../../controls/textControl.php:348
+msgid "Default Value Updated"
+msgstr "Standardwert Aktualisiert"
+
+#: ../../../controls/listControl.php:868
+msgid "Auto Fill Control Updated"
+msgstr "Selbstfülle-Steuerung aktualisierte"
+
+#: ../../../controls/multiDateControl.php:136
+msgid "January"
+msgstr "Januar"
+
+#: ../../../controls/multiDateControl.php:136
+msgid "February"
+msgstr "Februar"
+
+#: ../../../controls/multiDateControl.php:136
+msgid "March"
+msgstr "März"
+
+#: ../../../controls/multiDateControl.php:137
+msgid "April"
+msgstr "April"
+
+#: ../../../controls/multiDateControl.php:137
+msgid "May"
+msgstr "Mai"
+
+#: ../../../controls/multiDateControl.php:137
+msgid "June"
+msgstr "Juni"
+
+#: ../../../controls/multiDateControl.php:137
+msgid "July"
+msgstr "Juli"
+
+#: ../../../controls/multiDateControl.php:138
+msgid "August"
+msgstr "August"
+
+#: ../../../controls/multiDateControl.php:138
+msgid "September"
+msgstr "September"
+
+#: ../../../controls/multiDateControl.php:138
+msgid "October"
+msgstr "Oktober"
+
+#: ../../../controls/multiDateControl.php:139
+msgid "November"
+msgstr "November"
+
+#: ../../../controls/multiDateControl.php:139
+msgid "December"
+msgstr "Dezember"
+
+#: ../../../controls/multiDateControl.php:202
+msgid "Bad Date Format Option"
+msgstr "Bad Datumsformat Option"
+
+#: ../../../controls/multiDateControl.php:704
+#: ../../../controls/multiDateControl.php:734
+#: ../../../controls/multiTextControl.php:431
+#: ../../../controls/textControl.php:290
+msgid "Value supplied for field"
+msgstr "Wert für das Feld"
+
+#: ../../../controls/multiDateControl.php:704
+msgid "is not valid XML"
+msgstr "ist keine gültige XML"
+
+#: ../../../controls/multiDateControl.php:717
+msgid "Era must be CE or BCE"
+msgstr "Era müssen CE oder BCE"
+
+#: ../../../controls/multiDateControl.php:721
+msgid "Invalid Month"
+msgstr "Ungültige Monat"
+
+#: ../../../controls/multiDateControl.php:725
+msgid "Year outside of valid range"
+msgstr "Jahr außerhalb des gültigen Bereich"
+
+#: ../../../controls/multiDateControl.php:734
+msgid "does not have all required XML members"
+msgstr "nicht alle erforderlichen XML-Mitglieder"
+
+#: ../../../controls/multiListControl.php:449
+msgid ""
+"Optionally, select which value(s) which will be initially selected upon "
+"first ingestion"
+msgstr ""
+"Optional, wählen Sie, welchen Wert (n), die ursprünglich ausgewählten beim "
+"ersten Einnahme"
+
+#: ../../../controls/multiListControl.php:476
+#: ../../../includes/schemeFunctions.php:284
+msgid "Options"
+msgstr "Optionen"
+
+#: ../../../controls/multiTextControl.php:267
+#: ../../../controls/textControl.php:173
+msgid ""
+"Really select preset?  This will delete any existing RegEx and cannot be "
+"undone!"
+msgstr ""
+"Wählen Sie Preset wirklich? Diese löscht alle vorhandenen RegEx und kann "
+"nicht rückgängig gemacht werden!"
+
+#: ../../../controls/multiTextControl.php:431
+#: ../../../controls/textControl.php:290
+msgid "does not match the required pattern"
+msgstr "nicht mit dem erforderlichen Muster"
+
+#: ../../../controls/multiTextControl.php:465
+#: ../../../controls/textControl.php:420
+msgid "Regular Expression Match"
+msgstr "Regulärer Ausdruck mit"
+
+#: ../../../controls/multiTextControl.php:465
+#: ../../../controls/textControl.php:420
+msgid "Leave blank to allow any input"
+msgstr "Leer lassen, damit jeder Eingang"
+
+#: ../../../controls/multiTextControl.php:466
+#, php-format
+msgid "use %s  otherwise"
+msgstr "Mit %s sonst"
+
+#: ../../../controls/multiTextControl.php:466
+#: ../../../controls/textControl.php:421
+msgid "Perl-style RegEx"
+msgstr "Perl-Stil RegEx"
+
+#: ../../../controls/multiTextControl.php:472
+#: ../../../controls/textControl.php:427
+msgid "Leave blank to have no initial value"
+msgstr "Lassen Sie leer, um kein Initialwert"
+
+#: ../../../controls/multiTextControl.php:509
+#: ../../../controls/textControl.php:445
+msgid ""
+"Pre-created Regular Expressions to match common patterns for your "
+"convieneince"
+msgstr ""
+"Vor erstellt Reguläre Ausdrücke, um gemeinsame Muster für Ihre Bequemlichkeit"
+
+#: ../../../controls/multiTextControl.php:522
+#: ../../../controls/textControl.php:458
+msgid ""
+"If you would like to save this regular expression as a preset, enter a name "
+"and click 'Save as Preset'"
+msgstr ""
+"Wenn Sie möchten, speichern Sie diese regulären Ausdruck als Voreinstellung, "
+"geben Sie einen Namen ein und klicken Sie auf 'Speichern als Preset'"
+
+#: ../../../controls/textControl.php:325
+msgid "Regular Expression Updated"
+msgstr "Regulärer Ausdruck Aktualisiert"
+
+#: ../../../controls/textControl.php:376
+msgid "Size Updated"
+msgstr "Größe aktualisiert"
+
+#: ../../../controls/textControl.php:380
+msgid "The number of rows and columns must be a positive integer"
+msgstr "Die Anzahl der Zeilen und Spalten muss eine positive Ganzzahl"
+
+#: ../../../controls/textControl.php:406
+msgid "Rows"
+msgstr "Reihen"
+
+#: ../../../controls/textControl.php:410
+msgid "Columns"
+msgstr "Spalten"
+
+#: ../../../controls/textControl.php:505
+msgid "There is already a Text Control Preset with the name"
+msgstr "Es gibt bereits einen Text Control Preset mit dem Namen"
+
+#: ../../../includes/dublinFunctions.php:101
+msgid "Add Field"
+msgstr "Feld hinzufügen"
+
+#: ../../../includes/dublinFunctions.php:103
+msgid "Dublin Core Field/Control Name"
+msgstr "Dublin-Core-Feld/Control Name"
+
+#: ../../../includes/dublinFunctions.php:132
+msgid "Add Field to Dublin Core"
+msgstr "Feld hinzufügen zu Dublin Core"
+
+#: ../../../includes/dublinFunctions.php:138
+msgid "Current Dublin Core fields for this scheme"
+msgstr "Aktuelle Dublin-Core-Felder für diese Regelung"
+
+#: ../../../includes/dublinFunctions.php:165
+msgid "No Dublin Core fields for this scheme yet"
+msgstr "Keine Dublin-Core-Felder für diese Regelung noch"
+
+#: ../../../includes/fixity.php:86 ../../../includes/fixity.php:90
+msgid "File"
+msgstr "Datei"
+
+#: ../../../includes/fixity.php:86
+msgid "changed from last hash check"
+msgstr "Zuletzt geändert von Hash-Check"
+
+#: ../../../includes/fixity.php:86
+msgid "Last Computed"
+msgstr "Letzte Computertomographie"
+
+#: ../../../includes/fixity.php:86
+msgid "Current Computed"
+msgstr "Aktuelle Computer"
+
+#: ../../../includes/fixity.php:87
+msgid "Last Computed Hash Time"
+msgstr "Letzte berechneten Hash-Zeit"
+
+#: ../../../includes/fixity.php:87
+msgid "Current Computed Hash Time"
+msgstr "Aktuelle berechneten Hash-Zeit"
+
+#: ../../../includes/fixity.php:90
+msgid "changed from initial hash"
+msgstr "Veränderung von der erste Hash"
+
+#: ../../../includes/fixity.php:90
+msgid "Initial"
+msgstr "Erste"
+
+#: ../../../includes/fixity.php:90
+msgid "Computed"
+msgstr "Computertomographie"
+
+#: ../../../includes/fixity.php:91
+msgid "Original Hash Time"
+msgstr "Original-Hash-Zeit"
+
+#: ../../../includes/fixity.php:91
+msgid "Current Hash Time"
+msgstr "Aktuelle Hash Zeit"
+
+#: ../../../includes/fixity.php:95
+msgid ""
+"Something that should never happen did.  The original hash and stored hash "
+"in the database differ. Check this file for errors"
+msgstr ""
+"Etwas, das sollte nie passieren hat. Die ursprüngliche Hash Hash gespeichert "
+"und in der Datenbank unterscheiden. Überprüfen Sie diese Datei auf Fehler"
+
+#: ../../../includes/fixity.php:112
+msgid "KORA Fixity Run Results"
+msgstr "KORA Fixity Run Ergebnisse"
+
+#: ../../../includes/fixity.php:115
+msgid "fixity errors"
+msgstr "fixity Fehler"
+
+#: ../../../includes/fixity.php:120
+msgid "files passed"
+msgstr "Dateien an"
+
+#: ../../../includes/footer.php:28 ../../../upgradeDatabase.php:1084
+msgid "Created by"
+msgstr "Erstellt von"
+
+#: ../../../includes/footer.php:29 ../../../upgradeDatabase.php:1085
+msgid "Version"
+msgstr "Version"
+
+#: ../../../includes/header.php:66 ../../../includes/menu.php:47
+#: ../../../activate.php:81 ../../../login.php:41
+#: ../../../resetPassword.php:86 ../../../upgradeDatabase.php:56
+msgid "Log In"
+msgstr "Anmelden"
+
+#: ../../../includes/header.php:67 ../../../upgradeDatabase.php:57
+msgid "Register"
+msgstr "Registrieren"
+
+#: ../../../includes/header.php:68 ../../../activate.php:47
+#: ../../../login.php:47 ../../../upgradeDatabase.php:58
+msgid "Activate Account"
+msgstr "Konto aktivieren"
+
+#: ../../../includes/header.php:70 ../../../upgradeDatabase.php:60
+msgid "Log Out"
+msgstr "Abmelden"
+
+#: ../../../includes/header.php:71 ../../../upgradeDatabase.php:61
+msgid "Update User Info"
+msgstr "Update Benutzer Informationen"
+
+#: ../../../includes/header.php:84
+msgid "Your database is out of date; please upgrade it"
+msgstr "Ihre Datenbank ist veraltet, bitte aktualisieren Sie"
+
+#: ../../../includes/ingestionClass.php:102
+#: ../../../includes/ingestionClass.php:307
+msgid "There was an error preparing the ingestion form"
+msgstr "Es war ein Fehler der Vorbereitung der Einnahme Form"
+
+#: ../../../includes/ingestionClass.php:289
+msgid "Submit Data"
+msgstr "Übermitteln Daten"
+
+#: ../../../includes/ingestionClass.php:438
+msgid "Object Ingested"
+msgstr "Objekt-Einnahme"
+
+#: ../../../includes/ingestionClass.php:446
+msgid "Ingestion Failed.  See below errors."
+msgstr "Aufnahme fehlgeschlagen. Siehe unten Fehler."
+
+#: ../../../includes/ingestionClass.php:448
+msgid "At least one control must have data"
+msgstr "Mindestens eine muß Daten"
+
+#: ../../../includes/koraSearch.php:107 ../../../includes/koraSearch.php:400
+msgid "Please specify at least one field to return"
+msgstr "Bitte geben Sie mindestens ein Feld, um wieder"
+
+#: ../../../includes/koraSearch.php:113 ../../../includes/koraSearch.php:406
+msgid "Query must be a Clause object"
+msgstr "Query muss eine Klausel Objekt"
+
+#: ../../../includes/koraSearch.php:135 ../../../includes/koraSearch.php:446
+#: ../../../includes/koraSearch.php:732 ../../../includes/koraSearch.php:803
+msgid "Invalid Authentication to Search"
+msgstr "Ungültige Authentifizierung zur Suche"
+
+#: ../../../includes/koraSearch.php:182 ../../../includes/koraSearch.php:1026
+msgid "Unknown control"
+msgstr "Unbekannt Kontrolle"
+
+#: ../../../includes/koraSearch.php:411
+msgid "Invalid sorting options"
+msgstr "Unzulässige sortierende Wahlen"
+
+#: ../../../includes/koraSearch.php:468
+msgid "Control "
+msgstr "Steuerung "
+
+#: ../../../includes/koraSearch.php:747
+msgid "No Collections Exist For This Scheme"
+msgstr "Keine Ansammlungen existieren für diesen Entwurf"
+
+#: ../../../includes/koraSearch.php:812 ../../../includes/koraSearch.php:821
+#, fuzzy
+msgid "Selected Control"
+msgstr "Ausgewählte Kontrolle"
+
+#: ../../../includes/koraSearch.php:812
+msgid "Does Not Exist"
+msgstr "Existiert nicht"
+
+#: ../../../includes/koraSearch.php:821
+msgid "Is Not a List or Multi-List"
+msgstr "Nicht ist eine Liste oder eine Multi-Liste"
+
+#: ../../../includes/koraSearch.php:1057 ../../../includes/required.php:35
+msgid "Error"
+msgstr "Fehler"
+
+#: ../../../includes/koraSearch.php:1057
+msgid "Bad Search Clause"
+msgstr "Schlecht Suche Klausel"
+
+#: ../../../includes/menu.php:45
+msgid "Accounts"
+msgstr "Konten"
+
+#: ../../../includes/menu.php:48
+msgid "Register an Account"
+msgstr "Ein Konto registrieren"
+
+#: ../../../includes/menu.php:49
+msgid "Activate an Account"
+msgstr "Aktivieren Sie ein Konto"
+
+#: ../../../includes/menu.php:51
+msgid "change language"
+msgstr "Sprache ändern"
+
+#: ../../../includes/menu.php:82
+msgid "Management"
+msgstr "Leitung"
+
+#: ../../../includes/menu.php:85
+msgid "System Management"
+msgstr "System Leitung"
+
+#: ../../../includes/menu.php:86
+msgid "Create/Modify Projects"
+msgstr "Erstellen/Ändern Projekte"
+
+#: ../../../includes/menu.php:87 ../../../manageUsers.php:28
+msgid "Manage Users"
+msgstr "Benutzer verwalten"
+
+#: ../../../includes/menu.php:88 ../../../manageSearchTokens.php:29
+msgid "Manage Search Tokens"
+msgstr "Verwalten Suche Spektakelplättchen"
+
+#: ../../../includes/menu.php:106 ../../../crossProjectSearch.php:28
+msgid "Cross-Project Search"
+msgstr "Cross-Project-Suche"
+
+#: ../../../includes/menu.php:108
+msgid "Search within Project"
+msgstr "Suche in der Projekt"
+
+#: ../../../includes/menu.php:110
+#, fuzzy
+msgid "Advanced Search within Scheme"
+msgstr "Fügen Sie eine neue Schema"
+
+#: ../../../includes/menu.php:116 ../../../includes/projectFunctions.php:71
+msgid "Project"
+msgstr "Projekt"
+
+#: ../../../includes/menu.php:118
+msgid "Select a Project"
+msgstr "Wählen Sie ein Projekt"
+
+#: ../../../includes/menu.php:120
+msgid "Manage Groups"
+msgstr "Verwalten von Gruppen"
+
+#: ../../../includes/menu.php:121
+msgid "Manage Project Users"
+msgstr "Verwalten von Projekten Benutzer"
+
+#: ../../../includes/menu.php:122 ../../../manageControlPresets.php:27
+msgid "Manage Control Presets"
+msgstr "Verwalten der Presets"
+
+#: ../../../includes/menu.php:133
+msgid "Select a Scheme"
+msgstr "Wählen Sie ein Schema"
+
+#: ../../../includes/menu.php:135
+msgid "Add a New Scheme"
+msgstr "Fügen Sie eine neue Schema"
+
+#: ../../../includes/menu.php:136
+msgid "Import Scheme From XML"
+msgstr "Import-Entwurf von XML"
+
+#: ../../../includes/menu.php:139
+msgid "Scheme Layout"
+msgstr "Schema Anordnung"
+
+#: ../../../includes/menu.php:141
+msgid "Manage Associator Permissions"
+msgstr "Berechtigungen verwalten Associator"
+
+#: ../../../includes/menu.php:142 ../../../manageRecordPresets.php:31
+msgid "Manage Record Presets"
+msgstr "Verwalten Record Presets"
+
+#: ../../../includes/menu.php:151
+msgid "Refresh Dublin Core Data"
+msgstr "Aktualisieren Dublin-Core-Daten"
+
+#: ../../../includes/menu.php:154
+msgid "Manage Dublin Core Fields"
+msgstr "Verwalten von Dublin-Core-Felder"
+
+#: ../../../includes/menu.php:162
+msgid "Record"
+msgstr "Record"
+
+#: ../../../includes/menu.php:166
+msgid "Ingest Record"
+msgstr "Sich nehmen Record"
+
+#: ../../../includes/menu.php:168
+msgid "List Scheme Records"
+msgstr "Auflisten Schema Records"
+
+#: ../../../includes/menu.php:169
+msgid "Import Records from XML"
+msgstr "Import-Aufzeichnungen von XML"
+
+#: ../../../includes/menu.php:171
+msgid "Export Data To XML"
+msgstr "Export-Daten zu XML"
+
+#: ../../../includes/menu.php:174 ../../../reviewPublicIngestions.php:39
+msgid "Review Public Ingestions"
+msgstr "Bericht-Öffentlichkeits-Einnahmen"
+
+#: ../../../includes/presetFunctions.php:62
+msgid "There is already a control of that type with that name"
+msgstr "Es gibt bereits eine Kontrolle der Art, dass mit diesem Namen"
+
+#: ../../../includes/presetFunctions.php:136
+msgid "There are no presets which you have control over"
+msgstr "Es gibt keine Presets, die Sie haben die Kontrolle über "
+
+#: ../../../includes/presetFunctions.php:141
+msgid "Preset Name"
+msgstr "voreinstellen Name"
+
+#: ../../../includes/presetFunctions.php:141
+msgid "Original Project"
+msgstr "Ursprüngliche Projekt"
+
+#: ../../../includes/presetFunctions.php:141
+msgid "Global"
+msgstr "Weltweit"
+
+#: ../../../includes/presetFunctions.php:141
+#: ../../../manageRecordPresets.php:75
+msgid "New Name"
+msgstr "Neuer Name"
+
+#: ../../../includes/presetFunctions.php:141
+#: ../../../includes/presetFunctions.php:226
+#: ../../../includes/projectFunctions.php:71
+#: ../../../includes/schemeFunctions.php:59
+#: ../../../includes/schemeFunctions.php:285
+#: ../../../includes/searchTokenFunctions.php:69
+#: ../../../includes/userFunctions.php:55 ../../../manageRecordPresets.php:32
+msgid "Delete"
+msgstr "Löschen"
+
+#: ../../../includes/presetFunctions.php:147
+msgid "Stock Preset"
+msgstr "Lager Preset"
+
+#: ../../../includes/presetFunctions.php:153
+#: ../../../manageRecordPresets.php:80
+msgid "Rename"
+msgstr "Umbenennen"
+
+#: ../../../includes/presetFunctions.php:174
+msgid "Object is not in current scheme"
+msgstr "Objekt ist nicht in der aktuellen Regelung"
+
+#: ../../../includes/presetFunctions.php:178
+msgid "You cannot have an empty name"
+msgstr "Sie können nicht eine leere Namen"
+
+#: ../../../includes/presetFunctions.php:185
+msgid "You do not have permission to create presets"
+msgstr "Sie haben keine Berechtigung, um Presets"
+
+#: ../../../includes/presetFunctions.php:192
+#: ../../../includes/presetFunctions.php:278
+msgid "There is already a preset with that name"
+msgstr "Es gibt bereits ein Preset mit dem Namen"
+
+#: ../../../includes/presetFunctions.php:199
+msgid "This record is already a preset"
+msgstr "Dieser Eintrag ist bereits ein Preset"
+
+#: ../../../includes/presetFunctions.php:205
+msgid "Preset Added"
+msgstr "Preset hinzugefügt"
+
+#: ../../../includes/presetFunctions.php:224
+msgid "ID"
+msgstr "ID"
+
+#: ../../../includes/presetFunctions.php:225
+msgid "Demote"
+msgstr "Degradieren"
+
+#: ../../../includes/presetFunctions.php:240
+msgid "This scheme currently has no presets"
+msgstr "Diese Regelung hat zur Zeit keine Presets"
+
+#: ../../../includes/projectFunctions.php:35
+msgid ""
+"The following schemes are currently allowed to associate to records in this "
+"scheme"
+msgstr "Die folgenden Regelungen sind derzeit um die Einträge in diesem Schema"
+
+#: ../../../includes/projectFunctions.php:85
+msgid "No schemes are currently allowed to associate to this project"
+msgstr "Schema sind derzeit nicht erlaubt, um für dieses Projekt"
+
+#: ../../../includes/required.php:28
+msgid ""
+"You must have PHP 5.1.3 or later installed to use KORA.  You currently have "
+"version "
+msgstr ""
+"Sie müssen PHP 5.1.3 oder höher installiert zu verwenden KORA. Sie haben "
+"derzeit Version"
+
+#: ../../../includes/required.php:35
+msgid "Magic Quotes are enabled.  Please disable magic_quotes_gpc in php.ini."
+msgstr ""
+"Magic Quotes aktiviert sind. Bitte deaktivieren magic_quotes_gpc in der php."
+"ini."
+
+#: ../../../includes/required.php:43
+msgid ""
+"Cannot connect to the database.  Please verify your configuration settings."
+msgstr ""
+"Kann keine Verbindung zu der Datenbank. Bitte bestätigen Sie Ihre "
+"Einstellungen."
+
+#: ../../../includes/required.php:52
+msgid ""
+"You must have at least MySQL 5.0.3 installed to use KORA.  You currently "
+"have version "
+msgstr ""
+"Sie müssen mindestens MySQL 5.0.3 installiert zu verwenden KORA. Sie haben "
+"derzeit Version"
+
+#: ../../../includes/schemeFunctions.php:43
+msgid "This project currently has no schemes"
+msgstr "Dieses Projekt hat derzeit keine Pläne"
+
+#: ../../../includes/schemeFunctions.php:57
+#: ../../../includes/utilities.php:1468 ../../../addCollection.php:38
+#: ../../../addScheme.php:37 ../../../editCollection.php:62
+#: ../../../editControl.php:110 ../../../editScheme.php:96
+#: ../../../manageProjects.php:107 ../../../manageProjects.php:168
+#: ../../../selectProject.php:76
+msgid "Description"
+msgstr "Beschreibung"
+
+#: ../../../includes/schemeFunctions.php:58
+#: ../../../includes/schemeFunctions.php:69
+#: ../../../includes/schemeFunctions.php:313
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: ../../../includes/schemeFunctions.php:154
+#: ../../../includes/schemeFunctions.php:238
+#: ../../../includes/schemeFunctions.php:323
+#: ../../../includes/utilities.php:1455
+msgid "Add a Control"
+msgstr "Fügen Sie ein Control"
+
+#: ../../../includes/schemeFunctions.php:155
+msgid "Remove this Collection"
+msgstr "Entfernen Sie diese Sammlung"
+
+#: ../../../includes/schemeFunctions.php:190
+msgid "Allow this scheme's layout to be used as a preset?"
+msgstr "Lassen Sie das Layout dieser Schema für die Verwendung als ein Preset?"
+
+#: ../../../includes/schemeFunctions.php:239
+#: ../../../includes/schemeFunctions.php:324
+msgid "Remove this Control Collection"
+msgstr "Entfernen Sie diese Kontrolle Collection"
+
+#: ../../../includes/schemeFunctions.php:278
+#: ../../../includes/utilities.php:1469 ../../../editControl.php:111
+msgid "Required"
+msgstr "Erforderlich"
+
+#: ../../../includes/schemeFunctions.php:280
+#: ../../../includes/utilities.php:1470 ../../../editControl.php:112
+msgid "Searchable"
+msgstr "Durchsuchbare"
+
+#: ../../../includes/schemeFunctions.php:281
+msgid "Adv. Search"
+msgstr "Vorgerückte Suche"
+
+#: ../../../includes/schemeFunctions.php:282
+msgid "Show"
+msgstr "Zeigen"
+
+#: ../../../includes/schemeFunctions.php:343
+msgid "Add a Control Collection"
+msgstr "Fügen Sie ein Control Collection"
+
+#: ../../../includes/searchTokenFunctions.php:35
+msgid "No existing search tokens found"
+msgstr "Keine bestehende Token Suche gefunden"
+
+#: ../../../includes/searchTokenFunctions.php:63
+msgid "Existing Tokens"
+msgstr "Bestehende Spektakelplättchen"
+
+#: ../../../includes/searchTokenFunctions.php:66 ../../../activate.php:44
+#: ../../../resetPassword.php:48
+msgid "Token"
+msgstr "Token"
+
+#: ../../../includes/searchTokenFunctions.php:67
+msgid "Can Search"
+msgstr "Kann Suche"
+
+#: ../../../includes/searchTokenFunctions.php:68
+msgid "Allow Search Of"
+msgstr "Lassen Sie der Suche nach"
+
+#: ../../../includes/searchTokenFunctions.php:95
+msgid "Allow"
+msgstr "Lassen"
+
+#: ../../../includes/searchTokenFunctions.php:104
+msgid "Please note that tokens are case-sensitive"
+msgstr "Bitte beachten Sie, dass Token sind Groß-und Kleinschreibung"
+
+#: ../../../includes/searchTokenFunctions.php:105
+msgid "Create New Token"
+msgstr "Neue Token"
+
+#: ../../../includes/userFunctions.php:35
+msgid "Username already in use"
+msgstr "Benutzername bereits im Einsatz"
+
+#: ../../../includes/userFunctions.php:38
+msgid "Username available"
+msgstr "Benutzername verfügbar"
+
+#: ../../../includes/userFunctions.php:54
+#: ../../../includes/userFunctions.php:75
+#: ../../../includes/userFunctions.php:337 ../../../accountSettings.php:71
+#: ../../../activate.php:41 ../../../login.php:37
+#: ../../../recoverPassword.php:12 ../../../register.php:49
+#: ../../../resetPassword.php:43
+msgid "Username"
+msgstr "Benutzername"
+
+#: ../../../includes/userFunctions.php:54 ../../../accountSettings.php:73
+msgid "Real Name"
+msgstr "Realer Name"
+
+#: ../../../includes/userFunctions.php:55 ../../../accountSettings.php:74
+#: ../../../register.php:62
+msgid "Organization"
+msgstr "Organisation"
+
+#: ../../../includes/userFunctions.php:55
+msgid "Activated"
+msgstr "Aktivkohle"
+
+#: ../../../includes/userFunctions.php:55
+#: ../../../includes/userFunctions.php:203
+msgid "Admin"
+msgstr "Admin"
+
+#: ../../../includes/userFunctions.php:72
+msgid "Reset User Password"
+msgstr "Benutzer-Passwort zurücksetzen"
+
+#: ../../../includes/userFunctions.php:87 ../../../login.php:39
+#: ../../../register.php:53 ../../../resetPassword.php:53
+msgid "Password"
+msgstr "Passwort"
+
+#: ../../../includes/userFunctions.php:91 ../../../resetPassword.php:57
+msgid "Confirm Password"
+msgstr "Kennwort Passwort"
+
+#: ../../../includes/userFunctions.php:96 ../../../recoverPassword.php:12
+#: ../../../recoverPassword.php:109 ../../../resetPassword.php:8
+#: ../../../resetPassword.php:62
+msgid "Reset Password"
+msgstr "Passwort zurücksetzen"
+
+#: ../../../includes/userFunctions.php:204
+msgid "Ingest Obj"
+msgstr "sich nehmen Obj"
+
+#: ../../../includes/userFunctions.php:205
+msgid "Delete Obj"
+msgstr "Löschen Obj"
+
+#: ../../../includes/userFunctions.php:206
+msgid "Edit Layout"
+msgstr "Layout bearbeiten"
+
+#: ../../../includes/userFunctions.php:207
+msgid "Create Scheme"
+msgstr "Erstellen Schema"
+
+#: ../../../includes/userFunctions.php:208
+msgid "Delete Scheme"
+msgstr "Löschen Schema"
+
+#: ../../../includes/userFunctions.php:209
+msgid "Export Scheme"
+msgstr "Ausführen Schema"
+
+#: ../../../includes/userFunctions.php:210
+msgid "Moderate Public Ingestion"
+msgstr "Gemäßigte allgemeine Einnahme"
+
+#: ../../../includes/userFunctions.php:211
+#: ../../../includes/userFunctions.php:337
+msgid "Action"
+msgstr "Aktion"
+
+#: ../../../includes/userFunctions.php:257
+msgid "Add New Group"
+msgstr "Neue Gruppe"
+
+#: ../../../includes/userFunctions.php:271
+msgid "No project selected"
+msgstr "Kein Projekt ausgewählt"
+
+#: ../../../includes/userFunctions.php:337
+msgid "Group"
+msgstr "Gruppe"
+
+#: ../../../includes/utilities.php:170 ../../../includes/utilities.php:174
+msgid "Prev"
+msgstr "Zurück "
+
+#: ../../../includes/utilities.php:264 ../../../includes/utilities.php:268
+msgid "Next"
+msgstr "Nächster"
+
+#: ../../../includes/utilities.php:600
+msgid "Could not extract the zip folder. Please try again."
+msgstr "Konnte das Reißverschlussfaltblatt nicht extrahieren. Versuchen Sie bitte noch einmal."
+
+#: ../../../includes/utilities.php:604
+msgid "There was trouble opening the zip folder.  Please try again."
+msgstr "Es gab die Mühe, die das Reißverschlussfaltblatt öffnet. Versuchen Sie bitte noch einmal."
+
+#: ../../../includes/utilities.php:924
+msgid "You need permission to search this project"
+msgstr "Sie benötigen eine Berechtigung, um dieses Projekt"
+
+#: ../../../includes/utilities.php:936
+msgid "Invalid Boolean Specified"
+msgstr "Ungültiger Boolescher spezifiziert"
+
+#: ../../../includes/utilities.php:991 ../../../deleteObject.php:45
+#: ../../../deleteObject.php:52 ../../../manageProjects.php:209
+#: ../../../schemeLayout.php:56
+msgid "Warning"
+msgstr "Warnung"
+
+#: ../../../includes/utilities.php:991
+msgid "No searchable fields in project"
+msgstr "Keine suchbaren Felder im Projekt"
+
+#: ../../../includes/utilities.php:1101
+msgid "Number of search results"
+msgstr "Anzahl der Suchergebnisse"
+
+#: ../../../includes/utilities.php:1104
+#: ../../../reviewPublicIngestions.php:115
+msgid "Jump to Page"
+msgstr "Gehe zur Seite"
+
+#: ../../../includes/utilities.php:1110
+#: ../../../reviewPublicIngestions.php:121
+msgid "View All"
+msgstr "Alle anzeigen"
+
+#: ../../../includes/utilities.php:1192 ../../../includes/utilities.php:1229
+msgid "Show Detailed Record View"
+msgstr "Zeige Details vom Eintrag anzeigen"
+
+#: ../../../includes/utilities.php:1459
+msgid "Control to Add"
+msgstr "Control zu Hinzufügen"
+
+#: ../../../includes/utilities.php:1471
+msgid "Advanced Search"
+msgstr "Vorgerückte Suche"
+
+#: ../../../includes/utilities.php:1472 ../../../editControl.php:116
+msgid "Show in results"
+msgstr "Zeige Ergebnisse"
+
+#: ../../../includes/utilities.php:1475
+msgid "Add Control"
+msgstr "Hinzufügen Control"
+
+#: ../../../includes/utilities.php:1529
+msgid "You must provide a name for this control."
+msgstr "Sie müssen einen Namen für dieses Steuerelement."
+
+#: ../../../includes/utilities.php:1533
+msgid "Missing required field."
+msgstr ""
+
+#: ../../../includes/utilities.php:1538 ../../../includes/utilities.php:1543
+#: ../../../editControl.php:69
+msgid "is not a valid control name"
+msgstr "ist kein gültiger Name Kontrolle"
+
+#: ../../../includes/utilities.php:1550 ../../../includes/utilities.php:1554
+msgid "Please select a valid control type."
+msgstr "Bitte wählen Sie eine gültige Kontrolltyps."
+
+#: ../../../includes/utilities.php:1592
+msgid "Record Associator"
+msgstr "Rekord Associator"
+
+#: ../../../includes/utilities.php:1593
+msgid "Date"
+msgstr "Datum"
+
+#: ../../../includes/utilities.php:1594
+msgid "Image"
+msgstr "Bilde"
+
+#: ../../../includes/utilities.php:1595
+msgid "List"
+msgstr "Liste"
+
+#: ../../../includes/utilities.php:1596
+msgid "Date (Multi-Input)"
+msgstr "Datum (Multi-Eingang)"
+
+#: ../../../includes/utilities.php:1597
+msgid "List (Multi-Select)"
+msgstr "Liste (Multi-Auswahl)"
+
+#: ../../../includes/utilities.php:1598
+msgid "Text (Multi-Input)"
+msgstr "Texte (Multi-Eingang)"
+
+#: ../../../includes/utilities.php:1599
+msgid "Text"
+msgstr "Texte"
+
+#: ../../../includes/utilities.php:1600
+msgid "Title"
+msgstr "Titel"
+
+#: ../../../includes/utilities.php:1601
+msgid "Creator"
+msgstr "Schöpfer"
+
+#: ../../../includes/utilities.php:1602
+msgid "Subject"
+msgstr "Subjekt"
+
+#: ../../../includes/utilities.php:1603
+msgid "Publisher"
+msgstr "Verlag"
+
+#: ../../../includes/utilities.php:1604
+msgid "Contributor"
+msgstr "Beitrag"
+
+#: ../../../includes/utilities.php:1605
+msgid "Date Original"
+msgstr "Datum der ursprünglichen"
+
+#: ../../../includes/utilities.php:1606
+msgid "Date Digital"
+msgstr "Datum digitalen"
+
+#: ../../../includes/utilities.php:1607
+msgid "Format"
+msgstr "Format"
+
+#: ../../../includes/utilities.php:1608
+msgid "Source"
+msgstr "Quelle"
+
+#: ../../../includes/utilities.php:1609
+msgid "Coverage"
+msgstr "Abdeckung"
+
+#: ../../../includes/utilities.php:1610
+msgid "Rights"
+msgstr "Rechte"
+
+#: ../../../includes/utilities.php:1611
+msgid "Contributing Institution"
+msgstr "Beitrag Institution"
+
+#: ../../../includes/utilities.php:1612
+msgid "Geolocator"
+msgstr "Geolocator"
+
+#: ../../../includes/utilities.php:1613
+msgid "Geolocator Control"
+msgstr "Geolocator Kontrolle"
+
+#: ../../../accountSettings.php:33 ../../../manageUsers.php:56
+#: ../../../resetPassword.php:33 ../../../resetPassword.php:95
+msgid "Passwords do not match."
+msgstr "Passwörter stimmen nicht überein."
+
+#: ../../../accountSettings.php:36
+msgid "Password not long enough, must be at least 8 characters."
+msgstr "Passwort nicht lang genug ist, muss mindestens 8 Zeichen lang sein."
+
+#: ../../../accountSettings.php:66
+msgid "Password updated"
+msgstr "Passwort geändert"
+
+#: ../../../accountSettings.php:68
+msgid "Update User Information"
+msgstr "Update Nutzungshinweise"
+
+#: ../../../accountSettings.php:72
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: ../../../accountSettings.php:75
+msgid "New Password"
+msgstr "Neues Passwort"
+
+#: ../../../accountSettings.php:75
+msgid "Leave blank if not changing"
+msgstr "Oder leer lassen, wenn nicht verändern"
+
+#: ../../../accountSettings.php:76
+msgid "Confirm New Password"
+msgstr "Neues Kennwort bestätigen"
+
+#: ../../../accountSettings.php:77 ../../../register.php:64
+msgid "Language"
+msgstr "Sprache"
+
+#: ../../../accountSettings.php:85
+msgid "Update Information"
+msgstr "Update-Informationssystem"
+
+#: ../../../activate.php:34
+msgid "Activate your Account"
+msgstr "Aktivieren Sie Ihr Konto"
+
+#: ../../../activate.php:81
+msgid "Your account has been activated"
+msgstr "Ihr Konto wurde aktiviert"
+
+#: ../../../activate.php:81 ../../../resetPassword.php:86
+msgid "Please"
+msgstr "Bitte"
+
+#: ../../../activate.php:84
+msgid "Username/Token Incorrect"
+msgstr "Benutzername/Token Falsche"
+
+#: ../../../addCollection.php:32
+msgid "Add New Collection to "
+msgstr "Neue Kollektion zu "
+
+#: ../../../addCollection.php:39
+msgid "Create New Collection"
+msgstr "Neue Sammlung erstellen "
+
+#: ../../../addCollection.php:49 ../../../addScheme.php:75
+msgid "You must provide a name."
+msgstr "Sie müssen einen Namen. "
+
+#: ../../../addScheme.php:31
+msgid "Add New Scheme to "
+msgstr "Neue Schema für "
+
+#: ../../../addScheme.php:38
+msgid "Load Controls From"
+msgstr "Legen Sie die Kontrollen vom"
+
+#: ../../../addScheme.php:44
+msgid "None (Empty Layout)"
+msgstr "Keine (leeren Layout)"
+
+#: ../../../addScheme.php:52 ../../../editScheme.php:97
+msgid "Public Ingestible?"
+msgstr "Allgemeines Ingestible"
+
+#: ../../../addScheme.php:53 ../../../editScheme.php:98
+msgid "Legal Notice"
+msgstr "Gesetzliche Kündigungsfrist"
+
+#: ../../../addScheme.php:55
+msgid "Create New Scheme"
+msgstr "Neue Schema"
+
+#: ../../../assocSearch.php:31
+msgid "No cid present"
+msgstr "cid nicht anwesend"
+
+#: ../../../assocSearch.php:35
+msgid "No search results"
+msgstr "Kein Suchergebnis"
+
+#: ../../../assocSearch.php:38 ../../../crossProjectSearchResults.php:34
+#: ../../../searchProjectResults.php:45
+msgid "Search Results"
+msgstr "Suchergebnis"
+
+#: ../../../assocSearch.php:124
+msgid "You do not have access to associate to any schemes"
+msgstr "Sie haben keinen Zugang, um auf alle Schema"
+
+#: ../../../crossProjectSearch.php:36 ../../../searchProject.php:50
+msgid "Keywords"
+msgstr "Schlagworte"
+
+#: ../../../crossProjectSearch.php:44
+msgid "Boolean"
+msgstr "Boolean"
+
+#: ../../../crossProjectSearch.php:48
+msgid "AND"
+msgstr "UND"
+
+#: ../../../crossProjectSearch.php:49
+msgid "OR"
+msgstr "ODER"
+
+#: ../../../crossProjectSearch.php:55
+msgid "Projects"
+msgstr "Projekts"
+
+#: ../../../crossProjectSearchResults.php:38
+msgid "Please enter at least one keyword"
+msgstr "Bitte geben Sie mindestens ein Schlüsselwort"
+
+#: ../../../crossProjectSearchResults.php:42
+msgid "Please select at least one project to search"
+msgstr "Bitte wählen Sie mindestens ein Projekt für die Suche"
+
+#: ../../../crossProjectSearchResults.php:94
+msgid ""
+"Sorry, but you do not have permission to search some of the requested "
+"projects"
+msgstr ""
+"Es tut uns leid, aber Sie haben keine Berechtigung für die Suche einige der "
+"beantragten Projekte"
+
+#: ../../../deleteObject.php:43
+msgid "Delete Record"
+msgstr "Datensatz löschen"
+
+#: ../../../deleteObject.php:45
+msgid ""
+"This will permanently delete this record and all data associated with it"
+msgstr ""
+"Dadurch wird dieser Eintrag permanent zu löschen und alle Daten im "
+"Zusammenhang mit"
+
+#: ../../../deleteObject.php:46
+msgid "Are you sure you really want to delete this record?"
+msgstr "Sind Sie sicher, dass Sie wirklich löschen möchten, diesen Rekord?"
+
+#: ../../../deleteObject.php:53
+msgid ""
+"At least one record associates to this record.  Any such associations will "
+"be lost if this record is deleted."
+msgstr ""
+"Mindestens ein Datensatz assoziierten Unternehmen zu diesem Eintrag. Eine "
+"solche Vereinigungen werden verloren gehen, wenn dieser Eintrag gelöscht "
+"wird."
+
+#: ../../../editCollection.php:52
+msgid "Edit Collection Properties for"
+msgstr "Sammlung bearbeiten Eigenschaften für"
+
+#: ../../../editCollection.php:68
+msgid "Submit Changes"
+msgstr "Abschicken"
+
+#: ../../../editControl.php:64
+msgid "You must provide a name for the control."
+msgstr "Sie müssen einen Namen für die Kontrolle."
+
+#: ../../../editControl.php:79
+msgid "That name is already used by another control in this scheme."
+msgstr "Dieser Name wird bereits von einem anderen in dieser Schema."
+
+#: ../../../editControl.php:91
+msgid "Edit control in"
+msgstr "Edit Control in"
+
+#: ../../../editControl.php:91
+msgid "scheme"
+msgstr "Schema"
+
+#: ../../../editControl.php:114
+msgid "Advanced Searchable"
+msgstr "Vorgerücktes auffindbares"
+
+#: ../../../editControl.php:120
+msgid "Update Control"
+msgstr "Update Kontrolle"
+
+#: ../../../editControl.php:125
+msgid ""
+"Updating the Name can break front-end programming that has been completed.  "
+"Make certain you are doing what you intended."
+msgstr ""
+"Aktualisierung der Name brechen können Front-End-Programmierung, die ist "
+"abgeschlossen.  Stellen Sie sicher, Sie tun, was man beabsichtigt."
+
+#: ../../../editOptions.php:37
+msgid "Invalid Control ID Specified"
+msgstr "Ungültige Control ID spezifiziert"
+
+#: ../../../editOptions.php:53
+msgid "Editing Options for "
+msgstr "Bearbeiten von Optionen für "
+
+#: ../../../editOptions.php:58
+msgid ""
+"Could not load control of this type.  Please ensure all controls are "
+"properly installed."
+msgstr ""
+"Konnte nicht geladen werden diese Art von Kontrolle. Bitte achten Sie "
+"darauf, alle Bedienelemente sind richtig installiert."
+
+#: ../../../editScheme.php:38 ../../../editScheme.php:78
+msgid "Invalid Scheme ID"
+msgstr "Ungültiges Schema ID"
+
+#: ../../../editScheme.php:42
+msgid "A scheme with that name already exists"
+msgstr "Ein Schema mit diesem Namen ist bereits vorhanden"
+
+#: ../../../editScheme.php:68
+msgid "No Scheme ID Provided."
+msgstr "Sofern keine Schema ID."
+
+#: ../../../editScheme.php:85
+msgid "Edit Scheme Info"
+msgstr "Bearbeiten Schema Info"
+
+#: ../../../editScheme.php:99
+msgid "Edit Scheme"
+msgstr "Bearbeiten Schema"
+
+#: ../../../importMultipleRecords.php:49 ../../../importScheme.php:30
+msgid "XML File to Load: "
+msgstr "XML Akte zum zu laden: "
+
+#: ../../../importMultipleRecords.php:50
+msgid "Zip Folder: "
+msgstr "Reißverschluss-Faltblatt: "
+
+#: ../../../importMultipleRecords.php:52
+msgid "Upload Records"
+msgstr "Antriebskraft-Aufzeichnungen"
+
+#: ../../../importMultipleRecords.php:68
+msgid "Upload an XML file"
+msgstr "Laden Sie eine XML Akte"
+
+#: ../../../importMultipleRecords.php:130
+msgid "**ERROR: Could not open xml file"
+msgstr "**STÖRUNG: Konnte xml Akte nicht öffnen"
+
+#: ../../../importMultipleRecords.php:134
+msgid "**ERROR: Please upload an xml file"
+msgstr "**STÖRUNG: Laden Sie bitte eine xml Akte"
+
+#: ../../../importScheme.php:22
+msgid "Bad XML Format - "
+msgstr "Schlechtes XML Format "
+
+#: ../../../importScheme.php:32
+msgid "Create Scheme From File"
+msgstr "Verursachen Sie Entwurf von der Akte"
+
+#: ../../../importScheme.php:45
+msgid "Failed to parse XML file."
+msgstr "XML Akte analysieren nicht gekonnt."
+
+#: ../../../importScheme.php:51
+msgid "incorrect document root."
+msgstr "falsche Dokumentenwurzel."
+
+#: ../../../importScheme.php:64
+msgid "Creating scheme ..."
+msgstr "Schaffung des Entwurfs ..."
+
+#: ../../../importScheme.php:73 ../../../importScheme.php:102
+msgid "Succeeded!"
+msgstr "Gefolgt!"
+
+#: ../../../importScheme.php:77
+msgid "Failed - scheme could not be created."
+msgstr "Ausfallen - Entwurf könnte nicht verursacht werden."
+
+#: ../../../importScheme.php:83 ../../../importScheme.php:109
+msgid "No collections"
+msgstr "Keine Ansammlungen"
+
+#: ../../../importScheme.php:92
+msgid "Creating Collection "
+msgstr "Schaffung der Ansammlung "
+
+#: ../../../importScheme.php:98
+msgid "Failed - collection "
+msgstr "Ausfallen - Ansammlung "
+
+#: ../../../importScheme.php:98
+msgid " could not be created."
+msgstr " konnte nicht verursacht werden."
+
+#: ../../../importScheme.php:105
+msgid "All Collections successfully created"
+msgstr "Alle Ansammlungen verursachten erfolgreich."
+
+#: ../../../importScheme.php:125
+#, fuzzy
+msgid "Creating Control "
+msgstr "Update Kontrolle"
+
+#: ../../../importScheme.php:128
+#, fuzzy
+msgid "Failed - "
+msgstr "nicht"
+
+#: ../../../importScheme.php:132
+msgid "Succeeded."
+msgstr "Gefolgt."
+
+#: ../../../importScheme.php:134
+msgid "All controls created successfully."
+msgstr "Alle Kontrollen erfolgreich verursacht."
+
+#: ../../../importScheme.php:135
+msgid "Structure for scheme "
+msgstr "Struktur für Entwurf "
+
+#: ../../../importScheme.php:135
+msgid " fully imported!"
+msgstr " völlig importiert!"
+
+#: ../../../importScheme.php:111
+msgid "Creating Controls"
+msgstr "Schaffung von Kontrollen"
+
+#: ../../../index.php:29
+msgid "Your configuration file is out of date; please update it."
+msgstr "Ihre Konfigurationsdatei ist veraltet, bitte aktualisieren."
+
+#: ../../../ingestApprovedData.php:172 ../../../ingestApprovedData.php:203
+msgid "A database error has occurred. Please refresh the page and try again."
+msgstr "Eine Datenbankstörung ist aufgetreten. Erneuern Sie bitte die Seite und den Versuch wieder."
+
+#: ../../../ingestApprovedData.php:222
+msgid "Record Approved"
+msgstr "Rekordanerkanntes"
+
+#: ../../../ingestApprovedData.php:228
+msgid "All Records Denied and Erased"
+msgstr "Alle Aufzeichnungen verweigerten und löschten"
+
+#: ../../../ingestApprovedData.php:232
+msgid "Record Denied and Erased"
+msgstr "Notieren Sie verweigert und gelöscht"
+
+#: ../../../ingestObject.php:31
+msgid "Ingestion"
+msgstr "Verschlucken"
+
+#: ../../../ingestObject.php:38
+msgid ""
+"Loading a preset will erase any data you have currently entered into "
+"fields.  Continue?"
+msgstr ""
+"Laden einer Preset-löscht alle Daten, die Sie derzeit in Bereichen. Weiter?"
+
+#: ../../../ingestObject.php:58
+#, php-format
+msgid "Controls marked with a %s are required"
+msgstr "Kontrollen, die mit einem %s sind Pflichtfelder"
+
+#: ../../../ingestObject.php:65
+msgid "Load Values from Preset"
+msgstr "Legen Sie Werte von Preset"
+
+#: ../../../ingestObject.php:74
+msgid "Load"
+msgstr "Laden"
+
+#: ../../../ingestObject.php:102 ../../../publicIngest.php:97
+msgid "Invalid Project/Scheme ID passed"
+msgstr "Ungültige Projekt/Schema-ID an "
+
+#: ../../../login.php:29
+msgid "Log In to KORA"
+msgstr "Anmelden, um KORA"
+
+#: ../../../login.php:44
+msgid "New Account"
+msgstr "Neues Konto"
+
+#: ../../../login.php:51
+msgid "I forgot my username/password"
+msgstr "Ich habe kein Benutzername/Passwort"
+
+#: ../../../login.php:99
+msgid "Your account needs to be activated."
+msgstr "Ihr Konto muss aktiviert sein."
+
+#: ../../../login.php:131
+msgid "Username/Password Incorrect"
+msgstr "Benutzername/Passwort Falsche"
+
+#: ../../../manageAssocPerms.php:27
+msgid "Associatior Permissions"
+msgstr "Associatior Berechtigungen"
+
+#: ../../../manageAssocPerms.php:28
+msgid ""
+"This form allows you to grant association access to other schemes.  Select a "
+"project from the left drop-down menu, followed by a scheme from the right "
+"drop-down menu, then click \"Add\" to grant permission to that scheme to "
+"search this scheme."
+msgstr ""
+"Mit diesem Formular können Sie die Erteilung der Verein den Zugang zu "
+"anderen Schema. Wählen Sie ein Projekt aus dem linken Drop-Down-Menü, "
+"gefolgt durch eine Schema aus dem rechten Dropdown-Menü, und klicken Sie "
+"dann auf \"Hinzufügen\", um große Zustimmung zu dieser Schema zu Suche "
+"dieser Schema."
+
+#: ../../../manageAssocPerms.php:51
+msgid "No other available projects"
+msgstr "Keine andere Projekte zur Verfügung"
+
+#: ../../../manageAssocPerms.php:69
+msgid "Are you sure you want to remove this permission?"
+msgstr "Sind Sie sicher, dass Sie möchten, entfernen Sie diese Erlaubnis?"
+
+#: ../../../manageDublinCore.php:35
+msgid ""
+"Remove DC field?  Records currently in KORA will require a recalculation of "
+"DC data."
+msgstr ""
+"DC-Bereich entfernen? Zeichnet sich in KORA erfordert eine Neuberechnung der "
+"DC-Daten."
+
+#: ../../../manageDublinCore.php:37
+msgid ""
+"Run the Dublin Core Data Update function when you are done editing the "
+"controls associated with Dublin Core for this scheme"
+msgstr ""
+"Führen Sie das Dublin-Core-Daten-Update-Funktion, wenn Sie fertig sind die "
+"Bearbeitung der Kontrollen im Zusammenhang mit der Dublin Core für diese "
+"Schema"
+
+#: ../../../manageDublinCore.php:47
+msgid "Dublin Core Settings for"
+msgstr "Dublin-Core-Einstellungen für"
+
+#: ../../../manageGroups.php:28
+msgid "Manage Groups for"
+msgstr "Verwalten von Gruppen für"
+
+#: ../../../manageGroups.php:47
+msgid "Really delete group?"
+msgstr "Gruppe wirklich löschen?"
+
+#: ../../../manageProjects.php:49
+msgid "Manage Projects"
+msgstr "Projekte verwalten"
+
+#: ../../../manageProjects.php:53
+msgid "Active Projects"
+msgstr "Aktive Projekte"
+
+#: ../../../manageProjects.php:53
+msgid "Inactive Projects"
+msgstr "Inaktive Projekte"
+
+#: ../../../manageProjects.php:82 ../../../manageProjects.php:227
+msgid "New Project"
+msgstr "Neues Projekt"
+
+#: ../../../manageProjects.php:83 ../../../manageProjects.php:161
+#: ../../../manageProjects.php:230
+msgid "Edit Project Information"
+msgstr "Bearbeiten Informationen zum Projekt"
+
+#: ../../../manageProjects.php:84 ../../../manageProjects.php:217
+#: ../../../manageProjects.php:235
+msgid "Delete Project"
+msgstr "Projekt löschen"
+
+#: ../../../manageProjects.php:101 ../../../manageProjects.php:143
+msgid "Create New Project"
+msgstr "Neues Projekt"
+
+#: ../../../manageProjects.php:108
+msgid "Initial Administrator"
+msgstr "Erste Administrator"
+
+#: ../../../manageProjects.php:125 ../../../manageProjects.php:170
+msgid "Active"
+msgstr "Aktive"
+
+#: ../../../manageProjects.php:131 ../../../manageProjects.php:176
+msgid "Style"
+msgstr "Stil"
+
+#: ../../../manageProjects.php:133 ../../../manageProjects.php:178
+msgid "Default KORA Appearance"
+msgstr "Standard KORA Aussehen"
+
+#: ../../../manageProjects.php:146 ../../../manageProjects.php:193
+#: ../../../manageProjects.php:219
+msgid "Go Back"
+msgstr "Zurück"
+
+#: ../../../manageProjects.php:190
+msgid "Edit Project Details"
+msgstr "Projekt bearbeiten Details"
+
+#: ../../../manageProjects.php:206
+msgid "Confirm Deletion"
+msgstr "Bestätigen Löschen"
+
+#: ../../../manageProjects.php:210
+#, php-format
+msgid "You are about to delete the \"%s\" project"
+msgstr "Sie sind zu löschen, die \"%s\" Projekt"
+
+#: ../../../manageProjects.php:211
+msgid "Please confirm this action"
+msgstr "Bitte bestätigen Sie diese Aktion"
+
+#: ../../../manageProjects.php:265 ../../../manageProjects.php:360
+msgid "You must provide a project name."
+msgstr "Sie müssen ein Projekt-Namen."
+
+#: ../../../manageProjects.php:266 ../../../manageProjects.php:361
+msgid "You must provide a project description."
+msgstr "Sie müssen eine Projektbeschreibung."
+
+#: ../../../manageProjects.php:267 ../../../manageProjects.php:362
+msgid "Connection error, try again."
+msgstr "Connection error, versuchen Sie es erneut."
+
+#: ../../../manageProjects.php:268
+msgid "Description too long."
+msgstr "Beschreibung zu lang."
+
+#: ../../../manageProjects.php:269
+msgid "Name too long."
+msgstr "Name zu lang."
+
+#: ../../../manageProjectUsers.php:27
+msgid "Manage Users for"
+msgstr "Verwaltung Benutzer für"
+
+#: ../../../manageProjectUsers.php:37
+msgid "Really delete from project?"
+msgstr "Wirklich löschen Projekt aus?"
+
+#: ../../../manageRecordPresets.php:32
+msgid ""
+"Note: demoting an record will cause it to no longer be a preset, but the "
+"record will still remain and will now appear in search results, etc.  To "
+"truly delete the record, please select"
+msgstr ""
+"Hinweis: herabstufen ein Datensatz wird dazu führen, dass er nicht mehr zu "
+"einer voreingestellten, aber die Aufnahme wird nach wie vor und wird nun in "
+"den Suchergebnissen angezeigt werden, etc. Um wirklich den Datensatz "
+"löschen, wählen Sie bitte"
+
+#: ../../../manageRecordPresets.php:68
+msgid "Rename a Preset"
+msgstr "Benennen Sie ein Preset"
+
+#: ../../../manageRecordPresets.php:71
+msgid "Old Name"
+msgstr "Alten Namen"
+
+#: ../../../manageSearchTokens.php:39
+msgid "Really delete token?"
+msgstr "Token wirklich löschen?"
+
+#: ../../../manageUsers.php:42
+msgid "Really delete user?"
+msgstr "Wirklich gelöscht werden?"
+
+#: ../../../publicIngest.php:31
+msgid "Public Ingestion"
+msgstr "Allgemeine Einnahme"
+
+#: ../../../publicIngest.php:109
+msgid "Legal notice: "
+msgstr "Gesetzliche Kündigungsfrist: "
+
+#: ../../../recoverPassword.php:6 ../../../register.php:44
+msgid "Account Registration"
+msgstr "Account Registrierung"
+
+#: ../../../recoverPassword.php:14 ../../../recoverPassword.php:22
+msgid "Send E-Mail"
+msgstr "E-Mail senden"
+
+#: ../../../recoverPassword.php:20
+msgid "E-Mail Address"
+msgstr "E-Mail-Adresse"
+
+#: ../../../recoverPassword.php:20
+msgid "Recover Username"
+msgstr "wieder Benutzername"
+
+#: ../../../recoverPassword.php:46
+msgid "There is no account with that e-mail address."
+msgstr "Es ist kein Konto mit der E-Mail-Adresse."
+
+#: ../../../recoverPassword.php:54 ../../../recoverPassword.php:107
+msgid "KORA Account Information"
+msgstr "KORA Account-Informationen"
+
+#: ../../../recoverPassword.php:55
+msgid "Your KORA Username is"
+msgstr "KORA Ihr Benutzername ist"
+
+#: ../../../recoverPassword.php:68
+msgid "Your username has been sent to your e-mail address."
+msgstr "Ihr Benutzername wurde an Ihre E-Mail-Adresse."
+
+#: ../../../recoverPassword.php:70 ../../../recoverPassword.php:124
+#: ../../../register.php:152
+msgid ""
+"Attempt to send E-Mail failed; Please verify your mailserver configuration "
+"in php.ini"
+msgstr ""
+"Versuch, E-Mail senden fehlgeschlagen; Bitte überprüfen Sie Ihre Mailserver-"
+"Konfiguration in der php.ini"
+
+#: ../../../recoverPassword.php:90
+msgid "There is no activated account with that username."
+msgstr "Es ist nicht aktiviert Konto mit dem Benutzernamen. "
+
+#: ../../../recoverPassword.php:108
+msgid "To change your password, visit the following link"
+msgstr "Um Ihr Kennwort zu ändern, besuchen Sie den folgenden Link"
+
+#: ../../../recoverPassword.php:110
+msgid "Or copy/paste the following URL into your browser"
+msgstr "Oder Kopieren/Einfügen die folgende URL in Ihren Browser"
+
+#: ../../../recoverPassword.php:122
+msgid ""
+"Instructions on how to reset your password have been sent to your e-mail "
+"address."
+msgstr ""
+"Anleitung zum Zurücksetzen Ihres Passworts gesendet wurden an Ihre E-Mail-"
+"Adresse."
+
+#: ../../../register.php:55
+msgid "Verify Password"
+msgstr "Überprüfen Passwort"
+
+#: ../../../register.php:58
+msgid "Email address"
+msgstr "E-Mail-Adresse"
+
+#: ../../../register.php:60
+msgid "Full Name"
+msgstr "Vollständiger Name"
+
+#: ../../../register.php:72
+msgid "Create Account"
+msgstr "Konto erstellen"
+
+#: ../../../register.php:91
+msgid "That username is already taken."
+msgstr "Das Benutzername ist bereits vergeben."
+
+#: ../../../register.php:95
+msgid "Your Passwords do not Match."
+msgstr "Ihre Passwörter stimmen nicht überein."
+
+#: ../../../register.php:99
+msgid "Your username is blank."
+msgstr "Ihr Benutzername ist leer."
+
+#: ../../../register.php:103
+msgid "Please make your password at least 8 characters."
+msgstr "Bitte stellen Sie Ihr Passwort mindestens 8 Zeichen lang sein."
+
+#: ../../../register.php:107
+msgid "You did not supply an e-mail address."
+msgstr "Sie haben keine E-Mail-Adresse."
+
+#: ../../../register.php:130
+msgid "Account Creation"
+msgstr "Accounterstellung"
+
+#: ../../../register.php:131
+msgid "Your account has been created"
+msgstr "Ihr Konto wurde erstellt"
+
+#: ../../../register.php:135
+msgid "KORA Account Activation"
+msgstr "KORA Account-Aktivierung"
+
+#: ../../../register.php:136
+msgid ""
+"In order to access your KORA account, you must verify your e-mail address"
+msgstr "Um den Zugriff auf Ihr Konto KORA, müssen Sie Ihre E-Mail-Adresse"
+
+#: ../../../register.php:137
+msgid ""
+"To do this, click on the link below or go to the \"Activate Account\" page"
+msgstr ""
+" dies zu tun, klicken Sie auf den Link unten oder gehen Sie auf die \"Konto "
+"aktivieren\" Seite"
+
+#: ../../../register.php:138
+msgid "type in your username, and enter the following number"
+msgstr "Geben Sie Ihren Benutzernamen und geben Sie die folgende Nummer"
+
+#: ../../../register.php:139 ../../../register.php:150
+msgid "Activate Your Account"
+msgstr "Aktivieren Sie Ihr Konto"
+
+#: ../../../register.php:150
+msgid "Please check your e-mail for instructions on how to"
+msgstr "Bitte überprüfen Sie Ihre E-Mail-Anweisungen zum"
+
+#: ../../../resetPassword.php:28 ../../../resetPassword.php:90
+msgid "Password must be at least 8 characters."
+msgstr "Das Passwort muss mindestens 8 Zeichen lang sein."
+
+#: ../../../resetPassword.php:86
+msgid "Password reset"
+msgstr "Passwort zurücksetzen"
+
+#: ../../../reviewPublicIngestions.php:111
+msgid "Number of records to be approved/denied"
+msgstr "Zahl der genehmigt zu werden Aufzeichnungen/verweigerte"
+
+#: ../../../reviewPublicIngestions.php:193
+msgid "Deny All"
+msgstr "Verweigern Sie alle"
+
+#: ../../../reviewPublicIngestions.php:209
+#: ../../../reviewPublicIngestions.php:243
+msgid "Approve"
+msgstr "Genehmigen Sie"
+
+#: ../../../reviewPublicIngestions.php:211
+#: ../../../reviewPublicIngestions.php:245
+msgid "Deny"
+msgstr "Verweigern Sie"
+
+#: ../../../reviewPublicIngestions.php:280
+msgid "Approving Data"
+msgstr "Anerkennend Daten"
+
+#: ../../../reviewPublicIngestions.php:305
+#, fuzzy
+msgid ""
+"Are you sure you want to deny this record? The data will be deleted "
+"immediately and cannot be undone."
+msgstr ""
+"Sind Sie sicher, dass Sie diese Datei löschen möchten? Diese sofort wirksam "
+"und wird nicht rückgängig gemacht."
+
+#: ../../../reviewPublicIngestions.php:307
+#, fuzzy
+msgid "Deleting Data"
+msgstr "Aktualisieren von Daten"
+
+#: ../../../reviewPublicIngestions.php:331
+#, fuzzy
+msgid ""
+"Are you sure you want to deny all records? All data will be deleted "
+"immediately and cannot be undone."
+msgstr ""
+"Sind Sie sicher, dass Sie diese Datei löschen möchten? Diese sofort wirksam "
+"und wird nicht rückgängig gemacht."
+
+#: ../../../reviewPublicIngestions.php:333
+msgid "Deleting All Records. Please Wait."
+msgstr "Löschen aller Aufzeichnungen. Warten Sie bitte."
+
+#: ../../../schemeExport.php:112 ../../../schemeExportLanding.php:64
+msgid "No controls for scheme "
+msgstr "Keine Kontrollen für Entwurf "
+
+#: ../../../schemeExport.php:112 ../../../schemeExport.php:132
+#: ../../../schemeExport.php:149 ../../../schemeExport.php:195
+#: ../../../schemeExportLanding.php:64 ../../../schemeExportLanding.php:85
+msgid " of project "
+msgstr " vom Projekt "
+
+#: ../../../schemeExport.php:132
+msgid "No scheme info for scheme "
+msgstr "Kein Entwurfinfo für Entwurf "
+
+#: ../../../schemeExport.php:149
+msgid "No collections for scheme "
+msgstr "Keine Ansammlungen für Entwurf "
+
+#: ../../../schemeExport.php:195 ../../../schemeExportLanding.php:85
+msgid "No data for scheme "
+msgstr "Keine Daten für Entwurf "
+
+#: ../../../schemeExport.php:252
+msgid "XML file could not be created - check directory permissions"
+msgstr "XML Akte könnte nicht hergestellt werden - überprüfen Sie Verzeichniserlaubnis"
+
+#: ../../../schemeExportLanding.php:189
+msgid "This export requires files located in "
+msgstr "Dieser Export erfordert die Akten, die innen gelegen sind "
+
+#: ../../../schemeExportLanding.php:189
+msgid " zip file(s)."
+msgstr " Zip Datei(en)."
+
+#: ../../../schemeExportLanding.php:196
+msgid "Click here to download the xml file."
+msgstr "Klicken Sie hier, um die xml Akte herunterzuladen."
+
+#: ../../../schemeExportLanding.php:241
+msgid "Generating Zip File, Please Wait"
+msgstr "Zip Datei erzeugend, warten Sie bitte"
+
+#: ../../../schemeLayout.php:47
+msgid "Scheme Layout for"
+msgstr "Schema-Layout für"
+
+#: ../../../schemeLayout.php:56
+msgid ""
+"Dublin Core data for this scheme is out of date.  You should consider "
+"running the update script."
+msgstr ""
+"Dublin-Core-Daten für dieses Shema ist veraltet. Sie sollten mit dem Update-"
+"Skript."
+
+#: ../../../schemeLayout.php:65
+msgid "Edit Dublin Core scheme field associations"
+msgstr "Bearbeiten Dublin-Core-System Bereich Verbände."
+
+#: ../../../schemeLayout.php:85
+#, fuzzy
+msgid ""
+"Really delete collection?  Any data and Dublin Core associations to controls "
+"in this collection will be lost, including any data pending approval."
+msgstr ""
+"Wirklich Löschungansammlung? Alle mögliche Daten und Dublin-Kernverbindungen zu den Kontrollen in dieser Ansammlung sind, einschließlich irgendwelche Daten während Zustimmung verloren."
+
+#: ../../../schemeLayout.php:93
+#, fuzzy
+msgid ""
+"Really delete control?  Any data and Dublin Core associations will be lost, "
+"including any data pending approval."
+msgstr "Wirklich Löschungsteuerung? Alle mögliche Daten und Dublin-Kernverbindungen sind, einschließlich irgendwelche Daten während Zustimmung verloren."
+
+#: ../../../searchProject.php:39 ../../../searchProject.php:57
+msgid "All"
+msgstr "Alle"
+
+#: ../../../searchProject.php:56
+msgid "Any"
+msgstr "Beliebig"
+
+#: ../../../selectProject.php:55
+msgid "Project Selection"
+msgstr "Projektauswahl"
+
+#: ../../../selectProject.php:57
+msgid "You are currently not a member of any active projects"
+msgstr "Sie sind derzeit nicht Mitglied einer aktiven Projekten "
+
+#: ../../../selectProject.php:63
+msgid "Quick Jump"
+msgstr "Schnellsprung"
+
+#: ../../../selectProject.php:63
+msgid "select a project"
+msgstr "wählen Sie ein Projekt aus"
+
+#: ../../../selectProject.php:76
+msgid "Project Name"
+msgstr "Projekt Name"
+
+#: ../../../selectScheme.php:31
+msgid "Scheme Selection for"
+msgstr "Schema für die Auswahl"
+
+#: ../../../selectScheme.php:47
+msgid "Really delete scheme?"
+msgstr "Schema wirklich löschen?"
+
+#: ../../../systemManagement.php:30 ../../../systemManagement.php:112
+msgid "Update Control List"
+msgstr "Aktualisierung der Liste der Kontrollen"
+
+#: ../../../systemManagement.php:62
+msgid "Control List Updated"
+msgstr "Update-Liste Control"
+
+#: ../../../systemManagement.php:64 ../../../systemManagement.php:113
+msgid "Update Style List"
+msgstr "Update-Liste Stil"
+
+#: ../../../systemManagement.php:109
+msgid "System management"
+msgstr "System-Management"
+
+#: ../../../systemManagement.php:117
+msgid "Upgrade Database Layout"
+msgstr "Upgrade von Datenbank-Layout"
+
+#: ../../../updateDublinCore.php:30
+msgid "Updating Dublin Core Data for"
+msgstr "Aktualisierung der Dublin-Core-Daten für"
+
+#: ../../../updateDublinCore.php:30
+msgid "in"
+msgstr "in"
+
+#: ../../../updateDublinCore.php:34
+msgid "updating data"
+msgstr "Aktualisieren von Daten"
+
+#: ../../../updateDublinCore.php:119
+msgid "done"
+msgstr "getan"
+
+#: ../../../updateDublinCore.php:127
+msgid ""
+"No dublin core data for this scheme.  Please add dublin core fields first."
+msgstr ""
+"Keine Dublin-Core-Daten für diese Schema. Bitte fügen Sie Dublin Core Felder "
+"zuerst."
+
+#: ../../../updateDublinCore.php:130
+msgid "Current fields associated with dublin core"
+msgstr "Aktuelle Bereichen im Zusammenhang mit der Dublin Core"
+
+#: ../../../updateDublinCore.php:149
+msgid "There are currently no Dublin Core-associated fields in this scheme"
+msgstr ""
+"Es sind derzeit keine Dublin-Core-assoziierte Bereiche, in diese Schema"
+
+#: ../../../updateDublinCore.php:151
+msgid "Manage Dublin Core Data"
+msgstr "Verwalten von Dublin-Core-Daten"
+
+#: ../../../updateDublinCore.php:153
+msgid "Refresh Dublin Core data?  This may take a long time."
+msgstr "Aktualisieren Dublin-Core-Daten? Dies kann sehr lange dauern."
+
+#: ../../../updateDublinCore.php:156
+msgid "Refresh DC Data"
+msgstr "Aktualisieren DC Daten"
+
+#: ../../../upgradeDatabase.php:72
+msgid "KORA Upgrade Utility"
+msgstr "KORA Upgrade-Dienstprogramm"
+
+#: ../../../upgradeDatabase.php:73
+msgid ""
+"This script will ensure that your KORA database is up-to-date.  If an "
+"upgrade fails, please attempt it a second time before reporting the issue."
+msgstr ""
+"Dieses Skript wird dafür sorgen, dass Ihre KORA-Datenbank up-to-date. Wenn "
+"ein Update nicht, versuchen Sie es ein zweites Mal vor die Berichterstattung "
+"über die Ausstellung."
+
+#: ../../../upgradeDatabase.php:86
+msgid "Checking for existence of System Information database table"
+msgstr "Prüfung auf Existenz der System-Informationen Datenbanktabelle "
+
+#: ../../../upgradeDatabase.php:96 ../../../upgradeDatabase.php:116
+msgid "Created"
+msgstr "Erstellt"
+
+#: ../../../upgradeDatabase.php:100 ../../../upgradeDatabase.php:123
+#: ../../../upgradeDatabase.php:201 ../../../upgradeDatabase.php:224
+#: ../../../upgradeDatabase.php:242 ../../../upgradeDatabase.php:274
+#: ../../../upgradeDatabase.php:290 ../../../upgradeDatabase.php:309
+#: ../../../upgradeDatabase.php:329 ../../../upgradeDatabase.php:348
+#: ../../../upgradeDatabase.php:369 ../../../upgradeDatabase.php:513
+#: ../../../upgradeDatabase.php:584 ../../../upgradeDatabase.php:617
+#: ../../../upgradeDatabase.php:633 ../../../upgradeDatabase.php:649
+#: ../../../upgradeDatabase.php:667 ../../../upgradeDatabase.php:731
+#: ../../../upgradeDatabase.php:780 ../../../upgradeDatabase.php:897
+#: ../../../upgradeDatabase.php:940 ../../../upgradeDatabase.php:997
+#: ../../../upgradeDatabase.php:1011 ../../../upgradeDatabase.php:1047
+msgid "Failed"
+msgstr "nicht"
+
+#: ../../../upgradeDatabase.php:101
+msgid "Unable to create systemInfo table"
+msgstr "Kann nicht erstellt SystemInfo Tabelle"
+
+#: ../../../upgradeDatabase.php:101 ../../../upgradeDatabase.php:124
+#: ../../../upgradeDatabase.php:998 ../../../upgradeDatabase.php:1012
+#: ../../../upgradeDatabase.php:1048
+msgid ""
+"Please check your database configuration.  Unable to proceed with update "
+"process."
+msgstr ""
+"Bitte überprüfen Sie Ihre Datenbank-Konfiguration. Nicht in der Lage, mit "
+"der Update-Prozess."
+
+#: ../../../upgradeDatabase.php:106 ../../../upgradeDatabase.php:129
+msgid "Found"
+msgstr "Gefunden"
+
+#: ../../../upgradeDatabase.php:108
+msgid "Checking for existence of system information for this install"
+msgstr "Prüfung auf Existenz der System-Informationen für die Installation"
+
+#: ../../../upgradeDatabase.php:124
+msgid "Unable to create systemInfo data"
+msgstr "Kann nicht erstellt SystemInfo Daten"
+
+#: ../../../upgradeDatabase.php:158
+msgid ""
+"Found version number less than 1.0.0.  Running beta->production upgrades."
+msgstr ""
+"Gefunden Versionsnummer kleiner als 1.0.0. Running beta-> Produktion "
+"Upgrades."
+
+#: ../../../upgradeDatabase.php:185
+msgid "Attempting to create fixity table"
+msgstr "Der Versuch, fixe Tabelle"
+
+#: ../../../upgradeDatabase.php:197 ../../../upgradeDatabase.php:220
+#: ../../../upgradeDatabase.php:238 ../../../upgradeDatabase.php:270
+#: ../../../upgradeDatabase.php:286 ../../../upgradeDatabase.php:305
+#: ../../../upgradeDatabase.php:325 ../../../upgradeDatabase.php:344
+#: ../../../upgradeDatabase.php:365 ../../../upgradeDatabase.php:509
+#: ../../../upgradeDatabase.php:580 ../../../upgradeDatabase.php:613
+#: ../../../upgradeDatabase.php:629 ../../../upgradeDatabase.php:645
+#: ../../../upgradeDatabase.php:663 ../../../upgradeDatabase.php:727
+#: ../../../upgradeDatabase.php:776 ../../../upgradeDatabase.php:893
+#: ../../../upgradeDatabase.php:936
+msgid "Successful"
+msgstr "Erfolgreiche"
+
+#: ../../../upgradeDatabase.php:211
+msgid "Attempting to create recordPreset table"
+msgstr "Der Versuch, recordPreset Tabelle"
+
+#: ../../../upgradeDatabase.php:234
+msgid "Attempting to rename controls table to control"
+msgstr "Der Versuch, umbenennen Kontrollen Tabelle zu kontrollieren"
+
+#: ../../../upgradeDatabase.php:266
+msgid "Expanding user table (Part 1/2)"
+msgstr "Ausbau der Tabelle user (Teil 1/2)"
+
+#: ../../../upgradeDatabase.php:282
+msgid "Expanding user table (Part 2/2)"
+msgstr "Ausbau der Tabelle user (Teil 2/2)"
+
+#: ../../../upgradeDatabase.php:301
+msgid "Expanding scheme table"
+msgstr "Ausbau der Schema-Tabelle"
+
+#: ../../../upgradeDatabase.php:320
+msgid "Expanding control table"
+msgstr "Ausbau der Kontrolle Tabelle"
+
+#: ../../../upgradeDatabase.php:324
+msgid ""
+"The controls table has been updated; please run \"Update Control List\" in "
+"the System Management console."
+msgstr ""
+"Die Kontrollen Tabelle aktualisiert wurde, führen Sie \"Aktualisierung der "
+"Liste der Kontrollen\" in der System-Management-Konsole."
+
+#: ../../../upgradeDatabase.php:340
+msgid "Expanding controlPreset table"
+msgstr "Ausbau controlPreset Tabelle"
+
+#: ../../../upgradeDatabase.php:360
+msgid "Renaming stock presets"
+msgstr "Umbenennen von Lager-Presets"
+
+#: ../../../upgradeDatabase.php:392
+msgid "Trimming List Control Options"
+msgstr "Schneiden Liste der Optionen"
+
+#: ../../../upgradeDatabase.php:498
+msgid "Failure"
+msgstr "Ausfall"
+
+#: ../../../upgradeDatabase.php:544
+msgid "Adding display option to Date and Multi-Date Controls"
+msgstr "Hinzufügen Option zu Datum und Multi-Datum Controls"
+
+#: ../../../upgradeDatabase.php:594
+msgid "Adding Advanced Search column to Project tables"
+msgstr "Hinzufügen Erweiterte Suche Spalte zur Projekt-Tabellen"
+
+#: ../../../upgradeDatabase.php:625
+msgid "Adding Scheme Preset column to Scheme table"
+msgstr "Hinzufügen Scheme Preset Spalte zur Scheme Tabelle"
+
+#: ../../../upgradeDatabase.php:641
+msgid "Correcting Washington DC in US States Preset"
+msgstr "orrektur Washington DC in US-Staaten Preset"
+
+#: ../../../upgradeDatabase.php:659
+msgid "Correcting URL/URI Preset"
+msgstr "Korrektur der URL / URI Preset"
+
+#: ../../../upgradeDatabase.php:688
+msgid "Updating Allowed Image Formats"
+msgstr "Aktualisierung erlaubt Image-Formate"
+
+#: ../../../upgradeDatabase.php:753
+msgid "Updating Reverse Associations"
+msgstr "Aktualisierung Reverse Verbände"
+
+#: ../../../upgradeDatabase.php:819
+msgid "Control table is missing from project"
+msgstr ""
+
+#: ../../../upgradeDatabase.php:819
+msgid "or"
+msgstr "oder"
+
+#: ../../../upgradeDatabase.php:858
+msgid "Timestamp control creation failed for scheme"
+msgstr "Zeitstempelsteuerkreation verlassen für Entwurf"
+
+#: ../../../upgradeDatabase.php:891
+msgid "Adding timestamps"
+msgstr "Addieren der Zeitstempel"
+
+#: ../../../upgradeDatabase.php:924
+msgid "Updating user Table"
+msgstr "Ausbau der Benutzer-Tabelle"
+
+#: ../../../upgradeDatabase.php:993
+msgid "publicIngestion column Created"
+msgstr "publicIngestion Spalte verursachte"
+
+#: ../../../upgradeDatabase.php:998
+#, fuzzy
+msgid "Unable to create publicIngestion column"
+msgstr "Nicht imstande, publicIngestion Spalte herzustellen"
+
+#: ../../../upgradeDatabase.php:1007
+msgid "legal column Created"
+msgstr "zugelassene Spalte verursachte"
+
+#: ../../../upgradeDatabase.php:1012
+#, fuzzy
+msgid "Unable to create legal column"
+msgstr "Nicht imstande, zugelassene Spalte herzustellen"
+
+#: ../../../upgradeDatabase.php:1043
+msgid "PublicData Table Created"
+msgstr "PublicData Tabelle hergestellt"
+
+#: ../../../upgradeDatabase.php:1048
+#, fuzzy
+msgid "Unable to create tables"
+msgstr "Nicht imstande, Tabellen herzustellen"
+
+#: ../../../upgradeDatabase.php:1066
+msgid "No updates found; your database is up-to-date."
+msgstr "Keine Updates gefunden, Ihre Datenbank auf dem neuesten Stand ist."
+
+#: ../../../uploadXML.php:118
+#, fuzzy
+msgid "Ingesting object "
+msgstr "sich nehmen Obj"
+
+#: ../../../uploadXML.php:136
+msgid ""
+"No project or scheme id specified. Could not ingest records, please try "
+"again."
+msgstr "Keine Projekt- oder Entwurfidentifikation spezifiziert. Konnte Aufzeichnungen nicht einnehmen, versucht bitte noch einmal."
+
+#: ../../../viewObject.php:57
+msgid "Viewing Record"
+msgstr "Anzeigen Record"
+
+#: ../../../viewObject.php:76
+msgid ""
+"Can not load control; please ensure all controls are properly installed."
+msgstr ""
+"Kann nicht geladen Kontrolle, stellen Sie bitte sicher, alle Bedienelemente "
+"sind richtig installiert ist."
+
+#: ../../../viewObject.php:88
+msgid "The following records associate to this record"
+msgstr "Die folgenden Informationen zu diesem Eintrag Associate"
+
+#: ../../../viewObject.php:89
+msgid ""
+"Note: You may not have authorization to view any or all of the following "
+"records"
+msgstr ""
+"Hinweis: Sie können keine Genehmigung, um eine oder alle der folgenden "
+"Informationen"
+
+#: ../../../viewObject.php:102
+msgid "Edit this Record"
+msgstr "Bearbeiten dieser Datensatz"
+
+#: ../../../viewObject.php:103
+msgid "Delete this Record"
+msgstr "Löschen dieser Datensatz"
+
+#: ../../../viewObject.php:104
+msgid "Create a new Record from these Values"
+msgstr "Erstellen Sie einen neuen Record aus diesen Werten"
+
+#: ../../../viewObject.php:126
+msgid "Save this record as a preset"
+msgstr "Speichern Sie diese Record als Voreinstellung"
+
+#: ../../../viewObject.php:132
+msgid "Create"
+msgstr "Erstellen"
+
+#: ../../../viewObject.php:135
+msgid ""
+"Note: Records saved as presets will no longer appear in search results or as "
+"distinct records."
+msgstr ""
+"Hinweis: Die Recorde als Presets gespeichert werden nicht mehr in den "
+"Suchergebnissen angezeigt werden oder als getrennte Recorde."
+
+#~ msgid "action"
+#~ msgstr "Aktion"
+
+#~ msgid "source"
+#~ msgstr "Quelle"
+
+#~ msgid "Username/Password Recovery"
+#~ msgstr "Benutzername/Passwort-Recovery"

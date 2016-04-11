@@ -1,0 +1,72 @@
+<?php
+
+namespace KoraORM\Controls;
+
+/**
+ * A default control for record associators.
+ * 
+ * @author Zachary Pepin <zachary.pepin@matrix.msu.edu>
+ */
+class AssociatorControl extends \KoraORM\KoraControl implements \IteratorAggregate, \ArrayAccess, \Countable, \JsonSerializable
+{
+	private $associatedObjects = null;
+	
+	public static function loadMetadata()
+	{
+		return array( 'koraType' => 'AssociatorControl' );
+	}
+	
+	public function getIterator()
+	{
+		return new \ArrayIterator($this->getAssociatedObjects());
+	}
+	
+	public function offsetExists($offset)
+	{
+		return is_int($offset) && 0 <= $offset && $offset < count($this->getAssociatedObjects());
+	}
+	
+	public function offsetGet($offset)
+	{
+		return $this->getAssociatedObjects()[$offset];
+	}
+	
+	public function offsetSet($offset, $value)
+	{
+		throw new Exception("unsupported operation");
+	}
+	
+	public function offsetUnset($offset)
+	{
+		throw new Exception("unsupported operation");
+	}
+	
+	public function count()
+	{
+		return count($this->getAssociatedObjects());
+	}
+	
+	public function jsonSerialize()
+	{
+		$json = array();
+		foreach ($this->getAssociatedObjects() as $obj)
+			$json[] = $obj->kid;
+		return $json;
+	}
+	
+	private function getAssociatedObjects()
+	{
+		if (!isset($this->associatedObjects))
+		{
+			$this->associatedObjects = array();
+			if (is_array($this->koraData))
+			{
+				foreach ($this->koraData as $kid)
+				{
+					$this->associatedObjects[] = $this->entity->manager->getByKid($kid, false);
+				}
+			}
+		}
+		return $this->associatedObjects;
+	}
+}

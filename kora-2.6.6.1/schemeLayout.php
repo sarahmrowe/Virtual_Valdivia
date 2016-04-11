@@ -1,0 +1,61 @@
+<?php
+/**
+Copyright (2008) Matrix: Michigan State University
+
+This file is part of KORA.
+
+KORA is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+KORA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Initial Version: Matt Geimer, 2008
+// Refactor: Joe Deming, Anthony D'Onofrio 2013
+require_once('includes/includes.php');
+
+Manager::Init();
+
+Manager::RequireLogin();
+Manager::RequireProject();
+Manager::RequireScheme();
+
+// check once for ability to edit scheme layout to prevent repeated database calls
+$ePerm = Manager::GetUser()->HasProjectPermissions(EDIT_LAYOUT);
+
+Manager::PrintHeader();
+
+echo '<h2>'.gettext('Scheme Layout for').' '.Manager::GetScheme()->GetName().'</h2>';
+
+if (Manager::IsSystemAdmin())
+{
+	// See if the dublin core information is up-to-date
+	$dcQuery = $db->query('SELECT dublinCoreOutOfDate FROM scheme WHERE schemeid='.Manager::GetScheme()->GetSID().' LIMIT 1');
+	$dcQuery = $dcQuery->fetch_assoc();
+	if ($dcQuery['dublinCoreOutOfDate'] > 0)
+	{
+		echo '<div class="error">'.gettext('Warning').': '.gettext('Dublin Core data for this scheme is out of date.  You should consider running the update script.').'</div><br />';
+	}
+}
+
+if($ePerm)
+{
+	$controlQuery = $db->query('SELECT cid FROM p'.Manager::GetProject()->GetPID().'Control WHERE schemeid='.Manager::GetScheme()->GetSID().' LIMIT 1');
+	if ($controlQuery->num_rows > 0)
+	{
+        echo "<a href='manageDublinCore.php?pid=".$_REQUEST['pid']."&sid=".$_REQUEST['sid']."'>".gettext('Edit Dublin Core scheme field associations').'</a><br />';
+	} 
+}
+?>
+<div id="apschemecontrols"></div>
+<?php 
+Manager::PrintFooter();
+?>

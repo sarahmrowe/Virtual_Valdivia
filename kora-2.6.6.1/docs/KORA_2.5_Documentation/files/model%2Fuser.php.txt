@@ -1,0 +1,985 @@
+<?php
+/**
+Copyright (2008) Matrix: Michigan State University
+
+This file is part of KORA.
+
+KORA is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+KORA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
+// Initial Version: Joseph M. Deming, 2013
+
+require_once(__DIR__.'/../includes/includes.php');
+
+Manager::AddJS('javascripts/admin.js', Manager::JS_CLASS); 
+Manager::AddJS('javascripts/user.js', Manager::JS_CLASS); 
+
+/**
+ * @class User object
+ *
+ * This class respresents a user account in KORA
+ */
+class User {
+	
+	protected $admin = false;
+	protected $allowedPIDs = null;
+	protected $confirmed = false;
+	protected $email = false;
+	protected $isLoggedIn = false;
+	protected $isProjectAdmin = false;
+	protected $isSuperAdmin = false;
+	protected $language = false;
+	protected $organization = false;
+	protected $realname = false;
+	protected $uid = 0;
+	protected $username = null;
+	
+	/**
+	  * Construtor function for a user
+	  *
+	  * @param int $uid Id for the user to generate
+	  *
+	  * @return void
+	  */
+	function __construct($uid_ = NULL) {
+		
+		if (!$uid_ && !isset($_SESSION['uid']))    { throw new Exception(gettext('Trying to create login user when user is not logged in')); return false; }
+		elseif (!$uid_ && isset($_SESSION['uid'])) { $this->uid = $_SESSION['uid']; }
+		else                                       { $this->uid = $uid_; }	
+		
+		$this->SetUserInfo();
+		
+		// THIS ORDER IS IMPORTANT / SOME ONLY RELEVANT FOR LOGIN USER
+		if (!$uid_) { $this->SetIsLoggedIn(); }
+		$this->SetIsSystemAdmin();
+		if (!$uid_) { $this->SetIsProjectAdmin(); }
+	}
+	
+	/**
+	 * Simple function to check if a user is logged in.  Based on checking session variable for a userid greater than 0.
+	 *
+	 * @return true / false
+	 */
+	protected function SetIsLoggedIn() {
+		$this->uid = (isset($_SESSION['uid']) && $_SESSION['uid'] > 0 ) ? $_SESSION['uid'] : 0;
+		$this->isLoggedIn = (isset($_SESSION['uid']) && $_SESSION['uid'] > 0 );
+	}
+	
+	/**
+	 * Function to check if the user has rights to the currently selected project
+	 *
+	 * @return true / false
+	 */
+	protected function SetIsProjectAdmin() {
+	    global $db;
+	    
+	    if (!Manager::GetProject()) { $this->isProjectAdmin = false; return false; }
+	    
+	    if ($this->IsSystemAdmin()) { $this->isProjectAdmin = true; return true; }
+	    
+	    $query = "SELECT member.uid FROM member JOIN project ";
+	    $query .= "WHERE project.pid='".Manager::GetProject()->GetPID();
+	    $query .= "' AND member.gid = project.admingid AND member.uid='".$_SESSION['uid']."' LIMIT 1";
+		
+	    $results = $db->query($query);
+	    
+	    $this->isProjectAdmin = ($results->num_rows > 0);
+	    return $this->isProjectAdmin;
+	}
+	
+	/**
+	 * Simple function to check for kora admin rights.
+	 *
+	 * @return true / false
+	 */
+	protected function SetIsSystemAdmin() {
+	    $this->isSuperAdmin = (isset($_SESSION['admin']) && $_SESSION['admin'] == true );
+	}
+	
+	/**
+	  * Set the user's information based on DB entry
+	  *
+	  * @return void
+	  */
+	protected function SetUserInfo()
+	{
+		global $db;
+		
+		// Compare the Computed Hash to that in the Database
+		$results = $db->query("SELECT username,admin,confirmed,email,realName,organization,language FROM user WHERE uid=".$this->uid." LIMIT 1");
+		if ($results->num_rows == 0) { throw new Exception(gettext('Failed to find user with this uid in database ')."[$this->uid]"); return false; }
+		$results = $results->fetch_assoc();
+
+		$this->username = $results['username'];
+		$this->admin = $results['admin'];
+		$this->confirmed = $results['confirmed'];
+		$this->email = $results['email'];
+		$this->realname = $results['realName'];
+		$this->organization = $results['organization'];
+		$this->language = $results['language'];
+	}
+	
+	public function GetEmail() { return $this->email; }
+	public function GetLanguage() { return $this->language; }
+	public function GetLoginName() { return $this->username; }
+	public function GetOrganization() { return $this->organization; }
+	public function GetRealName() { return $this->realname; }
+	public function GetUID() { return $this->uid; }
+	public function IsConfirmed() { return $this->confirmed; }
+	public function IsLoggedIn() { return $this->isLoggedIn; }
+	public function IsProjectAdmin() { return $this->isProjectAdmin; }
+	public function IsSystemAdmin() { return $this->isSuperAdmin; }
+	
+	/**
+	  * Gather all projects a user has access to
+	  *
+	  * @return list of projects
+	  */
+	public function GetAuthorizedProjects()
+	{
+		// LAZY-LOAD, IF WE HAVE SET IT IN THE PAST, JUST RETURN
+		if (!is_null($this->allowedPIDs)) { return $this->allowedPIDs; }
+		
+		global $db;
+		$this->allowedPIDs = array();
+		// get the list of (active) projects the user has access to
+		if ($this->IsSystemAdmin()) {
+			$projectQuery = $db->query('SELECT pid FROM project WHERE active=1 ORDER BY name ASC');
+			
+			while ($a = $projectQuery->fetch_assoc()) {
+				$this->allowedPIDs[] = $a['pid'];
+			}
+		} else {
+			$pidQuery = $db->query('SELECT DISTINCT pid FROM member WHERE uid='.escape($this->uid));
+			
+			while ($a = $pidQuery->fetch_assoc()) {
+				$this->allowedPIDs[] = $a['pid'];
+			}
+		}
+		
+		return $this->allowedPIDs;
+	}
+	
+	/**
+	  * Processes account activation of a user
+	  *
+	  * @param int $user The user ID
+	  * @param string $token Token the user was emailed for activation
+	  *
+	  * @return result string
+	  */
+	public static function HandleAccountActivation($user,$token){
+		global $db;
+	
+		$query_result = $db->query("SELECT username FROM user WHERE username=".escape($user)." AND salt=".escape($token)." LIMIT 1");
+		$results =& $query_result;
+	    if(!$results){
+	    	echo $db->error;
+	    }
+	    else {
+	    	$array = $results->fetch_assoc();
+	    	
+	    	// If valid, activate the account.  If not, show an error message.
+	    	if (!empty($array)) {
+	    		$updatedQueryResults = $db->query("UPDATE user SET confirmed='1' WHERE username=".escape($user)." AND salt=".escape($token));
+	    		$updatedResults =& $updatedQueryResults;
+	    		
+	    		echo gettext('Your account has been activated').'.  '.gettext('Please').' <a href="accountLogin.php">'.gettext('Log In').'</a>.';
+	    	} else {
+	    		echo gettext('Username/Token Incorrect');
+	    	}
+	    }	
+	}
+	
+	/**
+	  * Processes recovery of user's username
+	  *
+	  * @return result string
+	  */
+	public static function HandleRecoverUsername()
+	{
+		// The user is trying to recover a username.  If such a user exists,
+		// e-mail them their username
+		
+		// There is no LIMIT on this query in case multiple accounts are registered to the
+		// same e-mail address
+		global $db;
+	    $query = $db->query('SELECT username, email FROM user WHERE email='.escape($_REQUEST['email']));
+	    
+	    if ($query->num_rows == 0)
+	    {
+	    	echo gettext('There is no account with that e-mail address.');
+	    }
+	    else
+	    {
+	    	$errorMsg = '';
+	    	
+	        while ($user = $query->fetch_assoc())
+	        {
+	            $messageSubject = gettext('KORA Account Information');
+		        $message  = '<html><body><p>'.gettext('Your KORA Username is').': ';
+		        $message .= '<b>'.$user['username'].'</b>';
+		        $message .= "</p></body></html>\n";
+		        
+		        $headers = '';
+		        $headers .= "MIME-Version: 1.0\r\n";
+		        $headers .= "Content-type: text/html\r\n";
+		        $headers .= "From: \"KORA Account\" <".baseEmail.">\r\n";
+		        $headers .= "To: ".$user['email']."\r\n";
+		        $headers .= "Reply-To: do-not-reply@example.com\r\n";
+		
+		        $mailSuccess = mail($user['email'], $messageSubject, $message, $headers);
+		        if ($mailSuccess) {
+		            $errorMsg = gettext('Your username has been sent to your e-mail address.');
+		        } else {
+		            $errorMsg = gettext('Attempt to send E-Mail failed; Please verify your mailserver configuration in php.ini');
+		        }        	
+	        }
+	        
+	        echo $errorMsg;
+	    }
+	}
+	
+	/**
+	  * Processes recovery of a user's password
+	  *
+	  * @return result string
+	  */
+	public static function HandleRecoverPassword()
+	{
+		// The user is trying to recover a forgotten password.  If such a user exists,
+	    // set a random activation token and e-mail them a link to reset their password.
+	    global $db;
+	    $query = $db->query('SELECT uid, username, email FROM user WHERE username='.escape($_REQUEST['username']).' AND confirmed=1 LIMIT 1');
+	    
+	    // TODO:  SHOULD THIS BE HERE?  ARE WE CHECKING LANGUAGE
+	    if ($query->num_rows == 0)
+	    {
+	    	// **changed.  added a check for if the user is trying to change the language
+	        if(isset($_REQUEST['action']) && $_REQUEST['action']=='change language')
+	        	Manager::PrintErrDiv();
+	        else
+	        	echo gettext('There is no activated account with that username.');
+	    }
+	    else
+	    {
+	        $user = $query->fetch_assoc();    	
+	        
+	        // generate a random 16-character alphanumeric string
+	        $token = '';
+	        $validChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	        for($i=0; $i<16; $i++)
+	        {
+	        	$token .= $validChars[rand() % 62];
+	        }
+	        
+	        // Update the database; set the user's allowPasswordReset flag and resetToken
+	        $db->query('UPDATE user SET allowPasswordReset=1, resetToken='.escape($token).' WHERE uid='.$user['uid'].' LIMIT 1');
+	        
+	        $messageSubject = gettext('KORA Account Information');
+	        $message  = '<html><body><p>'.gettext('To change your password, visit the following link').': ';
+	        $message .= '<a href="'.baseURI.'accountResetPassword.php?username='.$user['username'].'&token='.$token.'">'.gettext('Reset Password').'</a><br />';
+	        $message .= gettext('Or copy/paste the following URL into your browser').': '.baseURI.'accountResetPassword.php?username='.$user['username'].'&token='.$token;
+	        $message .= "</p></body></html>\n";
+	            
+	        $headers = '';
+	        $headers .= "MIME-Version: 1.0\r\n";
+	        $headers .= "Content-type: text/html\r\n";
+	        $headers .= "From: \"KORA Account\" <".baseEmail.">\r\n";
+	        $headers .= "To: ".$user['email']."\r\n";
+	        $headers .= "Reply-To: do-not-reply@example.com\r\n";
+	    
+	        $mailSuccess = mail($user['email'], $messageSubject, $message, $headers);
+	        if ($mailSuccess) {
+	            echo gettext('Instructions on how to reset your password have been sent to your e-mail address.');
+	        } else {
+	            echo gettext('Attempt to send E-Mail failed; Please verify your mailserver configuration in php.ini');
+	        }           
+	    }	
+	}
+	
+	/**
+	  * Processes a password reset by the user
+	  *
+	  * @return result string
+	  */
+	public static function HandleResetSelfPassword()
+	{
+		global $db;
+	
+		if (isset($_REQUEST['username']) && isset($_REQUEST['token']) && isset($_REQUEST['password1']) && isset($_REQUEST['password2']))
+		{
+			if ($_REQUEST['password1'] == $_REQUEST['password2'])
+			{
+				if (strlen($_REQUEST['password1']) >= 8)
+				{
+	    			// Update the database					
+					$userCheck = $db->query('SELECT * FROM user WHERE username='.escape($_REQUEST['username']).' AND resetToken='.escape($_REQUEST['token']).' LIMIT 1');
+				
+					///Check if token user combo matches
+					if($userCheck->num_rows==1){
+			       		$salt = time();
+		                $sha256 = hash_init('sha256');
+		                hash_update($sha256, $_REQUEST['password1']);
+		                hash_update($sha256, $salt);
+		                $pwhash = hash_final($sha256);  
+		                $db->query('UPDATE user SET password='.escape($pwhash).', salt='.escape($salt).',allowPasswordReset=0 WHERE username='.escape($_REQUEST['username']).' AND resetToken='.escape($_REQUEST['token']).' LIMIT 1');
+		                
+		                if (!$db->error)
+		                { echo gettext('Password Updated.  Please').' <a href="accountLogin.php">'.gettext('Log In').'</a>'; }
+		                else
+		                { echo gettext('There was an error resetting your password, please check username and token and try again.'); }
+					}
+					else
+					{
+						echo gettext('There was an error resetting your password, please check username and token and try again.');
+					}
+				}
+				else
+				{
+					echo gettext('Password must be at least 8 characters.');
+				}
+			}
+			else
+			{
+				echo gettext('Passwords do not match.');
+			}
+		}
+	}
+	
+	/**
+	  * Processes registration of a new user and send's out activation email
+	  *
+	  * @return result string
+	  */
+	public static function HandleRegistration()
+	{
+		global $db;
+		
+		$errors = false;
+		
+		// check for Username Availability
+		$results = $db->query("SELECT username FROM user WHERE username=".escape($_REQUEST['username']));
+		if (!$results) { 
+			error_log($db->error);
+			$errors = true;
+		}
+		if ($results->num_rows != 0)
+		{
+			Manager::PrintErrDiv(gettext('That username is already taken.'));
+			$errors = true;
+		}
+		else if ($_REQUEST['password1'] != $_REQUEST['password2'])
+		{
+			Manager::PrintErrDiv(gettext('Your Passwords do not Match.'));
+			$errors = true;
+		}
+		else if (empty($_REQUEST['username']))
+		{
+			Manager::PrintErrDiv(gettext('Your username is blank.'));
+			$errors = true;
+		}
+		else if (strlen($_REQUEST['password1']) < 8)
+		{
+			Manager::PrintErrDiv(gettext('Please make your password at least 8 characters.'));
+			$errors = true;
+		}
+		else if (empty($_REQUEST['email']))
+		{
+			Manager::PrintErrDiv(gettext('You did not supply an e-mail address.'));
+			$errors = true;
+		}
+		else if (!filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL))
+		{
+			Manager::PrintErrDiv(gettext('Your e-mail address is invalid.'));
+			$errors = true;
+		}
+	
+		if (!$errors)
+		{
+			// add user, send confirmation e-mail
+			$salt = time();
+			$sha2 = hash_init('sha256');
+			hash_update($sha2,$_REQUEST['password1']);
+			hash_update($sha2,$salt);
+			$pwhash = hash_final($sha2);
+			
+			$query = 'INSERT INTO user (username, password, salt, email, realName, admin, organization, language, confirmed, searchAccount) ';
+			$query .= ' VALUES ('.escape($_REQUEST['username']).", '".$pwhash."', $salt, ";
+			$query .= escape($_REQUEST['email']).', '.escape($_REQUEST['realname']).", '0', ";
+			$query .= escape($_REQUEST['organization']).', '.escape($_REQUEST['language']).", '0', '0')";
+			
+			
+			
+			echo '<h2>'.gettext('Account Creation').'</h2>';
+			
+			// Compose the E-Mail
+			
+			$messageSubject = gettext('KORA Account Activation');
+			$message = '<html><body><p>'.gettext('In order to access your KORA account, you must verify your e-mail address').'.  ';
+			$message .= gettext('To do this, click on the link below or go to the "Activate Account" page').', ';
+			$message .= gettext('type in your username, and enter the following number').": $salt\n\n";
+			$message .= "<a href=\"".baseURI.'accountActivate.php?username='.$_REQUEST['username']."&token=$salt\">".gettext('Activate Your Account')."</a></p></body></html>\n";
+			
+			$headers = '';
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-type: text/html\r\n";
+			$headers .= "From: \"KORA Activation\" <".baseEmail.">\r\n";
+			$headers .= "To: ".$_REQUEST['email']."\r\n";
+			$headers .= "Reply-To: do-not-reply@example.com\r\n";
+	
+			$mailSuccess = mail($_REQUEST['email'], $messageSubject, $message, $headers);
+			if ($mailSuccess) {
+				echo gettext('Your account has been created').'.  ';
+				  echo gettext('Please check your e-mail for instructions on how to').' <a href="accountActivate.php">'.gettext('Activate Your Account').'.</a>';
+				  $db->query($query);
+			} else {
+				echo gettext('Account creation failed').'.  ';
+				echo gettext('Attempt to send E-Mail failed; Please verify your mailserver configuration in php.ini');
+			}
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	  * Prints out html for the login form
+	  *
+	  * @return void
+	  */
+	// TODO: REVIEW THIS...
+	public static function PrintLoginForm()
+	{
+		echo '<h2>'.gettext('Log In to KORA').'</h2>';
+		
+		?>
+		<div id="formstyle" class="koraform">
+		<?php  if (!empty($errorMessage)) echo '<div class="error">'.gettext($errorMessage).'</div><br/>'; ?>
+		
+		<div class='kora_login_form'>
+		<label for="Username"><?php echo gettext("Username").":";?></label>
+		<input type="text" class="kora_login_user" id="textfield" <?php  if (isset($_REQUEST['username'])) echo 'value="'.$_REQUEST['username'].'"';?>/>
+		<label for="Password"><?php echo gettext("Password").":";?></label>
+		<input type="password" class="kora_login_pass" id="textfield" />
+		<button  type="button" class="kora_login_submit"><?php echo gettext('Log In');?></button>
+		<button  type="button" class="kora_login_new"><?php echo gettext('New Account');?></button>
+		<button  type="button" class="kora_login_activate"><?php echo gettext('Activate Account');?></button>
+		</div>
+		
+		<div class="spacer"></div>
+		<div class="forgot"><a href="accountRecoverPassword.php"><?php echo gettext('I forgot my username/password');?></a></div>
+		</div>
+		<?php
+	}
+	
+	/**
+	  * Prints out html for the account activation form
+	  *
+	  * @return void
+	  */
+	// TODO: REVIEW THIS...
+	public static function PrintActivationForm()
+	{
+		echo '<h2>'.gettext('Activate your Account').'</h2>';
+		?>
+		
+		<div id="formstyle" class="koraform">
+		<div class="kora_activate_form">
+		
+		<label for="Username"><?php echo gettext('Username').':';?><span class="small">previously created</span></label>
+		<input type='text' class='kora_activate_user' <?php  if (isset($_REQUEST['username'])) echo 'value="'.$_REQUEST['username'].'"';?> />
+		
+		<label for="Username"><?php echo gettext('Token').':';?><span class="small">token sent to email</span></label>
+		<input type='text' class='kora_activate_token' <?php  if (isset($_REQUEST['token'])) echo 'value="'.$_REQUEST['token'].'"';?> />
+		
+		<button type="button" class="kora_activate_submit"><?php echo gettext('Activate Account');?></button> 
+		</div>
+		
+	<?php }
+	
+	/**
+	  * Prints out html for the user registration form
+	  *
+	  * @return void
+	  */
+	// TODO: REVIEW THIS...
+	public static function PrintRegistrationForm() { 
+		// TODO: TAKE THIS ARRAY TO MANAGER CLASS
+		global $locale_list;
+		?>
+		<!-- start form for registration -->
+		<h2><?php echo gettext('Account Registration');?></h2>
+		<div id="formstyle" class="koraform">		
+		<div class='kora_reg_form'>
+		<label for="username"><?php echo gettext('Username').':'?> <span class="small"><?php echo gettext('add a username');?></span></label>
+		<input type='text' class='kora_reg_user' id='username' <?php  if (isset($_REQUEST['username'])) echo 'value="'.$_REQUEST['username'].'"';?> />
+		<div id="unamecheck"></div>
+		<div style="clear: both;"></div>
+		<label for="password1"><?php echo gettext('Password').':'?> <span class="small">8 <?php echo gettext('characters or more');?></span></label>
+		<input type='password' id='password1' class='kora_reg_pw1' />
+		<label for="password2"><?php echo gettext('Verify Password').':'?> <span class="small"><?php echo gettext('retype password');?></span></label>
+		<input type='password' id='password2' class='kora_reg_pw2' />
+		<div style="clear: both;"></div>
+		<label for="email"><?php echo gettext('Email address').':'?> <span class="small"><?php echo gettext('add a valid address');?></span></label>
+		<input type='text' id='email' class='kora_reg_email' <?php  if (isset($_REQUEST['email'])) echo 'value="'.$_REQUEST['email'].'"';?> />
+		<label for="realname"><?php echo gettext('Full Name').':'?> <span class="small">(<?php echo gettext('optional');?>)</span></label>
+		<input type='text' id='realname' class='kora_reg_name' <?php  if (isset($_REQUEST['realname'])) echo 'value="'.$_REQUEST['realname'].'"';?> />
+		<label for="organization"><?php echo gettext('Organization').':'?> <span class="small">(<?php echo gettext('optional');?>)</span></label>
+		<input type='text' id='organization' class='kora_reg_org' <?php  if (isset($_REQUEST['organization'])) echo 'value="'.$_REQUEST['organization'].'"';?> />
+		<label for="set_default_lang"><?php echo gettext('Language').':'?> <span class="small"><?php echo '('. gettext('optional').')';?></span></label>
+		<select class='kora_reg_lang'>
+		<?php foreach($locale_list as $key => $value)
+		{
+			echo "<option value=\"$key\"";
+			if(isset($_REQUEST['language']) && ($key == $_REQUEST['language'])) echo " selected";
+			echo ">$value</option>";
+		} ?> </select>
+		<button class='kora_reg_submit' type="button"><?php echo gettext('Create Account');?></button>
+		
+		</div>
+		</div>        
+		<?php 
+	}
+	
+	/**
+	  * Prints out html for the username/password recovery form
+	  *
+	  * @return void
+	  */
+	public static function PrintRecoveryForm()
+	{
+		?>
+		<h2><?php echo gettext('Account Recovery');?></h2>
+		<div id="formstyle" class="koraform">
+		<div class="kora_recoverPassword_form">
+		
+		<label for="Username"><?php echo gettext('Username').':';?> <span class="small"><?php echo gettext('Reset Password');?></span></label>
+		<label for="Email"><input type="text" class="kora_recoverPassword_user" id="username" /></label>
+		<button class='kora_recoverPassword_submit' type="button"><?php echo gettext('Send E-Mail');?></button>
+		
+		</div>
+		<br />
+		
+		<div class="kora_recoverUser_form">
+		<label for="Email"><?php echo gettext('E-Mail Address').':';?> <span class="small"><?php echo gettext('Recover Username');?></span></label>
+		<input type="text" class="kora_recoverUser_email" id="email" />
+		<button class="kora_recoverUser_submit" type="button"><?php echo gettext('Send E-Mail');?></button>
+		</div>
+		
+		</div>
+		
+		<?php     
+	}
+	
+	/**
+	  * Prints out html for the password reset form
+	  *
+	  * @return void
+	  */
+	public static function PrintResetForm()
+	{
+		 
+		echo '<h2>'.gettext('Reset Password').'</h2>';
+		if (!empty($errorMessage)) echo '<div class="error">'.gettext($errorMessage).'</div>'; ?>
+				
+		<div class="kora_resetPass_form" id="apforgotpasswordreset">
+		<table class="table">
+		    <tr>
+		        <td><strong><?php echo gettext('Username');?></strong></td>
+		        <td><input type="text" class="kora_resetPass_user" <?php 
+		            if (isset($_REQUEST['username'])) echo ' value="'.$_REQUEST['username'].'"'; ?> /></td>
+		    </tr>
+		    <tr>
+		        <td><strong><?php echo gettext('Token');?></strong></td>
+		        <td><input type="text" class="kora_resetPass_token" <?php 
+		            if (isset($_REQUEST['token'])) echo ' value="'.$_REQUEST['token'].'"'; ?> /></td>
+		    </tr>    
+		    <tr>
+		        <td><strong><?php echo gettext('Password');?></strong></td>
+		        <td><input type="password" class="kora_resetPass_pw1" /></td>
+		    </tr>
+		    <tr>
+		        <td><strong><?php echo gettext('Confirm Password');?></strong></td>
+		        <td><input type="password" class="kora_resetPass_pw2" /></td>
+		    </tr>
+		    <tr>
+		        <td>&nbsp;</td>
+		        <td><input type="button" class="kora_resetPass_submit" value="<?php echo gettext('Reset Password');?>" /></td>
+		    </tr>
+		</table>
+		</div>
+		<?php 	
+	}
+
+	/***************************
+	*        UNPRIVILEGED      *
+	***************************/
+	
+	/**
+	  * Checks if a username is already in the system
+	  *
+	  * @param string $uname Username to check
+	  *
+	  * @return result string
+	  */
+	public static function checkUsername($uname) {
+		global $db;
+		if($uname == "") {
+			echo " ";
+		}
+		else {
+			$results = $db->query("SELECT username FROM user WHERE username=".escape($uname)." LIMIT 1");
+			if($results) { 
+				$array = $results->fetch_assoc();
+				if($array) {
+					echo gettext('Username already in use').'!';
+				}
+				else
+				echo gettext('Username available');
+			}
+			else
+			echo $db->error;
+		}
+	}
+	
+	/**
+	  * Processes user login and sets the current session on success
+	  *
+	  * @return result string on error
+	  */
+	public static function DoLogin()
+	{
+		global $db;
+		
+		// Begin Hash Calculation
+		$sha256 = hash_init('sha256');
+		$results = $db->query("SELECT salt FROM user WHERE username=".escape($_REQUEST['username'])." LIMIT 1");
+		if(!$results){
+			echo gettext('Login failed, either your username or password was not recognized.');
+			print $db->error;
+		}
+		else {
+			$array = $results->fetch_assoc();
+		}
+		hash_update($sha256,$_REQUEST['password']);
+		hash_update($sha256,$array['salt']);
+		$passwd = hash_final($sha256);
+		// End Hash Calculation
+		
+		// Compare the Computed Hash to that in the Database
+		$results = $db->query("SELECT uid,admin,confirmed FROM user WHERE username=".escape($_REQUEST['username'])." AND password='".$passwd."' LIMIT 1");
+		
+		if(!$results) {
+			echo gettext('Login failed, either your username or password was not recognized.');
+			print $db->error;
+			return false;
+		}
+		else {
+			$array = $results->fetch_assoc();
+			if (!empty($array))
+			{
+				if (!$array['confirmed']) {
+					echo gettext('Your account needs to be activated.');
+					return false;
+				} else {
+					@session_start();
+					if(!isset($_SESSION['base_Path'])){
+						$_SESSION['base_Path'] = basePath;
+					}
+					$_SESSION['uid'] = $array['uid'];
+					$_SESSION['admin'] = $array['admin'];
+					//$_SESSION['language'] = $array['language'];
+					$_SESSION['language'] = 'English';
+					
+					// Check for the database version number.  If the query fails or returns no row,
+					// set the variable to 0
+					@$versionQuery = $db->query('SELECT version FROM systemInfo WHERE baseURL='.escape(baseURI).' LIMIT 1');
+					if (!$versionQuery || $versionQuery->num_rows == 0)
+					{
+						$_SESSION['dbVersion'] = '0';
+					}
+					else
+					{
+						$versionQuery = $versionQuery->fetch_assoc();
+						$_SESSION['dbVersion'] = $versionQuery['version'];
+						
+					}
+					// Header redirect to index
+					echo "success";
+				}
+			}
+			else
+			{
+				echo gettext('Username/Password Incorrect');
+			}
+		}
+	}
+	
+	/**
+	  * Resets the user's password and stores it into the DB
+	  *
+	  * @param string $password New password
+	  *
+	  * @return result string on error
+	  */
+	public function resetPassword($password)
+	{
+		global $db;
+		
+		// Hash the password
+		$salt = time();
+		$sha256 = hash_init('sha256');
+		hash_update($sha256, $password);
+		hash_update($sha256, $salt);
+		$pwhash = hash_final($sha256);
+		
+		print DoQueryPrintError('UPDATE user SET password='.escape($pwhash).', salt='.escape($salt).' WHERE uid='.escape($this->uid).' LIMIT 1',
+			gettext('Password updated'),
+			gettext('Problem updating password')
+			);
+	}
+	
+	/***************************
+	*         LOGGED IN        *
+	***************************/
+	
+	/**
+	  * Prints out a list of all the users in a KORA installation and their status. For admin to manage users
+	  *
+	  * @return void
+	  */
+	public static function loadNames() {
+		global $db;
+		$results = $db->query("SELECT uid,username,realName,organization,confirmed,admin FROM user WHERE searchAccount=0 ORDER BY username ASC");
+		echo '<table class="table"><tr><td><strong>'.gettext('Username').'</strong></td><td><strong>'.gettext('Real Name').'</strong></td><td>
+		<strong>'.gettext('Organization').'</strong></td><td><strong>'.gettext('Activated').'?</strong></td><td><strong>'.gettext('Admin').'</strong></td><td><strong>'.gettext('Delete').'?</strong></td></tr>';
+		if(!$results) {
+			print $db->error;  
+		}
+		else {
+			while($array = $results->fetch_assoc()) {
+				echo '<tr><td>'.htmlEscape($array['username']).'</td><td><input uid='.$array['uid'].' class="userrn" type="text" value="'.$array['realName'].'" /></td><td><input uid='.$array['uid'].' class="userorg" type="text" value="'.$array['organization'].'" /></td>';
+				echo '<td><input type="checkbox" uid='.$array['uid'].' class="userisconfirmed"';
+				if($array['confirmed']){echo " checked ";}
+				echo ' /></td>';
+				echo '<td><input type="checkbox" uid='.$array['uid'].' class="userisadmin"';
+				if($array['admin']){echo " checked ";}
+				echo ' /></td><td><a class="deluser" uid='.$array['uid'].' ">X</a></td></tr>';
+			}
+		}
+		echo "</table>";
+		?>    
+		<br /><br /><strong><?php echo gettext('Reset User Password');?></strong><br />
+		<table class="table">
+		<tr>
+		<td><strong><?php echo gettext('Username');?></strong></td>
+		<td><select class="kmu_resetpw_username">
+		<?php 
+		$results = $db->query('SELECT uid,username FROM user WHERE searchAccount=0 ORDER BY username ASC');
+		while ($user = $results->fetch_assoc())
+		{
+			echo '<option value="'.$user['uid'].'">'.htmlEscape($user['username']).'</option>';
+		}
+		?>
+		</select></td>
+		</tr>
+		<tr>
+		<td><strong><?php echo gettext('Password');?></strong></td>
+		<td><input type="password" class="kmu_resetpw_password1" /></td>
+		</tr>
+		<tr>
+		<td><strong><?php echo gettext('Confirm Password');?></strong></td>
+		<td><input type="password" class="kmu_resetpw_password2" /></td>
+		</tr>
+		<tr>
+		<td>&nbsp;</td>
+		<td><input type="button" class="kmu_resetpw_submit" value="<?php echo gettext('Reset Password');?>" /></td>
+		</tr>
+		</table>
+		<?php 
+	}
+	
+	/**
+	  * Update a user's profile information
+	  *
+	  * @param string $pw1 New password
+	  * @param string $pw2 Password to match $pw1 for validation
+	  * @param string $org Organization user is apart of
+	  * @param string $name User's real life name
+	  * @param string $email Email for the user
+	  * @param string $lang Default Language for the user 
+	  *
+	  * @return result string on error
+	  */
+	public function UpdateUser($pw1,$pw2,$org,$name,$email,$lang)
+	{
+		global $db;
+		if (!filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL))
+		{
+			echo gettext('Your e-mail address is invalid.');
+		}
+		else if(strlen($pw1) > 0 ) {
+			if($pw1 != $pw2 && strlen($pw1) != 0) {
+				echo gettext('Passwords do not match.');
+			}
+			elseif(strlen($pw1) < 8) {
+				echo gettext('Password not long enough, must be at least 8 characters.');
+			}
+			else {   //passwords match and are of required length
+				$salt = time();
+				$sha256 = hash_init('sha256');
+				hash_update($sha256,$pw1);
+				hash_update($sha256,$salt);
+				$pwhash = hash_final($sha256);
+				$result = $db->query("UPDATE user SET organization=".escape($org).",realName=".escape($name).",salt=".$salt.",password='".$pwhash."',language=".escape($lang)." WHERE uid=".$this->GetUID()." LIMIT 1 ");
+				print $db->error;
+				$passUpdated = true;
+				// NOT REALLY AN ERROR BUT SHOWING UP IN RED AT TOP OF FORM SEEMS OK...
+				echo gettext('Password updated');
+			}
+		}
+		else {     //password not being updated
+			$result = $db->query("UPDATE user SET organization=".escape($org).",realName=".escape($name).",email=".escape($email).",language=".escape($lang)." WHERE uid=".$this->GetUID()." LIMIT 1");
+			print $db->error;
+		}
+		
+		$_SESSION['language'] = $lang;
+		
+		//UPDATE CURRENT OBJECT PROPERTIES WITH WHAT MAY BE IN DB NOW
+		$this->SetUserInfo();
+	}
+	
+	/**
+	  * Updates the user's real name
+	  *
+	  * @param string $rn Real name
+	  *
+	  * @return result string
+	  */
+	public function updateRealName($rn)
+	{
+		print DoQueryPrintError('UPDATE user SET realname='.escape($rn).' WHERE uid='.escape($this->uid).' LIMIT 1',
+			gettext('Real name updated'),
+			gettext('Problem updating real name')
+			);
+	}
+	
+	/**
+	  * Updates the user's organization
+	  *
+	  * @param string $org Organization name
+	  *
+	  * @return result string
+	  */
+	public function updateOrganization($org)
+	{
+		print DoQueryPrintError('UPDATE user SET organization='.escape($org).' WHERE uid='.escape($this->uid).' LIMIT 1',
+			gettext('Organization updated'),
+			gettext('Problem updating organization')
+			);
+	}
+	
+	/***************************
+	*        SYSTEM ADMIN      *
+	***************************/
+	
+	/**
+	  * Remove a user from the DB system
+	  *
+	  * @param int $uid User ID of the user to be deleted
+	  *
+	  * @return result string
+	  */
+	public static function deleteUser($uid) {
+		if($uid && $uid != 1){  //don't delete the first user - its koraadmin
+			print DoQueryPrintError("DELETE FROM member WHERE uid=".escape($uid),
+				gettext('User removed from groups'),
+				gettext('Problem removing user from groups')
+				);
+			print DoQueryPrintError("DELETE FROM user WHERE uid=".escape($uid)." LIMIT 1",
+				gettext('User deleted'),
+				gettext('Problem deleting user')
+				);
+		}
+	}
+	
+	/**
+	  * Update admin status of a particular user
+	  *
+	  * @param bool $admin Boolean whether the user is an admin or not
+	  *
+	  * @return void
+	  */
+	public function updateAdmin($admin) {
+		if($admin == "true") {
+			print DoQueryPrintError("UPDATE user SET admin=1 WHERE uid=".escape($this->uid)." LIMIT 1",
+				gettext('Administrator set'),
+				gettext('Problem setting Administrator')
+				);
+		}
+		if($admin == "false") {
+			print DoQueryPrintError("UPDATE user SET admin=0 WHERE uid=".escape($this->uid)." LIMIT 1",
+				gettext('Administrator unset'),
+				gettext('Problem unsetting Administrator')
+				);
+		}
+	}
+	
+	/**
+	  * Change the activation status of a user account
+	  *
+	  * @param bool $admin Boolean whether the user is activated or not.
+	  *
+	  * @return result string
+	  */
+	public function updateActivated($admin) {
+		if($admin == "true") {
+			print DoQueryPrintError("UPDATE user SET confirmed=1 WHERE uid=".escape($this->uid)." LIMIT 1",
+				gettext('Account activated'),
+				gettext('Problem activating account')
+				);
+		}
+		if($admin == "false") {
+			print DoQueryPrintError("UPDATE user SET confirmed=0 WHERE uid=".escape($this->uid)." LIMIT 1",
+				gettext('Account deactivated'),
+				gettext('Problem deactivating account')
+				);
+		}
+	}
+	
+	/**
+	  * Checks if user has access to a project
+	  *
+	  * @param array[string] $permissions Permissions required for the project
+	  * @param int $pid_ Project ID
+	  *
+	  * @return boolean of result
+	  */
+	public function HasProjectPermissions($permissions, $pid_ = null)
+	{
+		if ((!$pid_) && (!Manager::GetProject())) { return false; }
+		
+		$p = ($pid_) ? new Project($pid_) : Manager::GetProject();
+		
+		$u = $p->GetUserPermissions($this->GetUID());
+		
+		return (($u & $permissions) || ($u & PROJECT_ADMIN) || Manager::IsSystemAdmin());
+	}
+	
+}
+
+
+?>
+

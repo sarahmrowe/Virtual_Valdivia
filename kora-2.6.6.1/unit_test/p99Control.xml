@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<p99Control cid = "1" schemeid = "56" collid = "118" type = "ListControl" name = "Clip" description = "" required = "0" searchable = "0" advSearchable = "0" showInResults = "0" showInPublicResults = "0" publicEntry = "0" options = "" sequence = "1"/>
+	<p99Control cid = "2" schemeid = "56" collid = "118" type = "ListControl" name = "Clip_2" description = "My Description" required = "0" searchable = "0" advSearchable = "0" showInResults = "0" showInPublicResults = "0" publicEntry = "0" options = "" sequence = "1"/>
+
+</dataset>
+

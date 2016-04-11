@@ -1,0 +1,15 @@
+<?php
+
+require_once( __DIR__ . '/config.php' );
+
+$manager = new \KoraORM\KoraManager(SEARCH_TOKEN);
+$searchManager = $manager->getSearchManager();
+$searchHandler = $searchManager->getDefaultBasicHandler(PROJECT_ID, SCHEME_ID);
+
+if (($results = $searchHandler->handleRequest()) !== false)
+{
+	header('Content-type: application/json');
+	echo json_encode($results);
+} else {
+	$searchHandler->printForm();
+}

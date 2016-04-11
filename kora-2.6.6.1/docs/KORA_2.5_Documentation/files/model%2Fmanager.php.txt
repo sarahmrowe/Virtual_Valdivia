@@ -1,0 +1,920 @@
+<?php
+/**
+Copyright (2008) Matrix: Michigan State University
+
+This file is part of KORA.
+
+KORA is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+KORA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
+// Initial Version: Joseph M. Deming, 2013
+
+require_once(__DIR__.'/../includes/includes.php');
+
+/**
+ * @class Manager object
+ *
+ * This class respresents a Manager singleton-type in KORA
+ */
+class Manager {
+	
+	const CSS_CORE = 0;
+	const CSS_LIB = 100;
+	const CSS_CLASS = 1000;
+	const CSS_THEME = 10000;
+	const CSS_END = 65536;
+	
+	const JS_CORE = 0;
+	const JS_LIB = 100;
+	const JS_CLASS = 1000;
+	const JS_END = 65536;
+	
+	private static $db = null;
+	private static $js = [];
+	private static $css = [];
+	private static $user = null, $uid = null;
+	private static $project = null, $pid = null;
+	private static $scheme = null, $sid = null;
+	private static $record = null, $rid = null;
+	
+	/**
+	  * Constructor/initializer for the Manager model
+	  *
+	  * @return void
+	  */
+	public static function Init()
+	{
+		Manager::SetUser();
+		Manager::SetProject();
+		Manager::SetScheme();
+		Manager::SetRecord();
+		
+		Manager::AddCSS('css/all.css', Manager::CSS_CORE);
+		Manager::AddCSS('includes/thickbox/thickbox.css', Manager::CSS_LIB);
+		
+		Manager::AddJS('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', Manager::JS_CORE);
+		Manager::AddJS('javascripts/gettext.js.php', Manager::JS_CORE);
+		Manager::AddJS('includes/thickbox/thickbox.js', Manager::JS_LIB);
+		Manager::AddJS('javascripts/common.js', Manager::JS_CORE);
+		
+		// ADD STYLE FOR SELECTED PROJECT (OR DEFAULT IF NO PROJ)
+		if (Manager::GetProject()) { Manager::AddCSS(Manager::GetProject()->GetStylePath(), Manager::CSS_THEME); }
+		else                       { Manager::AddCSS('css/default.css', Manager::CSS_THEME); }
+	}
+	
+	/**
+	  * Sets the current User ID from session
+	  *
+	  * @return void
+	  */
+	protected static function SetUser()
+	{
+		Manager::$uid = (isset($_SESSION['uid'])) ? $_SESSION['uid'] : null;
+	}
+	
+	/**
+	  * Sets the current Project ID from session
+	  *
+	  * @return void
+	  */
+	protected static function SetProject()
+	{
+		Manager::$pid = (isset($_REQUEST['pid'])) ? $_REQUEST['pid'] : null;
+	}
+	
+	/**
+	  * Sets the current Scheme ID from session
+	  *
+	  * @return void
+	  */
+	protected static function SetScheme()
+	{
+		Manager::$sid = (isset($_REQUEST['sid'])) ? $_REQUEST['sid'] : null;
+	}
+	
+	/**
+	  * Sets the current Record ID from session
+	  *
+	  * @return void
+	  */
+	protected static function SetRecord()
+	{
+		Manager::$rid = (isset($_REQUEST['rid'])) ? $_REQUEST['rid'] : null;
+	}
+	
+	public static function GetUser() { if (Manager::$uid && !Manager::$user) { Manager::$user = new User(); } return Manager::$user; }
+	public static function GetProject() { if (Manager::$pid && !Manager::$project) { Manager::$project = new Project(Manager::$pid); } return Manager::$project; }
+	public static function GetScheme() { if (Manager::$sid && !Manager::$scheme) { Manager::$scheme = new Scheme(Manager::$pid, Manager::$sid); } return Manager::$scheme; }
+	public static function GetRecord() { if (Manager::$rid && !Manager::$record) { Manager::$record = new Record(Manager::$pid, Manager::$sid, Manager::$rid); } return Manager::$record; }
+	
+	public static function IsLoggedIn() { return (Manager::GetUser() && Manager::GetUser()->IsLoggedIn()); }
+	public static function IsSystemAdmin() { return (Manager::GetUser() && Manager::GetUser()->IsSystemAdmin()); }
+	public static function IsProjectAdmin() { return (Manager::GetUser() && Manager::GetUser()->IsProjectAdmin()); }
+	
+	/**
+	  * Get a list of all available presets for schemes
+	  *
+	  * @return Array of scheme presets
+	  */
+	public static function GetPresetSchemes()
+	{
+		global $db;
+		$presetSchemes = $db->query('SELECT CONCAT(project.name, \'/\', scheme.schemeName) AS name, scheme.schemeid AS id FROM scheme LEFT JOIN project USING (pid) WHERE scheme.allowPreset=1');
+		$retval = array();
+		if ($presetSchemes)
+		{
+			while ($p = $presetSchemes->fetch_assoc())
+			{ $retval[$p['id']] = $p['name']; }
+		}
+		return $retval;		
+	}
+	
+	/**
+	  * Checks a given list of Request variables to see if they are set
+	  *
+	  * @param Array[string] $indexes Request varibles to check for
+	  *
+	  * @return true on success
+	  */
+	public static function CheckRequestsAreSet($indexes)
+	{
+		foreach($indexes as $index)
+		{	
+			if(!isset($_REQUEST[$index]))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	  * Get access to a specific control
+	  *
+	  * @param string $pid_ Project ID
+	  * @param string $cid_ Control ID
+	  * @param string $rid_ Record ID
+	  * @param string $preid_ Preset Record ID
+	  *
+	  * @return control object
+	  */
+	public static function GetControl($pid_, $cid_, $rid_ = '', $preid_ = '')
+	{
+		global $db;
+		$cTable = 'p'.$pid_.'Control';
+		$ctrltypequery = $db->query("SELECT type FROM $cTable WHERE cid=".escape($cid_));
+		if ($ctrltypequery->num_rows == 0) 
+		{ Manager::PrintErrDiv('Control not found with cid '.$cid_); return false; }
+		$ctype = $ctrltypequery->fetch_assoc();
+		$cobj = new $ctype['type']($pid_, $cid_, $rid_, $preid_);
+		return $cobj;		
+	}
+	
+	/**
+	  * Prints out all Javascript files for Kora
+	  *
+	  * @return void
+	  */
+	public static function PrintJS()
+	{
+		ksort(Manager::$js);
+		foreach (Manager::$js as $c)
+		{
+			print '<script type="text/javascript" src="'.$c.'" ></script>'."\n";
+		}
+	}
+	
+	/**
+	  * Prints out all CSS files for Kora
+	  *
+	  * @return void
+	  */
+	public static function PrintCSS()
+	{
+		ksort(Manager::$css);
+		foreach (Manager::$css as $c)
+		{
+			print '<link href="'.$c.'" rel="stylesheet" type="text/css" />'."\n";
+		}
+	}
+	
+	/**
+	  * Prints a global div with html access to the current user, project, scheme, record, 
+	  * and the baseURI for your Kora installation if they are set
+	  *
+	  * @return void
+	  */
+	public static function PrintGlobalDiv()
+	{
+		$out = "<div id='kora_globals' ";
+		if (Manager::GetUser()) { $out .= "uid='".Manager::GetUser()->GetUID()."' "; }
+		if (Manager::GetProject()) { $out .= "pid='".Manager::GetProject()->GetPID()."' "; }
+		if (Manager::GetScheme()) { $out .= "sid='".Manager::GetScheme()->GetSID()."' "; }
+		if (Manager::GetRecord()) { $out .= "rid='".Manager::GetRecord()->GetRID()."' "; }
+		$out .= "baseURI='".baseURI."' ";
+		$out .= "></div>";
+		
+		print $out;
+	}
+	
+	/**
+	  * Print upper div for quick user login-type features
+	  *
+	  * @return void
+	  */
+	// TODO: REVIEW THIS FUNCTION
+	public static function PrintLoginDiv()
+	{ ?>
+		<div id="login">
+		
+		<?php if (!Manager::IsLoggedIn()) { ?>
+		    
+		    <a href="<?php echo baseURI;?>index.php"><?php echo gettext('Log In');?></a> |
+		    <a href="<?php echo baseURI;?>accountRegister.php"><?php echo gettext('Register');?></a> |
+		    <a href="<?php echo baseURI;?>accountActivate.php"><?php echo gettext('Activate Account');?></a>
+		<?php } else { ?>
+			<a href="<?php echo baseURI;?>accountLogout.php"><?php echo gettext('Log Out');?></a> |
+		    <a href="<?php echo baseURI;?>accountSettings.php"><?php echo gettext('Update User Info')?></a>
+		<?php } ?>
+	
+		</div>
+			<?php if (Manager::IsLoggedIn()) { ?>
+			<div class="clear"></div>
+	
+			<div class="koraglobal_recordSearch_form" id="viewobject"><?php echo gettext('View Record');?>:&nbsp
+			<input type="text" class="koraglobal_recordSearch_rid" />
+			<div class="koraglobal_recordSearch_error" style="color:red"></div>
+			</div>
+			
+			<?php } //TODO:FORM?>
+		</div>
+	<?php }
+	
+	/**
+	  * Prints an error div and error message
+	  *
+	  * @param string $msg_ Error message
+	  * @param bool $global_ Is it a global error?
+	  *
+	  * @return void
+	  */
+	public static function PrintErrDiv($msg_, $global_ = true)
+	{
+		$cl = ($global_) ? 'global_error error' : 'error';
+		print "<div class='$cl'>$msg_</div>";
+	}
+
+	/**
+	  * Prints out the quick jump lists for projects and schemes and specific Record if one is in focus
+	  *
+	  * @param string $myArgument With a *description* of this argument, these may also
+	  *    span multiple lines.
+	  *
+	  * @return void
+	  */
+	public static function PrintBreadcrumbs()
+	{
+		if(Manager::GetProject()){
+			//echo '<a href="selectScheme.php?pid='.Manager::GetProject()->GetPID().'">'.Manager::GetProject()->GetName().'</a>';
+			Manager::GetProject()->PrintQuickJump();
+		}
+		if(Manager::GetScheme()){
+			echo '&mdash;&gt;';
+			Manager::GetScheme()->PrintQuickJump();
+		}
+		if(Manager::GetRecord()){ // SHOW LINK FOR LIST-ALL AS WELL AS FOR THIS SPECIFIC RID
+			echo '&mdash;&gt;<a href="searchResults.php?pid='.Manager::GetProject()->GetPID().'&sid='.Manager::GetScheme()->GetSID().'">'.gettext('records').'</a>';
+			echo '&mdash;&gt;<a href="viewObject.php?rid='.Manager::GetRecord()->GetRID().'">'.Manager::GetRecord()->GetRID().'</a>';
+		}
+	}
+	
+	/**
+	  * Print out the list of search tokens in Kora
+	  *
+	  * @return void
+	  */
+	public static function PrintTokens()
+	{
+		global $db;
+		
+		$existingQuery = $db->query('SELECT uid,username FROM user WHERE searchAccount=1 ORDER BY uid');
+		if ($existingQuery->num_rows == 0)
+		{
+			echo gettext('No existing search tokens found').'.<br /><br />';
+		}
+		else
+		{
+			// Build up an array of project IDs and names
+			$projectQuery = $db->query('SELECT pid,name FROM project ORDER BY name');
+			$projectList = array();
+			while ($p = $projectQuery->fetch_assoc())
+			{
+				$projectList[] = $p;
+			}
+			
+			// Build up an array of what tokens have access to what projects
+			$accessQuery = $db->query('SELECT uid,pid FROM member WHERE uid IN (SELECT uid FROM user WHERE searchAccount=1)');
+			$accessList = array();
+			while ($row = $accessQuery->fetch_assoc())
+			{
+				if (!isset($accessList[$row['uid']]))
+				{
+					$accessList[$row['uid']] = array();
+				}
+				// Since associative array indexes are done as a hash table,
+				// isset ends up being faster than in_array, so I just use
+				// the pid as an index, not as a value.			
+				$accessList[$row['uid']][$row['pid']] = true;
+			}
+			
+			
+			echo gettext('Existing Tokens').':';
+			?>
+			<table class="table">
+			<tr><td><b><?php echo gettext('Token');?></b></td>
+			<td><b><?php echo gettext('Can Search');?>:</b></td>
+			<td><b><?php echo gettext('Allow Search Of');?>:</b></td>
+			<td><b><?php echo gettext('Delete');?></b></td></tr>
+			<?php  		 
+			while($token = $existingQuery->fetch_assoc())
+			{
+				// Populate the list of projects the token has access to and
+				// can be granted access to
+				
+				// empty text fields to begin populating the lists 
+				$canSearch = '<table border="0">';
+				$allowSearch = '<select id="addProject'.$token['uid'].'" name="addProject'.$token['uid'].'" class="token_proj" >';
+				
+				// Since the lists are mututally exclusive, iterate through the project list
+				// exactly once and populate both fields
+				foreach($projectList as $project)
+				{
+					if (isset($accessList[$token['uid']][$project['pid']]))
+					{
+						$canSearch .= '<tr class="token_proj_row" tokprojid="'.$project['pid'].'"><td>'.htmlEscape($project['name']).'</td><td><a class="delete token_delproj" >X</a></td></tr>';
+					}
+					else    // Does not currently have access; add to the allowSearch list
+					{
+						$allowSearch .= '<option value="'.$project['pid'].'">'.htmlEscape($project['name']).'</option>';
+					}
+				}
+				
+				$canSearch .= '</table>';
+				$allowSearch .= '</select><br /><input type="button" value="'.gettext('Allow').'" class="token_addproj"/>';
+				
+				echo '<tr class="token_row" tokid="'.$token['uid'].'"><td class="token_val">'.htmlEscape($token['username']).'</td>';
+				echo "<td>$canSearch</td>";  // has access to
+				echo "<td>$allowSearch</td>";  // add access to
+				echo '<td><a class="delete token_delete" >X</a></td></tr>';	
+			}
+			echo '</table>';
+		}
+		echo gettext('Please note that tokens are case-sensitive').'.<br /><br />';
+		echo '<input type="button" class="button token_create" value="'.gettext('Create New Token').'" />'; 
+	}
+	
+	/**
+	  * Print the html for the system management form
+	  *
+	  * @return void
+	  */
+	public static function PrintSystemManagementForm(){
+		echo '<h2>'.gettext('System management').'</h2>';
+		?><div id="koraAdminSysManage">
+		<div id="ka_admin_result"></div><br>
+		<input type="button" class="ka_sysMgt_updateCtrlList" value="<?php echo gettext('Update Control List');?>" /><br /><br />
+		<input type="button" class="ka_sysMgt_updateStyleList" value="<?php echo gettext('Update Style List');?>" />
+		<br /><br>
+		<input type="button" class="ka_sysMgt_updateDatabase" value="<?php echo gettext('Upgrade Database Layout');?>" /><br />
+		</div>
+		<?php
+	}
+	
+	/**
+	  * Prints out navigation links for search
+	  *
+	  * @param int $maxPage Max number of pages
+	  * @param int $currentPage Current page being viewed
+	  * @param string $adjacents TODO ???
+	  * @param string $pageLink TODO ???
+	  * @param string $linkclass TODO ???
+	  *
+	  * @return void
+	  */
+	public static function GetBreadCrumbsHTML($maxPage, $currentPage, $adjacents, $pageLink, $linkclass = '')
+	{
+		$crumbs = '';
+		if ($maxPage > 1)
+		{
+			$aclass = ($linkclass != '') ? "class=$linkclass" : '';
+		
+			// Display "Prev" link
+			if ($currentPage == 1)
+			{ $crumbs .= gettext('Prev').' | ';	}
+			else
+			{ $crumbs .= '<a '.$aclass.' '.sprintf($pageLink, ($currentPage - 1) ).'>'.gettext('Prev').'</a> | '; }
+			
+			if ($maxPage < (7 + $adjacents * 2))
+			{
+				// There's not enough pages to bother breaking it up, so
+				// display them all
+				
+				for($i=1; $i <= $maxPage; $i++)
+				{
+					if ($i != $currentPage)
+					{ $crumbs .= '<a '.$aclass.' '.sprintf($pageLink, $i).">$i</a> | ";	}
+					else
+					{ $crumbs .= "$i | "; }
+				}
+			}
+			else   // if lastpage > (6 + ADJACENTS * 2)
+			{
+				if ($currentPage < (1 + $adjacents * 2))
+				{
+					// we're near the beginning
+					
+					// show the early pages
+					for($i=1; $i <= (4 + $adjacents * 2); $i++)
+					{
+						if ($i != $currentPage)
+						{ $crumbs .= '<a '.$aclass.' '.sprintf($pageLink, $i).">$i</a> | "; }
+						else
+						{ $crumbs .= "$i | "; }
+					}
+					
+					// show the ... and the last two pages
+					$crumbs .= '... | <a '.$aclass.' '.sprintf($pageLink, ($maxPage - 1)).'>'.($maxPage - 1).'</a> | <a '.$aclass.' '.sprintf($pageLink, $maxPage).'>'.$maxPage.'</a> | ';
+				}
+				else if ((($maxPage - $adjacents * 2) > $currentPage) && ($currentPage > ($adjacents * 2)))
+				{
+					// we're in the middle
+					
+					// display the first two pages and ...
+					$crumbs .= '<a '.$aclass.' '.sprintf($pageLink, 1).'>1</a> | <a '.$aclass.' '.sprintf($pageLink, 2).'>2</a> | ... | ';
+					
+					// display the middle pages
+					for($i=$currentPage-$adjacents; $i <= ($currentPage + $adjacents); $i++)
+					{
+						if ($i != $currentPage)
+						{ $crumbs .= '<a '.$aclass.' '.sprintf($pageLink, $i).">$i</a> | "; }
+						else
+						{ $crumbs .= "$i | "; }
+					}
+					
+					// show the ... and the last two pages
+					$crumbs .= '... | <a '.$aclass.' '.sprintf($pageLink,($maxPage - 1)).'>'.($maxPage - 1).'</a> | <a '.$aclass.' '.sprintf($pageLink,$maxPage).'>'.$maxPage.'</a> | ';
+				}
+				else
+				{
+					// we're at the end
+					
+					// display the first two pages and ...
+					$crumbs .= '<a '.$aclass.' '.sprintf($pageLink,1).'>1</a> | <a '.$aclass.' '.sprintf($pageLink,2).'>2</a> | ... | ';
+					
+					// display the final pages
+					for($i=($maxPage - (2 + $adjacents * 2)); $i <= $maxPage; $i++)
+					{
+						if ($i != $currentPage)
+						{ $crumbs .= '<a '.$aclass.' '.sprintf($pageLink,$i).">$i</a> | "; }
+						else
+						{ $crumbs .= "$i | "; }
+					}
+				}
+			}
+			
+			// Display "Next" link
+			if ($currentPage == $maxPage)
+			{ $crumbs .= gettext('Next'); }
+			else
+			{ $crumbs .= '<a '.$aclass.' '.sprintf($pageLink,($currentPage + 1)).'>'.gettext('Next').'</a>'; }
+		}
+		
+		return $crumbs;
+	}
+
+	/**
+	  * Print out header
+	  *
+	  * @return void
+	  */
+	public static function PrintHeader()
+	{ 
+		include_once(basePath.'includes/header.php');
+	}
+	
+	/**
+	  * Print out footer
+	  *
+	  * @return void
+	  */
+	public static function PrintFooter()
+	{ 
+		include_once(basePath.'includes/footer.php');
+	}
+	
+	/**
+	  * Add a css page to the Manager
+	  *
+	  * @param string $css_ Name of CSS file
+	  * @param string $id_ TODO ???
+	  *
+	  * @return void
+	  */
+	public static function AddCSS($css_, $id_ = null)
+	{
+		if ($id_ !== null) { if (!isset(Manager::$css[$id_])) { Manager::$css[$id_] = $css_; } else { Manager::AddCSS($css_, $id_+1); } }
+		else               { if (!in_array($css_, Manager::$css)) { Manager::$css[] = $css_; } }
+	}
+	
+	/**
+	  * Add a Javascript page to the Manager
+	  *
+	  * @param string $js_ Name of Javascript file
+	  * @param string $id_ TODO ???
+	  *
+	  * @return void
+	  */
+	public static function AddJS($js_, $id_ = null)
+	{
+		if ($id_ !== null) { if (!isset(Manager::$js[$id_])) { Manager::$js[$id_] = $js_; } else { Manager::AddJS($js_, $id_+1); } }
+		else               { if (!in_array($js_, Manager::$js)) { Manager::$js[] = $js_; } }
+	}
+	
+	/**
+	  * Assign a project to a specific search token
+	  *
+	  * @param string $tokenid Search token
+	  * @param int $pid Project ID to be assigned
+	  *
+	  * @return void
+	  */
+	public static function addAccess($tokenid, $pid)
+	{
+		global $db;
+		
+		// should we check to see if it's a valid pid and a valid tokenid here?  We DO
+		// require System Admin to call any of these, but it might be best to play it safe
+		// at the expense of a couple more database calls....
+		
+		$db->query('INSERT INTO member (uid, pid, gid) VALUES ('.escape($tokenid).','.escape($pid).',0)');
+	}
+	
+	/**
+	  * Remove a project from a specific search token
+	  *
+	  * @param string $tokenid Search token
+	  * @param int $pid Project ID to be removed
+	  *
+	  * @return void
+	  */
+	public static function removeAccess($tokenid, $pid)
+	{
+		global $db;
+		
+		echo 'Here';
+		
+		$db->query('DELETE FROM member WHERE uid='.escape($tokenid).' AND pid='.escape($pid));
+		
+	}
+	
+	/**
+	  * Create a search token
+	  *
+	  * @return void
+	  */
+	public static function createToken()
+	{
+		global $db;	
+		
+		// generate a 24-character hex string
+		// I don't believe PHP is capable of handling the concept of
+		// 0xffffffffffffffffffffffff, and if it could it'd be ugly to get
+		// a random number in that range.  So, when in doubt, loop a simpler problem!
+		
+		$validToken = false;
+		while (!$validToken)
+		{
+			$token = '';
+			for($i = 0; $i < 4; $i++)
+			{
+				$token .= sprintf("%06x", mt_rand(0x000000, 0xffffff)); 
+			}
+			
+			// See if the token is already taken (what sick person uses hex strings as
+			//     usernames anyway?)
+			$available = $db->query("SELECT uid FROM user WHERE username='$token' LIMIT 1");
+			if ($available->num_rows == 0) 
+			{
+				$validToken = true;
+			}
+		}
+		
+		$query  = "INSERT INTO user (username, password, salt, email, admin, confirmed, searchAccount) ";
+		$query .= "VALUES ('$token', '$token', 0, ' ', 0, 0, 1)";
+		$db->query($query);
+	}
+	
+	/**
+	  * Delete a search token
+	  *
+	  * @return void
+	  */
+	public static function deleteToken($tokenID)
+	{
+		global $db;
+		
+		$db->query('DELETE FROM member WHERE uid='.escape($tokenID));
+		$db->query('DELETE FROM user WHERE uid='.escape($tokenID));
+	}
+	
+	/**
+	  * Check the DB version in our DB with the version listed in the configuration file
+	  *
+	  * @return void
+	  */
+	public static function CheckDatabaseVersion()
+	{
+		// See if the database is up-to-date
+		// THIS SHOULD BE DONE WITH THE FUTURE 'DATABASE' CLASS  OR OTHERWISE W/OUT SESSIONS...
+		if (isset($_SESSION['dbVersion']) && Manager::IsSystemAdmin() && version_compare($_SESSION['dbVersion'], LATEST_DB_VERSION, '<'))
+		{
+			Manager::PrintErrDiv('<a href="'.baseURI.'upgradeDatabase.php" >'.gettext('Your database is out of date; please upgrade it').'</a></div><br />');
+		}
+	}
+	
+	/**
+	  * Check to see if the user is logged in
+	  *
+	  * @param string $location Page to bounce to if they are not logged in
+	  *
+	  * @return void
+	  */
+	public static function RequireLogin($location = 'accountLogin.php')
+	{
+		if (!Manager::IsLoggedIn())
+		{
+			header("Location: $location");
+			die();
+		}
+	}
+	
+	/**
+	  * Check to see if the user has a set of permissions
+	  *
+	  * @param string $permissions Permissions required to continue
+	  * @param string $location Page to bounce to if permissions aren't matched
+	  *
+	  * @return void
+	  */
+	public static function RequirePermissions($permissions, $location = 'index.php')
+	{
+		Manager::RequireLogin($location);
+		Manager::RequireProject($location);
+		
+		if (!Manager::GetUser()->HasProjectPermissions($permissions)) { 
+			header("Location: $location");
+			die();
+		}
+	}
+	
+	/**
+	  * Check to see if the user is a system admin
+	  *
+	  * @param string $location Page to bounce to if user is not system admin
+	  *
+	  * @return void
+	  */
+	public static function RequireSystemAdmin($location = 'index.php')
+	{
+		if (!Manager::IsSystemAdmin())
+		{
+			header("Location: $location");
+			die();
+		}
+	}
+
+	/**
+	  * Check to see if the user is a project admin
+	  *
+	  * @param string $location Page to bounce to if user is not project admin
+	  *
+	  * @return void
+	  */
+	public static function RequireProjectAdmin($location = null)
+	{
+		if (!Manager::IsProjectAdmin())
+		{
+			// THIS WILL BOUNCE USER TO SELECT PROJECT IF NO PROJECT IS SET
+			Manager::RequireProject();
+			// ELSE WE WILL DO THE EQUIVALENT OF REQUIRE SCHEME IF LOCATION WAS NOT SPECIFIED
+			if (!$location) { $location = 'selectScheme.php?pid='.Manager::GetProject()->GetPID(); }
+			header("Location: $location");
+			die();
+		}
+	}
+	
+	/**
+	  * Check to see if a project is set
+	  *
+	  * @param string $location Page to bounce to if project not set
+	  *
+	  * @return void
+	  */
+	public static function RequireProject($location = 'selectProject.php')
+	{
+		Manager::RequireLogin();
+		if (!Manager::GetProject())
+		{
+			header("Location: $location");
+			die();
+		}
+	}
+	
+	/**
+	  * Check to see if a scheme is set
+	  *
+	  * @param string $location Page to bounce to if scheme not set
+	  *
+	  * @return void
+	  */
+	public static function RequireScheme($location = null)
+	{
+		Manager::RequireLogin();
+		if (!Manager::GetScheme())
+		{
+			// THIS WILL BOUNCE USER TO SELECT PROJECT IF NO PROJECT IS SET
+			Manager::RequireProject();
+			if (!$location) { $location = 'selectScheme.php?pid='.Manager::GetProject()->GetPID(); }
+			header("Location: $location");
+			die();
+		}
+	}	
+
+	/**
+	  * Check to see if a record is set
+	  *
+	  * @param string $location Page to bounce to if record not set
+	  *
+	  * @return void
+	  */
+	public static function RequireRecord($location = null)
+	{
+		Manager::RequireLogin();
+		
+		if (Manager::GetRecord() && Manager::GetRecord()->HasData())
+		{ return true; }
+
+		// IF CALLER PASSED IN A TARGET BOUNCE LOCATION, BOUNCE THERE
+		if ($location)
+		{ 
+			header("Location: $location");
+			die();
+		}
+		
+		// ELSE WE TRY TO BOUNCE THEM TO THE CLOSEST PAGE GIVEN THEIR CURRENT INFO
+		if (Manager::GetProject() && Manager::GetScheme())
+		{
+			header('Location: schemeLayout.php?pid='.Manager::GetProject()->GetPID().'&sid='.Manager::GetScheme()->GetSID());
+			die();
+		}
+		else if (Manager::GetProject())
+		{
+			header('Location: selectScheme.php?pid='.Manager::GetProject()->GetPID());
+			die();
+		}
+		else
+		{
+			header('Location: selectProject.php');
+			die();
+		}
+	}
+
+	/**
+	  * See if a record exists
+	  *
+	  * @param int $kid Record ID to search for
+	  *
+	  * @return true on success
+	  */
+	public static function DoesRecordExist($kid){
+		global $db;
+	
+		$k = explode('-',$kid);
+		
+		$Query = $db->query("SELECT * FROM p".$k[0]."Data WHERE id='".$kid."'");
+		
+		if($Query->num_rows > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	  * Update the list of control types in the DB based on files in controls directory
+	  *
+	  * @return result string on success
+	  */
+	public static function UpdateControlList(){
+		global $db;
+	
+		// get the list of control files
+		$dir = basePath.CONTROL_DIR;
+		$controlList = array();
+		if(is_dir($dir)) {
+			if($dh = opendir($dir)) {
+				while(($file = readdir($dh)) !== false) {
+					if(filetype($dir.$file) == "file") {
+						$controlfile = explode(".",$file);
+						if(!in_array($controlfile[0], array('index', 'control', 'controlVisitor'))) {
+							$controlList[] = $controlfile[0];
+							//require_once($dir.$file);	                        
+						}
+					}
+				}
+			}
+		}
+		
+		$dbControls = array();
+		$controlList = array_unique($controlList);
+		
+		foreach($controlList as $control) {
+			$controlName = ucfirst($control);
+			$controlInstance = new $controlName();
+			$dbControls[] = array('name' => $controlInstance->getType(), 'file' => $control.'.php', 'class' => $controlName, 'xmlPacked' => $controlInstance->isXMLPacked() ? '1' : '0');
+		}
+		
+		// clear the controls list
+		$db->query("SET SQL_SAFE_UPDATES=0;");
+		$db->query("DELETE FROM control");
+		$db->query("SET SQL_SAFE_UPDATES=1;");
+		// insert the controls into the table
+		
+		foreach($dbControls as $c) $db->query('INSERT INTO control (name, file, class, xmlPacked) VALUES ('.escape($c['name']).', '.escape($c['file']).', '.escape($c['class']).', '.escape($c['xmlPacked']).')');
+		
+		echo gettext('Control List Updated');
+	}
+	
+	/**
+	  * Update the list of style types in the DB based on files in css directory
+	  *
+	  * @return result string on success
+	  */
+	public static function UpdateStyleList(){
+		global $db;
+	
+		// Make sure any rows currently in the DB still exist
+		$styleQuery = $db->query('SELECT styleid, filepath FROM style');
+		while ($s = $styleQuery->fetch_assoc())
+		{
+			if (!file_exists(basePath.'css/'.$s['filepath']))
+			{
+				// Remove any references that projects had to that styleid
+				$db->query('UPDATE project SET styleid=0 WHERE styleid='.$s['styleid']);
+				// Delete the row
+				$db->query('DELETE FROM style WHERE styleid='.$s['styleid'].' LIMIT 1');
+			}
+		}
+		
+		// Scan for any new XML files
+		if ($dirHandle = opendir(basePath.'css'))
+		{
+			// Read all the file names
+			while (($filename = readdir($dirHandle)) !== FALSE)
+			{
+				// See if it's a .XML file
+				if (strlen($filename) && substr($filename, -4) == '.xml')
+				{
+					$xml = simplexml_load_file(basePath.'css/'.$filename);
+					// Make sure the necessary components are in place and the
+					// file exists
+					if (isset($xml->file) && isset($xml->name) && file_exists(basePath.'css/'.(string)$xml->file))
+					{
+						// Make sure no other record for this file exists, then insert a
+						// record
+						$testQuery = $db->query('SELECT styleid FROM style WHERE filepath='.escape((string)$xml->file).' LIMIT 1');
+						if ($testQuery->num_rows == 0)
+						{
+							$db->query('INSERT INTO style (description, filepath) VALUES ('.escape((string)$xml->name).','.escape((string)$xml->file).')');
+						}
+					}
+				}
+			}
+		}
+		
+		echo gettext('Style List Updated');
+	}
+}
+
+?>
+

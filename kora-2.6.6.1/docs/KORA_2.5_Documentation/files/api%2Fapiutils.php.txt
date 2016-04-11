@@ -1,0 +1,93 @@
+<?php
+$API_FUNCTION_PREFIX = "kora_api_call";
+require_once("db.lib.php");
+require_once("error_codes.php");
+require_once("actions.php");
+
+function XMLHeader()
+{
+    echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
+}
+function XMLDumpQueryResults($results)
+{
+    if($results)
+    {
+        XMLHeader();
+        echo "<results>";
+        while($r = $results->fetch_assoc())
+        {
+            echo "<result>";
+            echo ArrayToOutputXML($r);
+            echo "</result>";
+        }
+        echo '</results>';
+    }
+    else
+    {
+        echo "<results></results>";
+    }
+}
+
+function isGetSet($index)
+{
+    return( isset($_GET) &&
+            is_array($_GET) &&
+            isset($_GET[$index]) &&
+            $_GET[$index] != "");
+}
+
+// brianXMLEscape: Escapes XML special characters
+// Brian Beck, 2009
+function brianXMLEscape($rawString)
+{
+    return str_replace(array('<', '>', '&', '"', "'"), array('&lt;', '&gt;', '&amp;', '&quot;', '&apos;'), $rawString);
+}
+
+function ArrayToOutputXml($a)
+{
+   $output = "";
+   foreach($a as $key => $val)
+   {
+       if(strlen($key) > 1 && ($key == "pid" || $key == "schemeID"))
+       {
+         continue;
+       }
+       $output .= is_numeric($key) ? "<data id=\"$key\">" : "<".str_replace(' ', '', $key).">";
+       if(is_array($val))
+           $output .= ArrayToOutputXml($val);
+       else
+           $output .= brianXMLEscape($val);
+       $output .= is_numeric($key) ? "</data>" : "</".str_replace(' ', '', $key).">";
+   }
+   return $output;
+}
+
+function XMLDumpError($error, $extra = null)
+{
+    global $ERRORS;
+    XMLHeader();
+    echo "<error ";
+    if(is_array($ERRORS) && $ERRORS[$error])
+    {
+        $message = $ERRORS[$error]['hide_from_user'] ? "An internal error occured. Please contact the website operator." : $ERRORS[$error]['message'];
+        $errno = $ERRORS[$error]['code'];
+        echo "message=\"$message\" ";
+        echo "code=\"$errno\" ";
+        if($extra && !$ERRORS[$error]['hide_from_user'])
+            echo "more_details=\"$extra\" ";
+    }
+    echo "/>";
+}
+function XMLDumpErrorAndDie($error, $extra = null)
+{
+    XMLDumpError($error, $extra);
+    die();
+}
+function XMLMySQLErrorAndDie($query)
+{
+    global $db;
+    XMLDumpError('query_error', "[". mysql_escape_string($query)."] Error: " . $db->error);
+    die();
+}
+?>
+
