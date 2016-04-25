@@ -3,27 +3,17 @@
  * added padding to jumbotron item to create space between top static navbar
  */
  
-.html, body {
-	background-color: #FCF4E8;
-}
 
-.navbar {
-  background-color: #f6faeb;
-  background-image: none;
-  background-repeat: no-repeat;
- }
+
+
 
 .page-header {
 	margin-top:0;
 }
 
-.page-header h3 {
-	color: #61381e;
-}
 
 .panel-body {
 	padding-top:0;
-	background-color: #FCF4E8;
 }
 
 .panel-body h4{
@@ -66,7 +56,7 @@
 }
 
 .btn-accent {
-	background-color: #ecbcac;
+	background-color: #ECF5D5;
 	color: #61381e;
 }
 
