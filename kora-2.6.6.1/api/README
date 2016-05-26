@@ -1,5 +1,0 @@
-Kora ORM API
-
-The Kora ORM API is intended as a new API for creating websites backed by Kora.
-To use the API, just include './orm-includes.php' from your PHP script. Also,
-check out the './example' directory for some examples on how to use the API.

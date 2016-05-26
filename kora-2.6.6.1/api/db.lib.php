@@ -1,4 +1,0 @@
-<?php
-$KORA_DIR = "../";
-require_once($KORA_DIR.'/includes/koraSearch.php');
-?>
