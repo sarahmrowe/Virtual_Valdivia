@@ -18,7 +18,46 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+  
+    	<script src="https://opencontext.org/static/bootstrap/3.3.4/js/bootstrap.js"></script>
+	
+	<script src="../js/opencontext-simple.js"></script>
+	
+	<script type="text/javascript">
+	  /*
+	   * the oc_obj is an "object" with some code to interact with Open Context's API
+	   * it uses the "simple" JSON results from Open Context, so it does not include GeoJSON or
+	   * facet information
+	   */
+	  var oc_obj = new OpenContextSimpleAPI();
+	  
+	  /*
+	   * Now that we created the oc_obj, we can set some default filters
+	   * to limit searches to a subset of all of data published by Open Context.
+	   * This allows you to customize the search experience to focus on cetain
+	   * types of records from certain projects.
+	   */
+	  
+	  // limit searches to the 'Virtual Valdivia' project
+	  // we use javascript 'push' because projects_slugs is list. You can add
+	  // multiple projects in this list, allowing you to search within multiple projects
+	  oc_obj.project_slugs.push('90-virtual-valdivia');
+	  
+	  // limit searchs to pottery records only (so we ignore loci, trenches, etc.)
+	  // we use javascript 'push' because category_slugs is list. You can add
+	  // multiple categories to this list, allowing you to search within multiple categories
+	  // of records
+	  oc_obj.category_slugs.push('oc-gen-cat-object');
+	  
+	  // make sure we get a thumbnail for a picture associated with the search result
+	  oc_obj.attribute_slugs.push('thumbnail');
+	  
+	  // order search results by item label, in ascending order
+	  oc_obj.sort = 'item--asc';
+	  
+	</script>
+    
+    </head>
   <body>
   	<div class = "navbar navbar-default navbar-fixed-top">
   		<div class = "container">
@@ -41,20 +80,16 @@
   					<li class = "dropdown">
   						<a href = "#" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded="true">English <b class = "caret"></b></a>
   						<ul class = "dropdown-menu">
-  							<li><a href = "about.html">About<a/></li>
-  							<li><a href = "data.html">Data<a></li>
-  							<li><a href = "news.html">News<a></li>
-  							<li><a href = "contact_us.html">Contact Us<a></li>
+                            <li><a href = "about.html">About</a></li>
+                            <li><a href = "data.html">Data</a></li>
   						</ul>
   					</li>
   					
   					<li class = "dropdown">
   						<a href = "#" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded="true">Español <b class = "caret"></b></a>
   						<ul class = "dropdown-menu">
-  							<li><a href = "sobre.html">Sobre<a/></li>
-  							<li><a href = "datos.html">Datos<a></li>
-  							<li><a href = "noticias.html">Noticias<a></li>
-  							<li><a href = "contactenos.html">Contáctenos<a></li>
+                            <li><a href = "sobre.html">Sobre</a></li>
+                            <li><a href = "datos.html">Datos</a></li>
   						</ul>
   					</li>
   					
@@ -77,23 +112,44 @@
 						<h3>Data</h3>
 					</div>
 					
-					<img class = "featuredImg" src = "img/owls.jpg" width = 100%>
+					<img class = "featuredImg" src = "img/buen_suceso.jpg" width = 100%>
 					
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo diam arcu, ut interdum ante venenatis quis. Mauris eros arcu, mollis quis ullamcorper sit amet, laoreet sed augue. Suspendisse non faucibus neque, nec rhoncus tellus. In ac dapibus enim. Nam dapibus euismod lacus at imperdiet. Donec vel lorem tellus. Aenean vitae tellus arcu.
-
-						Sed blandit viverra ullamcorper. Maecenas nunc libero, tempor nec nisl eu, tincidunt consequat ligula. Nullam id leo vulputate, vulputate libero eu, luctus sem. Donec sed sapien fringilla, aliquam dolor ac, interdum erat. Proin tincidunt erat eu ligula elementum, ac tristique purus dapibus. Ut tempor sem eu eleifend varius. Morbi et lectus tempus, tristique nulla ac, vehicula nulla. Donec accumsan fermentum mi, quis dignissim purus aliquet at. Duis gravida nisi ipsum, ut faucibus arcu venenatis a. Nunc et magna ac metus efficitur ultrices ac eget arcu. Nam in nisl pretium, congue lorem in, tempor nibh. Suspendisse vel risus elit.
-					</p>
+					<p>Currently, the Virtual Valdivia database includes ceramic artifacts drawn from my dissertation excavations at the Late Valdivia site of Buen Suceso. Located in the Manglaralto Valley of Santa Elena Province, Ecuador, Buen Suceso was occupied between 2100 and 1800 BC.</p>
+                    
+                    <p>It is my hope that sharing my data through the Virtual Valdivia database can serve as an example to encourage other scholars to share their data. In the future, Virtual Valdivia should develop into a ceramic repository for multiple Valdivia sites from Ecuador, facilitating analysis across sites.</p>
+                        
+                    
 				
-					<h4>A Heading</h4>
-					 <p>
-					 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo diam arcu, ut interdum ante venenatis quis. Mauris eros arcu, mollis quis ullamcorper sit amet, laoreet sed augue. Suspendisse non faucibus neque, nec rhoncus tellus. In ac dapibus enim. Nam dapibus euismod lacus at imperdiet. Donec vel lorem tellus. Aenean vitae tellus arcu.
-
-						Sed blandit viverra ullamcorper. Maecenas nunc libero, tempor nec nisl eu, tincidunt consequat ligula. Nullam id leo vulputate, vulputate libero eu, luctus sem. Donec sed sapien fringilla, aliquam dolor ac, interdum erat. Proin tincidunt erat eu ligula elementum, ac tristique purus dapibus. Ut tempor sem eu eleifend varius. Morbi et lectus tempus, tristique nulla ac, vehicula nulla. Donec accumsan fermentum mi, quis dignissim purus aliquet at. Duis gravida nisi ipsum, ut faucibus arcu venenatis a. Nunc et magna ac metus efficitur ultrices ac eget arcu. Nam in nisl pretium, congue lorem in, tempor nibh. Suspendisse vel risus elit.
-					 </p>
+					<h4>Using the Database</h4>
+					 <p>The Virtual Valdivia database is hosted by <a href= "https://opencontext.org">Open Context</a>. Each ceramic piece is associated with numerous variables. Descriptions of each of these variables can be viewed on Open Context, or you can download the complete set of variable documentation as a PDF document by clicking here</p>
+                        
+                    <p>You can use the search box below to access a subset of the results (by searching for one of the data set variables), or you can download the complete data set as a .csv file by clicking here (coming soon).</p>
 				
 				</div>
 		
+                    
+                    	<div id="oc-style-zone">
+	  <div class="row">
+		<div id="oc-search-form" class="col-xs-6 col-xs-offset-3">
+		  
+			<div class="form-group">
+			  <label for="oc-keyword-search">Search Virtual Valdivia</label>
+			  <input type="search"
+					 class="form-control"
+					 onchange="oc_obj.search();return false;"
+					 id="oc-keyword-search"
+					 placeholder="Keyword Search">
+			  <p class="help-block">Use the search box above to browse through the Virtual Valdivia database, hosted by Open Context.</p>
+			 
+			</div>
+			<button type="button" class="btn btn-default" onclick="oc_obj.search();return false;">Search</button>
+		  
+		</div>
+	  </div>
+	  <div id="oc-results" class="container-fluid">
+	  </div>
+	</div>
+                    
 			</div>
 	
 		</div>
