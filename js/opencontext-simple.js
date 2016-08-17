@@ -184,8 +184,14 @@ function OpenContextSimpleAPI() {
                         }
                         result_html += '</div>';
                     }
+                    result_html += '<div class="row">';
+                    result_html += '<div class="col-xs-6">''
                     result_html += this.make_previous_link_html();
+                    result_html += '</div>';
+                    result_html += 'div class="row">';
                     result_html += this.make_next_link_html();
+                    result_html += '</div>';
+                    result_html += '</div>';
 				}
 				else{
 					result_html += '<p>No result records found.</p>';
