@@ -184,6 +184,7 @@ function OpenContextSimpleAPI() {
                         }
                         result_html += '</div>';
                     }
+                    result_html += this.make_previous_link_html();
                     result_html += this.make_next_link_html();
 				}
 				else{
@@ -245,10 +246,29 @@ function OpenContextSimpleAPI() {
             //we have search results, so proceed to display them.
             if ("next" in this.data) {
                 this.next_link = this.data ["next"];
-                html = '<button type="button" class="btn btn-default" ';
+                html = '<div align="right"> ';
+                html += '<button type="button" class="btn btn-default" ';
                 html += 'onclick="oc_obj.get_paging(\'next\');">';
                 html += 'Next';
                 html += '</button>';
+                html += '</div>';
+            }
+        }
+        return html;
+      }
+    
+    this.make_previous_link_html = function() {
+        var html = '';
+        if (this.data != null) {
+            //we have search results, so proceed to display them.
+            if ("previous" in this.data) {
+                this.next_link = this.data ["previous"];
+                html = '<div align="left"> ';
+                html += '<button type="button" class="btn btn-default" ';
+                html += 'onclick="oc_obj.get_paging(\'previous\');">';
+                html += 'Previous';
+                html += '</button>';
+                html += '</div>';
             }
         }
         return html;
