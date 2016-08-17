@@ -255,7 +255,7 @@ function OpenContextSimpleAPI() {
                 html = '<div align="right"> ';
                 html += '<button type="button" class="btn btn-default" ';
                 html += 'onclick="oc_obj.get_paging(\'next\');">';
-                html += 'Next';
+                html += '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>';
                 html += '</button>';
                 html += '</div>';
             }
@@ -272,7 +272,7 @@ function OpenContextSimpleAPI() {
                 html = '<div align="left"> ';
                 html += '<button type="button" class="btn btn-default" ';
                 html += 'onclick="oc_obj.get_paging(\'previous\');">';
-                html += 'Previous';
+                html += '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>';
                 html += '</button>';
                 html += '</div>';
             }
