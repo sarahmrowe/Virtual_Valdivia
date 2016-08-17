@@ -184,7 +184,7 @@ function OpenContextSimpleAPI() {
                         }
                         result_html += '</div>';
                     }
-                    result_html += this.make_next_link.html();
+                    result_html += this.make_next_link_html();
 				}
 				else{
 					result_html += '<p>No result records found.</p>';
