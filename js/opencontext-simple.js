@@ -268,7 +268,7 @@ function OpenContextSimpleAPI() {
         if (this.data != null) {
             //we have search results, so proceed to display them.
             if ("previous" in this.data) {
-                this.next_link = this.data ["previous"];
+                this.previous_link = this.data ["previous"];
                 html = '<div align="left"> ';
                 html += '<button type="button" class="btn btn-default" ';
                 html += 'onclick="oc_obj.get_paging(\'previous\');">';
