@@ -239,20 +239,20 @@ function OpenContextSimpleAPI() {
 	}
 
 //pagination when search returns more than 20 results
-        this.make_next_link_html = function() {
-            var html = '';
-            if (this.data != null) {
-                //we have search results, so proceed to display them.
-                if ("next" in this.data) {
-                    this.next_link = this.data ["next"];
-                    html = '<button type="button" class="btn btn-default"';
-                    html += 'onclick="oc_obj.get_paging(\'next\');">';
-                    html += 'Next';
-                    html += '</button>';
-                }
+    this.make_next_link_html = function() {
+        var html = '';
+        if (this.data != null) {
+            //we have search results, so proceed to display them.
+            if ("next" in this.data) {
+                this.next_link = this.data ["next"];
+                html = '<button type="button" class="btn btn-default" ';
+                html += 'onclick="oc_obj.get_paging(\'next\');">';
+                html += 'Next';
+                html += '</button>';
             }
-            return html;
         }
+        return html;
+      }
     
     this.get_paging = function(l_type) {
         //this function runs a AJAX request for pagination.
