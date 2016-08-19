@@ -330,7 +330,7 @@ function OpenContextSimpleFacetsAPI() {
 			// if we find 'oc-api:has-facets' in the data, then
 			// save the facet information to the this.facet attribute
 			this.facets = data['oc-api:has-facets'];
-			
+			console.log(this.facets);
 			// now make HTML for the facets and put them in the right place
 			this.show_facets();
 		}
@@ -338,7 +338,7 @@ function OpenContextSimpleFacetsAPI() {
     
     this.show_facets = function(){
 		if (document.getElementById(this.facets_dom_id)) {
-			var act_dom = document.getElementById(this.facets_dom_id)
+			var act_dom = document.getElementById(this.facets_dom_id);
 			var html = '';
 			if(this.facets != null){
 				// show some search facets

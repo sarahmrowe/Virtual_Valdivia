@@ -16,43 +16,7 @@
 	
 	<script src="js/opencontext-facets.js"></script>
       
-	<script type="text/javascript">
-	  /*
-	   * the oc_obj is an "object" with some code to interact with Open Context's API
-	   * it uses the "simple" JSON results from Open Context, so it does not include GeoJSON or
-	   * facet information
-	   */
-	  var oc_obj = new OpenContextSimpleFacetsAPI();
-	  
-	  /*
-	   * Now that we created the oc_obj, we can set some default filters
-	   * to limit searches to a subset of all of data published by Open Context.
-	   * This allows you to customize the search experience to focus on cetain
-	   * types of records from certain projects.
-	   */
-	  
-	  // limit searches to the 'Virtual Valdivia' project
-	  // we use javascript 'push' because projects_slugs is list. You can add
-	  // multiple projects in this list, allowing you to search within multiple projects
-	  oc_obj.project_slugs.push('90-virtual-valdivia');
-	  
-	  // limit searchs to pottery records only (so we ignore loci, trenches, etc.)
-	  // we use javascript 'push' because category_slugs is list. You can add
-	  // multiple categories to this list, allowing you to search within multiple categories
-	  // of records
-	  oc_obj.category_slugs.push('oc-gen-cat-object');
-	  
-	  // make sure we get a thumbnail for a picture associated with the search result
-	  oc_obj.attribute_slugs.push('thumbnail');
-	  
-	  // order search results by item label, in ascending order
-	  oc_obj.sort = 'item--asc';
-        
-        oc_obj.start_faceturl = 'https://opencontext.org/subjects-search/Ecuador.json?prop=oc-gen-cat-object---oc-gen-cat-pottery&prop=90-design%7C%7C90-vessel-shape&proj=90-virtual-valdivia#18/-1.81677/-80.67728/20/any/Google-Satellite';
-        
-        oc_obj.get_start_facets();
-	  
-	</script>
+	
       
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -175,6 +139,43 @@
 	</div>
 </div>
 
+      <script type="text/javascript">
+	  /*
+	   * the oc_obj is an "object" with some code to interact with Open Context's API
+	   * it uses the "simple" JSON results from Open Context, so it does not include GeoJSON or
+	   * facet information
+	   */
+	  var oc_obj = new OpenContextSimpleFacetsAPI();
+	  
+	  /*
+	   * Now that we created the oc_obj, we can set some default filters
+	   * to limit searches to a subset of all of data published by Open Context.
+	   * This allows you to customize the search experience to focus on cetain
+	   * types of records from certain projects.
+	   */
+	  
+	  // limit searches to the 'Virtual Valdivia' project
+	  // we use javascript 'push' because projects_slugs is list. You can add
+	  // multiple projects in this list, allowing you to search within multiple projects
+	  oc_obj.project_slugs.push('90-virtual-valdivia');
+	  
+	  // limit searchs to pottery records only (so we ignore loci, trenches, etc.)
+	  // we use javascript 'push' because category_slugs is list. You can add
+	  // multiple categories to this list, allowing you to search within multiple categories
+	  // of records
+	  oc_obj.category_slugs.push('oc-gen-cat-object');
+	  
+	  // make sure we get a thumbnail for a picture associated with the search result
+	  oc_obj.attribute_slugs.push('thumbnail');
+	  
+	  // order search results by item label, in ascending order
+	  oc_obj.sort = 'item--asc';
+        
+        oc_obj.start_faceturl = 'https://opencontext.org/subjects-search/Ecuador.json?prop=oc-gen-cat-object---oc-gen-cat-pottery&prop=90-design%7C%7C90-vessel-shape&proj=90-virtual-valdivia#18/-1.81677/-80.67728/20/any/Google-Satellite';
+        
+        oc_obj.get_start_facets();
+	  
+	</script>
   	
   	
   	
