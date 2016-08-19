@@ -10,9 +10,11 @@ function OpenContextSimpleAPI() {
 	/* Object for runing searches + displaying results from Open Context */
 	this.default_api_url = 'https://opencontext.org/subjects-search/';
 	this.url = null;
-	this.data = null;
+	this.data = null; // search result data
+	this.facets = null; // facet information returned from Open Context
 	this.keyword_dom_id = 'oc-keyword-search'; // DOM ID for the keyword search text input from user
 	this.results_dom_id = 'oc-results'; // DOM ID for where to put HTML displaying search results
+	this.facets_dom_id = 'oc-facets'; // DOM ID for where to put HTML displaying search facets
 	this.response = 'metadata,uri-meta,facet';
 	this.project_slugs = [];
 	this.category_slugs = [];
@@ -323,19 +325,26 @@ function OpenContextSimpleAPI() {
 		}
 	}
 	
-    this.get_start_facetsDone = function(data)
+    this.get_start_facetsDone = function(data){
+		if ('oc-api:has-facets' in data) {
+			// if we find 'oc-api:has-facets' in the data, then
+			// save the facet information to the this.facet attribute
+			this.facets = data['oc-api:has-facets'];
+			
+			// now make HTML for the facets and put them in the right place
+			this.show_facets();
+		}
+	}
     
     //Is this what this needs? Asks Sarah
     this.show_facets = function(){
-		var act_dom = this.get_facets_dom();
-		if (act_dom != false) {
+		if (document.getElementById(this.facets_dom_id)) {
+			var act_dom = document.getElementById(this.facets_dom_id)
 			var html = '';
-			var data = this.data;
-			html += '<h3>Filter Records</h3>';
-			if ('oc-api:has-facets' in data) {
+			if(this.facets != null){
 				// show some search facets
-				for (var i = 0, length = data['oc-api:has-facets'].length; i < length; i++) {
-					var facet = data['oc-api:has-facets'][i];
+				for (var i = 0, length = this.facets.length; i < length; i++) {
+					var facet = this.facets[i];
 					var facet_html = '<div class="panel panel-default">'
 					facet_html += '<div class="panel-body">';
 					facet_html += '<h4>' + facet.label + '</h4>'
