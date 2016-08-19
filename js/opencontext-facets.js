@@ -388,7 +388,8 @@ function OpenContextSimpleFacetsAPI() {
 		var html = '<div class = "checkbox">';
         var cb_class = facet.id.replace('#','');
         html += '<label>';
-        html += '<input type="checkbox" class="' + cb_class + '">';
+        html += '<input type="checkbox" class="' + cb_class + '"';
+        html += 'value="' + val_item.slug + ' >';
         html += '<a title="Filter by this value" ';
 		html += 'href="javascript:oc_obj.change(\'' + val_item.id + '\')">';
 		html += val_item.label;
