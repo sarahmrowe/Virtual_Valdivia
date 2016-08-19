@@ -14,7 +14,7 @@
     	<!--<script src="https://opencontext.org/static/bootstrap/3.3.4/js/bootstrap.js"></script>
         -->
 	
-	<script src="js/opencontext-simple.js"></script>
+	<script src="js/opencontext-facets.js"></script>
       
 	<script type="text/javascript">
 	  /*
@@ -22,7 +22,7 @@
 	   * it uses the "simple" JSON results from Open Context, so it does not include GeoJSON or
 	   * facet information
 	   */
-	  var oc_obj = new OpenContextSimpleAPI();
+	  var oc_obj = new OpenContextSimpleFacetsAPI();
 	  
 	  /*
 	   * Now that we created the oc_obj, we can set some default filters
@@ -47,6 +47,10 @@
 	  
 	  // order search results by item label, in ascending order
 	  oc_obj.sort = 'item--asc';
+        
+        oc_obj.start_faceturl = 'https://opencontext.org/subjects-search/Ecuador.json?prop=oc-gen-cat-object---oc-gen-cat-pottery&prop=90-design%7C%7C90-vessel-shape&proj=90-virtual-valdivia#18/-1.81677/-80.67728/20/any/Google-Satellite';
+        
+        oc_obj.get_start_facets();
 	  
 	</script>
       
@@ -138,7 +142,7 @@
 				</div>
 		
                     
-                    	<div id="oc-style-zone">
+    <div id="oc-style-zone">
 	  <div class="row">
 		<div id="oc-search-form" class="col-xs-6 col-xs-offset-3">
 		  
@@ -159,6 +163,10 @@
 	  <div id="oc-results" class="container-fluid">
 	  </div>
 	</div>
+                    
+        <div id="oc-facets">
+                    
+        </div>
                     
 			</div>
 	

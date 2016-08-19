@@ -6,7 +6,7 @@
 */
 
 
-function OpenContextSimpleAPI() {
+function OpenContextSimpleFacetsAPI() {
 	/* Object for runing searches + displaying results from Open Context */
 	this.default_api_url = 'https://opencontext.org/subjects-search/';
 	this.url = null;
@@ -308,7 +308,7 @@ function OpenContextSimpleAPI() {
      
     this.get_start_facets = function() {
 		// calls the Open Context API to get data from facets of Vessel Shape and Design Element
-		var url = this.this.start_faceturl;
+		var url = this.start_faceturl;
 		if (url != false) {
 			return $.ajax({
 				type: "GET",
@@ -336,7 +336,6 @@ function OpenContextSimpleAPI() {
 		}
 	}
     
-    //Is this what this needs? Asks Sarah
     this.show_facets = function(){
 		if (document.getElementById(this.facets_dom_id)) {
 			var act_dom = document.getElementById(this.facets_dom_id)
