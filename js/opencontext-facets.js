@@ -383,20 +383,41 @@ function OpenContextSimpleFacetsAPI() {
 		var html = html_list.join(' ');
 		return html;
 	}
-    //Are lines 371-373, 378 & 379 what this needs?
+    
 	this.make_facet_val_link = function(facet, val_item){
 		var html = '<div class = "checkbox">';
         var cb_class = facet.id.replace('#','');
         html += '<label>';
         html += '<input type="checkbox" class="' + cb_class + '"';
         html += 'value="' + val_item.slug + '" >';
-        html += '<a title="Filter by this value" ';
-		html += 'href="javascript:oc_obj.change(\'' + val_item.id + '\')">';
 		html += val_item.label;
-		html += '</a>';
         html += '</label>';
         html += '</div>';
 		return html;
 	}
+    
+    this.make_facets_search = function(){
+        if(this.facets != null){
+            // show some search facets
+            for (var i = 0, length = this.facets.length; i < length; i++) {
+				var facet = this.facets[i];
+                for (var j = 0, sf_length = this.show_only_facets.length; j < sf_length; j++) {
+                    var show_facet = this.show_only_facets[j];
+                    if(facet.label == show_facet){
+                        var sel_vals = [];
+                        var cb_class = facet.id.replace ('#','');
+                        var cbList = document.getElementsByClassName(cb_class);
+                        for (var k = 0, cb_length = cbList.length; k <cb_length; k++){
+                            var cb_item = cbList[k];
+                            if (cb_item.checked){
+                                sel_vals.push(cb_item.value);
+                            }
+                        }
+                        console.log(sel_vals);  
+                    }
+                }
+            }
+        }
+    }
     
 }
