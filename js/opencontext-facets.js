@@ -397,6 +397,7 @@ function OpenContextSimpleFacetsAPI() {
 	}
     
     this.facets_search = function(){
+        var url = this.start_faceturl;
         if(this.facets != null){
             // show some search facets
             for (var i = 0, length = this.facets.length; i < length; i++) {
@@ -406,6 +407,7 @@ function OpenContextSimpleFacetsAPI() {
                     if(facet.label == show_facet){
                         var sel_vals = [];
                         var cb_class = facet.id.replace ('#','');
+                        var prop_slug = facet.id.replace ('#facet-prop-','');
                         var cbList = document.getElementsByClassName(cb_class);
                         for (var k = 0, cb_length = cbList.length; k <cb_length; k++){
                             var cb_item = cbList[k];
@@ -413,7 +415,10 @@ function OpenContextSimpleFacetsAPI() {
                                 sel_vals.push(cb_item.value);
                             }
                         }
-                        console.log(sel_vals);  
+                        console.log(sel_vals);
+                        if(sel_vals.length > 0){
+                            
+                        }
                     }
                 }
             }
