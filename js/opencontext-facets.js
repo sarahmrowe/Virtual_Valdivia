@@ -325,4 +325,59 @@ function OpenContextSimpleAPI() {
 	
     this.get_start_facetsDone = function(data)
     
+    //Is this what this needs? Asks Sarah
+    this.show_facets = function(){
+		var act_dom = this.get_facets_dom();
+		if (act_dom != false) {
+			var html = '';
+			var data = this.data;
+			html += '<h3>Filter Records</h3>';
+			if ('oc-api:has-facets' in data) {
+				// show some search facets
+				for (var i = 0, length = data['oc-api:has-facets'].length; i < length; i++) {
+					var facet = data['oc-api:has-facets'][i];
+					var facet_html = '<div class="panel panel-default">'
+					facet_html += '<div class="panel-body">';
+					facet_html += '<h4>' + facet.label + '</h4>'
+					//use another function to make facet search values
+					facet_html += this.make_facet_values_html(facet);
+					facet_html += '</div>';
+					facet_html += '</div>';
+					html += facet_html;
+				}
+			}
+			act_dom.innerHTML = html;
+		}
+	}
+	this.make_facet_values_html = function(facet){
+		var value_list = [];
+		var html_list = [];
+		if ('oc-api:has-id-options' in facet) {
+			var value_list = facet['oc-api:has-id-options'];
+		}
+		else{
+			var value_list = [];
+		}
+		for (var i = 0, length = value_list.length; i < length; i++) {
+			var val_item = value_list[i];
+			var val_html = this.make_facet_val_link(val_item) + ' (' + val_item.count + ')';
+			html_list.push(val_html);
+		}
+		var html = html_list.join(', ');
+		return html;
+	}
+    //Are lines 371-373, 378 & 379 what this needs?
+	this.make_facet_val_link = function(val_item){
+		var html = '<div class = "checkbox">';
+        html += '<label>';
+        html += '<input type = "checkbox">';
+        html += '<a title="Filter by this value" ';
+		html += 'href="javascript:oc_obj.change(\'' + val_item.id + '\')">';
+		html += val_item.label;
+		html += '</a>';
+        html += '</label>';
+        html += '</div>';
+		return html;
+	}
+    
 }
