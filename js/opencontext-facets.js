@@ -23,7 +23,8 @@ function OpenContextSimpleFacetsAPI() {
     this.examples_per_row = 4;
 	this.record_start = 0;  // the start number for the results
 	this.record_rows = 20;  // the number of rows returned in a search result
-    this.start_faceturl = 'https://opencontext.org/subjects-search/Ecuador.json?prop=oc-gen-cat-object---oc-gen-cat-pottery&prop=90-design%7C%7C90-vessel-shape&proj=90-virtual-valdivia#18/-1.81677/-80.67728/20/any/Google-Satellite';
+    this.start_faceturl = 'https://opencontext.org/subjects-search/Ecuador.json?prop=oc-gen-cat-object---oc-gen-cat-pottery&prop=90-design%7C%7C90-vessel-shape&proj=90-virtual-valdivia';
+    this.show_only_facets = []; //list of the facets we want to display on the page
     this.previous_link = null;
     this.next_link = null;
 	this.search = function(){
@@ -347,14 +348,16 @@ function OpenContextSimpleFacetsAPI() {
 				// show some search facets
 				for (var i = 0, length = this.facets.length; i < length; i++) {
 					var facet = this.facets[i];
-					var facet_html = '<div class="panel panel-default">'
-					facet_html += '<div class="panel-body">';
-					facet_html += '<h4>' + facet.label + '</h4>'
-					//use another function to make facet search values
-					facet_html += this.make_facet_values_html(facet);
-					facet_html += '</div>';
-					facet_html += '</div>';
-					html += facet_html;
+                    if(facet.label in this.show_only_facets){
+					   var facet_html = '<div class="panel panel-default">'
+					   facet_html += '<div class="panel-body">';
+					   facet_html += '<h4>' + facet.label + '</h4>'
+					   //use another function to make facet search values
+					   facet_html += this.make_facet_values_html(facet);
+					   facet_html += '</div>';
+					   facet_html += '</div>';
+					   html += facet_html;
+                    }
 				}
 			}
 			act_dom.innerHTML = html;
