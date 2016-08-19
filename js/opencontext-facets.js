@@ -377,17 +377,18 @@ function OpenContextSimpleFacetsAPI() {
 		}
 		for (var i = 0, length = value_list.length; i < length; i++) {
 			var val_item = value_list[i];
-			var val_html = this.make_facet_val_link(val_item); //+ ' (' + val_item.count + ')';
+			var val_html = this.make_facet_val_link(facet, val_item); //+ ' (' + val_item.count + ')';
 			html_list.push(val_html);
 		}
 		var html = html_list.join(' ');
 		return html;
 	}
     //Are lines 371-373, 378 & 379 what this needs?
-	this.make_facet_val_link = function(val_item){
+	this.make_facet_val_link = function(facet, val_item){
 		var html = '<div class = "checkbox">';
+        var cb_class = facet.id.replace('#','');
         html += '<label>';
-        html += '<input type = "checkbox">';
+        html += '<input type="checkbox" class="' + cb_class + '">';
         html += '<a title="Filter by this value" ';
 		html += 'href="javascript:oc_obj.change(\'' + val_item.id + '\')">';
 		html += val_item.label;
