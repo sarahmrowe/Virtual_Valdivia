@@ -396,7 +396,7 @@ function OpenContextSimpleFacetsAPI() {
 		return html;
 	}
     
-    this.make_facets_search = function(){
+    this.facets_search = function(){
         if(this.facets != null){
             // show some search facets
             for (var i = 0, length = this.facets.length; i < length; i++) {
