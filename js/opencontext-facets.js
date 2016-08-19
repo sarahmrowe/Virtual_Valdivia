@@ -319,7 +319,7 @@ function OpenContextSimpleFacetsAPI() {
 					Accept : "application/json; charset=utf-8"
 				},
 				context: this,
-				success: this.get_start_facestsDone, //do this when we get data w/o problems
+				success: this.get_start_facetsDone, //do this when we get data w/o problems
 				error: this.get_dataError //error message display
 			});
 		}
@@ -334,6 +334,9 @@ function OpenContextSimpleFacetsAPI() {
 			// now make HTML for the facets and put them in the right place
 			this.show_facets();
 		}
+        else{
+           console.log(data); 
+        }
 	}
     
     this.show_facets = function(){
