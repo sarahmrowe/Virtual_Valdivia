@@ -380,7 +380,7 @@ function OpenContextSimpleFacetsAPI() {
 			var val_html = this.make_facet_val_link(val_item); //+ ' (' + val_item.count + ')';
 			html_list.push(val_html);
 		}
-		//var html = html_list.join(', ');
+		var html = html_list.join;//(', ');
 		return html;
 	}
     //Are lines 371-373, 378 & 379 what this needs?
