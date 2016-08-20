@@ -397,32 +397,88 @@ function OpenContextSimpleFacetsAPI() {
 	}
     
     this.facets_search = function(){
-        var url = this.start_faceturl;
+		// this function executes a search based on facet-values in check box input elements
+		var query_terms = [];
         if(this.facets != null){
-            // show some search facets
+            // if we have facet data (originally obtained by the API)
+			// then loop through these facets
             for (var i = 0, length = this.facets.length; i < length; i++) {
 				var facet = this.facets[i];
+				// now loop through the this.show_only_facets list to check to see
+				// if the current facet is one that we want to use for displaying & searches
                 for (var j = 0, sf_length = this.show_only_facets.length; j < sf_length; j++) {
                     var show_facet = this.show_only_facets[j];
                     if(facet.label == show_facet){
+						// OK, the current facet is a facet we want the user to be able to use
                         var sel_vals = [];
+						// the cb_class identifies checkbox input elements for values a user can
+						// select (check) for this particular facet
                         var cb_class = facet.id.replace ('#','');
-                        var prop_slug = facet.id.replace ('#facet-prop-','');
+						// get a list of input elements that have the cb_class
                         var cbList = document.getElementsByClassName(cb_class);
                         for (var k = 0, cb_length = cbList.length; k <cb_length; k++){
                             var cb_item = cbList[k];
                             if (cb_item.checked){
+								// a check box DOM element was checked by user, so add
+								// the value of the DOM element to the list of selected values
                                 sel_vals.push(cb_item.value);
                             }
                         }
                         console.log(sel_vals);
                         if(sel_vals.length > 0){
-                            
+							// we more than 0 selected values, create a query
+							// with the property (attribute) slug, which we get from the
+							// facet.id and then add the selected values to the make
+							// a query
+                            var prop_slug = facet.id.replace ('#facet-prop-','');
+							var query_term = prop_slug + sel_vals.join('||');
+							query_terms.push(query_term);
                         }
                     }
                 }
             }
         }
+		
+		if(query_terms.length > 0){
+	        // There are more than 0 query_terms, so we can do a search.
+			// Now we need to make the URL to do the search
+			var url = this.default_api_url;
+			if(url.indexOf('?') > -1){
+				// this checkes to see if the url already has a '?' character
+				// if the url.indexOf is > -1, then the url has the '?' character
+				var query_term_sep = '&';
+			}
+			else{
+				var query_term_sep = '?';	
+			}
+			for (var i = 0, length = query_terms.length; i < length; i++) {
+				// add the query terms to the url!
+				var query_term = query_terms[i];
+				url += query_term_sep + 'prop=' + query_term;
+				query_term_sep = '&';
+			}
+			console.log(url); // log the url for debugging
+			// now add additional query parameters (the defaults, so we also filter by project, etc.)
+			var params = this.set_parameters();
+			return $.ajax({
+				type: "GET",
+				url: url,
+				data: params,
+				dataType: "json",
+				headers: {
+					//added to get JSON data (content negotiation)
+					Accept : "application/json; charset=utf-8"
+				},
+				context: this,
+				success: this.get_dataDone, //do this when we get data w/o problems
+				error: this.get_dataError //error message display
+			});
+		}
+		else {
+			// don't do anything if the user pressed the search button without check boxes
+			// checked.
+			return false;
+		}
     }
     
 }
