@@ -391,6 +391,9 @@ function OpenContextSimpleFacetsAPI() {
         html += '<input type="checkbox" class="' + cb_class + '"';
         html += 'value="' + val_item.slug + '" >';
 		html += val_item.label;
+        html += '<a target="_blank" href="' +val_item['rdfs:isDefinedBy'] + '" >';
+        html += '<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>'
+        html += '</a>';
         html += '</label>';
         html += '</div>';
 		return html;
