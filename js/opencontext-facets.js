@@ -431,7 +431,7 @@ function OpenContextSimpleFacetsAPI() {
 							// facet.id and then add the selected values to the make
 							// a query
                             var prop_slug = facet.id.replace ('#facet-prop-','');
-							var query_term = prop_slug + sel_vals.join('||');
+							var query_term = prop_slug + '---' + sel_vals.join('||');
 							query_terms.push(query_term);
                         }
                     }
